@@ -5,6 +5,9 @@ import logging
 import urllib
 from google.appengine.api import urlfetch
 
+import tracker.sagawa
+
+
 #print "Content-Type: text/plain"
 print "Content-Type: text/html"
 print ""
