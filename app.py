@@ -5,57 +5,22 @@ import logging
 import urllib
 from google.appengine.api import urlfetch
 
-import tracker.sagawa
+from tracker import sagawa
 
 
-print "Content-Type: text/plain"
-#print "Content-Type: text/html"
+#print "Content-Type: text/plain"
+print "Content-Type: text/html"
 print ""
 
-#print "hello"
+numbers = [
+  "600097281033",
+  "600092368315"
+]
 
-#result = tracker.sagawa.fetch_first_page()
+params = sagawa.get_first_page_params()
+params.update(sagawa.create_detail_page_number_params(numbers))
+#print params
 
-#print result.status_code
-#print result.content
-
-#fields = tracker.sagawa.get_input_fields(result.content)
-#for field in fields:
-#  print field
-
-params = tracker.sagawa.get_first_page_params()
-for param in params:
-  print param
-
-exit(0)
-
-
-input_fragments = get_input_fragments(result.content)
-input_fields    = get_input_fields(input_fragments)
-#for input_fragment in input_fragments:
-#  print input_fragment
-"""
-print "----------"
-for input_field in input_fields:
-  print input_field
-"""
-
-#print "----------"
-hash = {}
-for input_field in input_fields:
-  name  = input_field.get("name")
-  value = input_field.get("value", "")
-  hash[name] = value
-#print hash
-
-
-hash["main:no1"] = "600097281033"
-hash["main:no2"] = "600092368315"
-
-url = "http://k2k.sagawa-exp.co.jp/p/sagawa/web/okurijoinput.jsp"
-data = urllib.urlencode(hash)
-result = urlfetch.fetch(url = url, method = urlfetch.POST, payload = data)
-
-#print "----------"
+result = sagawa.fetch_detail_page(params)
 #print result.status_code
 print result.content
