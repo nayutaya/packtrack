@@ -9,8 +9,9 @@ def create_first_page_url():
   return "http://k2k.sagawa-exp.co.jp/p/sagawa/web/okurijoinput.jsp"
 
 def fetch_first_page():
-  url = create_first_page_url()
-  return urlfetch.fetch(url = url)
+  return urlfetch.fetch(
+    method = urlfetch.GET,
+    url    = create_first_page_url())
 
 def get_input_fields(html):
   pattern = re.compile(r"<input(.+?)>", re.IGNORECASE | re.DOTALL)
@@ -58,9 +59,7 @@ def create_detail_page_number_params(numbers):
   return result
 
 def fetch_detail_page(params):
-  url = create_detail_page_url()
-  data = urllib.urlencode(params)
   return urlfetch.fetch(
-    method = urlfetch.POST,
-    url = url,
-    payload = data)
+    method  = urlfetch.POST,
+    url     = create_detail_page_url(),
+    payload = urllib.urlencode(params))
