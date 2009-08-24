@@ -8,10 +8,7 @@ from google.appengine.api import urlfetch
 from tracker import sagawa
 
 
-print "Content-Type: text/plain"
-#print "Content-Type: text/html"
-print ""
-
+"""
 def sagawa():
   numbers = [
     "600097281033",
@@ -25,6 +22,7 @@ def sagawa():
   result = sagawa.fetch_detail_page(params)
   #print result.status_code
   print result.content
+"""
 
 
 def get_first_page_url():
@@ -35,6 +33,10 @@ def fetch_first_page():
     method = urlfetch.GET,
     url    = get_first_page_url())
 
+print "Content-Type: text/plain"
+#print "Content-Type: text/html"
+print ""
+
 result = fetch_first_page()
 #print result.status_code
 #print result.content
@@ -42,15 +44,15 @@ result = fetch_first_page()
 pattern = re.compile(r"action=\"(.+?)\"", re.IGNORECASE)
 match = pattern.search(result.content)
 path = match.group(1)
-print path
+#print path
 
 url = "http://info.jpexpress.jp" + path
-print url
+#print url
 
-#url = "https://info.jpexpress.jp:443/confirm/confirmList.html;jsessionid=ECV69VR99S9333NAB6M965QG21GU03V05N0I3F4IONCKO23N797DA6GG9KHG200048000000.WU001_004?te-uniquekey=1234d109b1a"
 #url = "https://info.jpexpress.jp:443/confirm/confirmList.html"
 
 params = {
+  "includeChildBody:confirmIndexForm:doConfirmCareerList": "",
   "includeChildBody:confirmIndexForm/confirm/confirmIndex.html": "includeChildBody:confirmIndexForm",
   "includeChildBody:confirmIndexForm:denpyoNo0": "348012244355",
   "includeChildBody:confirmIndexForm:denpyoNo1": "348011824893",
@@ -66,22 +68,28 @@ params = {
 #print hash
 #print urllib.urlencode(params)
 
-headers = {
-  #"Referer": "http://info.jpexpress.jp/confirm/confirmIndex.html",
-  #"Referrer": "http://info.jpexpress.jp/confirm/confirmIndex.html",
-  #"User-Agent": "Mozilla/5.0 (Windows; U; Windows NT 6.0; ja; rv:1.9.0.13) Gecko/2009073022 Firefox/3.0.13 (.NET CLR 3.5.30729) AutoPager/0.5.2.2 (http://www.teesoft.info/)",
-  #"Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
-  #"Accept-Language": "ja,en-us;q=0.7,en;q=0.3",
-  #"Accept-Encoding": "gzip,deflate",
-  #"Accept-Charset": "Shift_JIS,utf-8;q=0.7,*;q=0.7",
-  #"Keep-Alive": "300",
-  #"Connection": "keep-alive",
-}
 
 result = urlfetch.fetch(
-  method = urlfetch.POST,
-  url    = url,
-  payload = urllib.urlencode(params), headers = headers, follow_redirects = False)
+  method  = urlfetch.POST,
+  url     = url,
+  payload = urllib.urlencode(params),
+  follow_redirects = False)
 #print result
+#print result.status_code
+print result.content
+
+#print "----------"
+
+url = result.headers["location"]
+#print url
+pattern = re.compile(r"\?.*$")
+url = pattern.sub("", url)
+print url
+
+result = urlfetch.fetch(
+  #method = urlfetch.POST,
+  url    = url)
+#print result
+#print result.headers
 print result.status_code
-#print result.content
+print result.content
