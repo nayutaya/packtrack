@@ -14,15 +14,18 @@ print ""
 
 #print "hello"
 
-result = tracker.sagawa.get_first_page()
+#result = tracker.sagawa.fetch_first_page()
 
-print result.status_code
+#print result.status_code
 #print result.content
 
-#print tracker.sagawa.parse_forms(result.content)
-fields = tracker.sagawa.get_input_fields(result.content)
-for field in fields:
-  print field
+#fields = tracker.sagawa.get_input_fields(result.content)
+#for field in fields:
+#  print field
+
+params = tracker.sagawa.get_first_page_params()
+for param in params:
+  print param
 
 exit(0)
 
