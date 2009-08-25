@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 
+import re
 import urllib
 import urllib2
 
@@ -14,3 +15,11 @@ def create_first_page_request():
 def open_first_page():
   request = create_first_page_request()
   return urllib2.urlopen(request)
+
+def get_session_id(html):
+  pattern = re.compile(r"jsessionid=([0-9A-Z]+\.[0-9A-Z]+_[0-9A-Z]+)")
+  match   = pattern.search(html)
+  if match is not None:
+    return match.group(1)
+  else:
+    return None
