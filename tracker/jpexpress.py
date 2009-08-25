@@ -63,3 +63,6 @@ def create_list_page_request(session_id, numbers):
 def open_list_page(session_id, numbers):
   request = create_list_page_request(session_id, numbers)
   return urllib2.urlopen(request)
+
+def create_detail_page_url(session_id, params):
+  return "http://info.jpexpress.jp/confirm/confirmDetail.html;jsessionid=" + session_id + "?" + params
