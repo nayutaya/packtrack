@@ -11,7 +11,7 @@ numbers = [
   "317443794334",
 ]
 
-page = jppost.get_list_page(numbers)
+page = jppost.PackageListPage.get_list_page(numbers)
 f = open("page.html", "wb")
 f.write(page)
 f.close()
