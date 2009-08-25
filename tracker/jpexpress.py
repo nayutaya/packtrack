@@ -59,3 +59,7 @@ def create_list_page_request(session_id, numbers):
   return urllib2.Request(
     url  = create_list_page_url(session_id),
     data = urllib.urlencode(params))
+
+def open_list_page(session_id, numbers):
+  request = create_list_page_request(session_id, numbers)
+  return urllib2.urlopen(request)

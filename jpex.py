@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
 
+import urllib
+import urllib2
 from tracker import jpexpress
 
 if False:
@@ -16,28 +18,16 @@ else:
 session_id = jpexpress.get_session_id(page1)
 print session_id
 
-#url = jpexpress.create_list_page_url(session_id)
-#print url
-
 numbers = ["348012244355", "348011824893", "348011053121"]
-#params = jpexpress.create_list_page_params(numbers)
-#print params
-
-import urllib
-import urllib2
-#data = urllib.urlencode(params)
-#print data
-
-#req = urllib2.Request(
-#  url = url, data = data)
-#print req
-
-req = jpexpress.create_list_page_request(session_id, numbers)
-io = urllib2.urlopen(req)
-print io.info()
-page2 = io.read()
+print numbers
 
 if True:
+  io = jpexpress.open_list_page(session_id, numbers)
+  page2 = io.read()
   f = open("page2.html", "wb")
   f.write(page2)
+  f.close()
+else:
+  f = open("page2.html", "rb")
+  page2 = f.read()
   f.close()
