@@ -6,6 +6,7 @@ import urllib
 from google.appengine.api import urlfetch
 
 from tracker import sagawa
+from tracker import jppost
 
 
 """
@@ -23,3 +24,14 @@ def sagawa():
   #print result.status_code
   print result.content
 """
+
+print "content-type: text/plain"
+print ""
+
+numbers = ["317443794205", "317443794334"]
+page = jppost.PackageListPage.get_content(numbers)
+#print page
+
+from BeautifulSoup import BeautifulSoup
+soup = BeautifulSoup(page)
+print soup.prettify()
