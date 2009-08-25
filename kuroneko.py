@@ -5,7 +5,9 @@ import urllib
 import urllib2
 from tracker import yamato
 
-io = yamato.open_detail_page()
+numbers = ["225303520584", "249790484403"]
+
+io = yamato.open_detail_page(numbers)
 page2 = io.read()
 io.close()
 

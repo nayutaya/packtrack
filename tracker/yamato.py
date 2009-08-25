@@ -9,7 +9,7 @@ def create_detail_page_url():
 
 def create_detail_page_base_params():
   return {
-    "number00": "",
+    "number00": "1",
     "number01": "",
     "number02": "",
     "number03": "",
@@ -23,20 +23,19 @@ def create_detail_page_base_params():
     "timeid": "",
   }
 
-def create_detail_page_number_params():
-  return {
-    "number00": "1",
-    "number01": "225303520584",
-  }
+def create_detail_page_number_params(numbers):
+  params = {}
+  for i, number in enumerate(numbers[:10]):
+    params["number%02i" % (i + 1)] = number
+  return params
 
-def create_detail_page_request():
+def create_detail_page_request(numbers):
   params = create_detail_page_base_params()
-  params.update(create_detail_page_number_params())
-  print params
+  params.update(create_detail_page_number_params(numbers))
   return urllib2.Request(
     url  = create_detail_page_url(),
     data = urllib.urlencode(params))
 
-def open_detail_page():
-  request = create_detail_page_request()
+def open_detail_page(numbers):
+  request = create_detail_page_request(numbers)
   return urllib2.urlopen(request)
