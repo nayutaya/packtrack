@@ -2,6 +2,24 @@
 
 import urllib
 import urllib2
+import random
+
+
+class PackageTrackingNumber:
+  def __init__(self):
+    pass
+
+  @classmethod
+  def create_check_digit(cls, number):
+    num = int(number)
+    return str(num % 7)
+
+  @classmethod
+  def create_random_number(cls, prefix = ""):
+    number = prefix
+    while len(number) < 11:
+      number += str(random.randint(0, 9))
+    return number + cls.create_check_digit(number)
 
 
 class PackageListPage:
