@@ -2,56 +2,84 @@
 
 import urllib
 import urllib2
+import random
 
 
-def create_list_page_base_params():
-  return {
-    "JSESSIONID": "KTzQblRXyvQWJh1BzkTm3YZzyszpMwyYf81fSpZypTVGjQVLLdkK!1995213173!1251210176530",
-    "org.apache.struts.taglib.html.TOKEN": "825c0b1b950dbb316bcd2c66576e42e7",
-    "SVID": "020",
-    "locale": "ja",
-    "searchKind": "S002",
-    "reqCodeNo1": "",
-    "reqCodeNo2": "",
-    "reqCodeNo3": "",
-    "reqCodeNo4": "",
-    "reqCodeNo5": "",
-    "reqCodeNo6": "",
-    "reqCodeNo7": "",
-    "reqCodeNo8": "",
-    "reqCodeNo9": "",
-    "reqCodeNo10": "",
-  }
+class PackageTrackingNumber:
+  def __init__(self):
+    pass
 
-def create_list_page_number_params():
-  return {
-    "reqCodeNo1": "317443794205",
-    "reqCodeNo2": "317443794334",
-  }
+  @classmethod
+  def create_check_digit(cls, number):
+    num = int(number)
+    return str(num % 7)
 
-def create_list_page_params():
-  params = create_list_page_base_params()
-  params.update(create_list_page_number_params())
-  return params
+  @classmethod
+  def create_random_number(cls, prefix = ""):
+    number = prefix
+    while len(number) < 11:
+      number += str(random.randint(0, 9))
+    return number + cls.create_check_digit(number)
 
-def create_list_page_base_url():
-  return "http://tracking.post.japanpost.jp/service/singleSearch.do"
 
-def create_list_page_url():
-  base   = create_list_page_base_url()
-  params = create_list_page_params()
-  return base + "?" + urllib.urlencode(params)
+class PackageListPage:
+  def __init__(self, content):
+    self.content = content
 
-def create_list_page_request():
-  return urllib2.Request(
-    url = create_list_page_url())
+  @classmethod
+  def create_base_params(cls):
+    return {
+      "SVID": "020",
+      "locale": "ja",
+      "searchKind": "S002",
+      "reqCodeNo1": "",
+      "reqCodeNo2": "",
+      "reqCodeNo3": "",
+      "reqCodeNo4": "",
+      "reqCodeNo5": "",
+      "reqCodeNo6": "",
+      "reqCodeNo7": "",
+      "reqCodeNo8": "",
+      "reqCodeNo9": "",
+      "reqCodeNo10": "",
+    }
 
-def open_list_page():
-  request = create_list_page_request()
-  return urllib2.urlopen(request)
+  @classmethod
+  def create_number_params(cls, numbers):
+    params = {}
+    for i, number in enumerate(numbers[:10]):
+      params["reqCodeNo%i" % (i + 1)] = number
+    return params
 
-def get_list_page():
-  io = open_list_page()
-  page = io.read()
-  io.close()
-  return page
+  @classmethod
+  def create_params(cls, numbers):
+    params = cls.create_base_params()
+    params.update(cls.create_number_params(numbers))
+    return params
+
+  @classmethod
+  def create_base_url(cls):
+    return "http://tracking.post.japanpost.jp/service/singleSearch.do"
+
+  @classmethod
+  def create_url(cls, numbers):
+    base   = cls.create_base_url()
+    params = cls.create_params(numbers)
+    return base + "?" + urllib.urlencode(params)
+
+  @classmethod
+  def create_request(cls, numbers):
+    return urllib2.Request(
+      url = cls.create_url(numbers))
+
+  @classmethod
+  def open(cls, numbers):
+    request = cls.create_request(numbers)
+    return urllib2.urlopen(request)
+
+  @classmethod
+  def get_content(cls, numbers):
+    io = cls.open(numbers)
+    page = io.read()
+    io.close()
+    return page
