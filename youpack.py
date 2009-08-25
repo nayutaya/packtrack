@@ -30,30 +30,20 @@ from BeautifulSoup import BeautifulSoup
 soup = BeautifulSoup(page)
 #print soup.prettify()
 
-#body = soup.body
-#def get_response_time(body):
-#  table = body("table")[0]
-#  tr    = table("tr")[0]
-#  td    = tr("td")[0]
-#  return td.renderContents().strip()
-#print ("time", get_response_time(body))
 
-#for x in body("table", {"align": "center"}):
-#  print x
-
-#out = body.prettify()
 
 # 値のない属性はエラーとなるため、値を与える
-tds = soup.findAll("td", {"nowrap": None})
-for td in tds:
-  for i, (key, value) in enumerate(td.attrs):
-    if key == "nowrap":
-      td.attrs[i] = (key, key)
+element_name = "td"
+attr_name = "nowrap"
+elements = soup.findAll(element_name, {attr_name: None})
+for element in elements:
+  for i, (attr, value) in enumerate(element.attrs):
+    if (attr, value) == (attr_name, None):
+      element.attrs[i] = (attr, attr)
 
 import xml.etree.ElementTree as etree
 html = etree.fromstring(soup.prettify())
 
-#out = soup.prettify()
 
 body = html.find("body")
 
