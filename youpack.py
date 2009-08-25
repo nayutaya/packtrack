@@ -24,10 +24,23 @@ f.close()
 #print page
 
 list_page = jppost.PackageListPage(page)
-print list_page
+#print list_page
 
-body = list_page.get_body()
-out = body
+from BeautifulSoup import BeautifulSoup
+soup = BeautifulSoup(page)
+#print soup.prettify()
+
+body = soup.body
+
+table = body("table", {"align": "center"})[0]
+tr    = table("tr")[0]
+td    = tr("td")[0]
+print td.renderContents().strip()
+
+#for x in body("table", {"align": "center"}):
+#  print x
+
+out = body.prettify()
 f = open("out.html", "wb")
 f.write(out)
 f.close()
