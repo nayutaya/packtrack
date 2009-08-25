@@ -34,34 +34,34 @@ class PackageListPage:
     return params
 
   @classmethod
-  def create_list_page_params(cls, numbers):
+  def create_params(cls, numbers):
     params = cls.create_base_params()
     params.update(cls.create_number_params(numbers))
     return params
 
   @classmethod
-  def create_list_page_base_url(cls):
+  def create_base_url(cls):
     return "http://tracking.post.japanpost.jp/service/singleSearch.do"
 
   @classmethod
-  def create_list_page_url(cls, numbers):
-    base   = cls.create_list_page_base_url()
-    params = cls.create_list_page_params(numbers)
+  def create_url(cls, numbers):
+    base   = cls.create_base_url()
+    params = cls.create_params(numbers)
     return base + "?" + urllib.urlencode(params)
 
   @classmethod
-  def create_list_page_request(cls, numbers):
+  def create_request(cls, numbers):
     return urllib2.Request(
-      url = cls.create_list_page_url(numbers))
+      url = cls.create_url(numbers))
 
   @classmethod
-  def open_list_page(cls, numbers):
-    request = cls.create_list_page_request(numbers)
+  def open(cls, numbers):
+    request = cls.create_request(numbers)
     return urllib2.urlopen(request)
 
   @classmethod
-  def get_list_page(cls, numbers):
-    io = cls.open_list_page(numbers)
+  def get_content(cls, numbers):
+    io = cls.open(numbers)
     page = io.read()
     io.close()
     return page
