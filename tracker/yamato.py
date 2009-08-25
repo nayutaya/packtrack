@@ -4,6 +4,7 @@ import re
 import urllib
 import urllib2
 
+
 def create_detail_page_url():
   return "http://toi.kuronekoyamato.co.jp/cgi-bin/tneko"
 
@@ -29,9 +30,13 @@ def create_detail_page_number_params(numbers):
     params["number%02i" % (i + 1)] = number
   return params
 
-def create_detail_page_request(numbers):
+def create_detail_page_params(numbers):
   params = create_detail_page_base_params()
   params.update(create_detail_page_number_params(numbers))
+  return params
+
+def create_detail_page_request(numbers):
+  params = create_detail_page_params(numbers)
   return urllib2.Request(
     url  = create_detail_page_url(),
     data = urllib.urlencode(params))
@@ -39,3 +44,9 @@ def create_detail_page_request(numbers):
 def open_detail_page(numbers):
   request = create_detail_page_request(numbers)
   return urllib2.urlopen(request)
+
+def get_detail_page(numbers):
+  io = open_detail_page(numbers)
+  page = io.read()
+  io.close()
+  return page
