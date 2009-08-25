@@ -53,3 +53,9 @@ def create_list_page_params(numbers):
   params = create_list_page_base_params()
   params.update(create_list_page_number_params(numbers))
   return params
+
+def create_list_page_request(session_id, numbers):
+  params = create_list_page_params(numbers)
+  return urllib2.Request(
+    url  = create_list_page_url(session_id),
+    data = urllib.urlencode(params))
