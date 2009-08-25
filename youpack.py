@@ -2,25 +2,32 @@
 
 from tracker import jppost
 
-#print jppost.create_list_page_url()
-#print jppost.create_list_page_request()
-#print jppost.open_list_page()
-
 #print jppost.PackageTrackingNumber.create_check_digit("31744379420")
 
+"""
 numbers = []
 for i in range(10):
-  number = jppost.PackageTrackingNumber.create_random_number("3174")
+  number = jppost.PackageTrackingNumber.create_random_number("31744379")
   numbers.append(number)
 print numbers
-
-#numbers = [
-#  "317443794205",
-#  "317443794334",
-#]
 
 page = jppost.PackageListPage.get_content(numbers)
 f = open("page.html", "wb")
 f.write(page)
 f.close()
+print page
+"""
+
+f = open("page.html", "rb")
+page = f.read()
+f.close()
 #print page
+
+list_page = jppost.PackageListPage(page)
+print list_page
+
+body = list_page.get_body()
+out = body
+f = open("out.html", "wb")
+f.write(out)
+f.close()

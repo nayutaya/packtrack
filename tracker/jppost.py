@@ -3,6 +3,7 @@
 import urllib
 import urllib2
 import random
+import re
 
 
 class PackageTrackingNumber:
@@ -23,8 +24,8 @@ class PackageTrackingNumber:
 
 
 class PackageListPage:
-  def __init__(self):
-    pass
+  def __init__(self, content):
+    self.content = content
 
   @classmethod
   def create_base_params(cls):
@@ -83,3 +84,8 @@ class PackageListPage:
     page = io.read()
     io.close()
     return page
+
+  def get_body(self):
+    pattern = re.compile(r"<body.*?>(.*)</body>", re.IGNORECASE | re.MULTILINE | re.DOTALL)
+    match   = pattern.search(self.content)
+    return match.group(1) if match is not None else ""
