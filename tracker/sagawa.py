@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 
-import re
 import urllib
 import urllib2
 from BeautifulSoup import BeautifulSoup
@@ -29,9 +28,10 @@ class PackageFirstPage:
   @classmethod
   def get_content(cls):
     io = cls.open()
-    page = io.read()
-    io.close()
-    return page
+    try:
+      return io.read()
+    finally:
+      io.close()
 
   @classmethod
   def get(cls):
@@ -60,6 +60,7 @@ class PackageFirstPage:
 
     self.jsfstate = hidden_fields["jsf_state_64"]
     self.jsftree  = hidden_fields["jsf_tree_64"]
+
 
 class PackageDetailPage:
   def __init__(self):
@@ -125,6 +126,7 @@ class PackageDetailPage:
   @classmethod
   def get_content(cls, state, tree, numbers):
     io = cls.open(state, tree, numbers)
-    page = io.read()
-    io.close()
-    return page
+    try:
+      return io.read()
+    finally:
+      io.close()

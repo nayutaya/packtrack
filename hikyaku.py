@@ -2,8 +2,6 @@
 
 from tracker import sagawa
 
-from BeautifulSoup import BeautifulSoup
-
 numbers = [
   "600097281033",
   "600092368315"
