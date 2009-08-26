@@ -1,52 +1,63 @@
 # -*- coding: utf-8 -*-
 
-import re
 import urllib
 import urllib2
 
 
-def create_detail_page_url():
-  return "http://toi.kuronekoyamato.co.jp/cgi-bin/tneko"
+class PackageDetailPage:
+  def __init__(self):
+    pass
 
-def create_detail_page_base_params():
-  return {
-    "number00": "1",
-    "number01": "",
-    "number02": "",
-    "number03": "",
-    "number04": "",
-    "number05": "",
-    "number06": "",
-    "number07": "",
-    "number08": "",
-    "number09": "",
-    "number10": "",
-    "timeid": "",
-  }
+  @classmethod
+  def create_url(cls):
+    return "http://toi.kuronekoyamato.co.jp/cgi-bin/tneko"
 
-def create_detail_page_number_params(numbers):
-  params = {}
-  for i, number in enumerate(numbers[:10]):
-    params["number%02i" % (i + 1)] = number
-  return params
+  @classmethod
+  def create_base_params(cls):
+    return {
+      "number00": "1",
+      "number01": "",
+      "number02": "",
+      "number03": "",
+      "number04": "",
+      "number05": "",
+      "number06": "",
+      "number07": "",
+      "number08": "",
+      "number09": "",
+      "number10": "",
+      "timeid": "",
+    }
 
-def create_detail_page_params(numbers):
-  params = create_detail_page_base_params()
-  params.update(create_detail_page_number_params(numbers))
-  return params
+  @classmethod
+  def create_number_params(cls, numbers):
+    params = {}
+    for i, number in enumerate(numbers[:10]):
+      params["number%02i" % (i + 1)] = number
+    return params
 
-def create_detail_page_request(numbers):
-  params = create_detail_page_params(numbers)
-  return urllib2.Request(
-    url  = create_detail_page_url(),
-    data = urllib.urlencode(params))
+  @classmethod
+  def create_params(cls, numbers):
+    params = cls.create_base_params()
+    params.update(cls.create_number_params(numbers))
+    return params
 
-def open_detail_page(numbers):
-  request = create_detail_page_request(numbers)
-  return urllib2.urlopen(request)
+  @classmethod
+  def create_request(cls, numbers):
+    params = cls.create_params(numbers)
+    return urllib2.Request(
+      url  = cls.create_url(),
+      data = urllib.urlencode(params))
 
-def get_detail_page(numbers):
-  io = open_detail_page(numbers)
-  page = io.read()
-  io.close()
-  return page
+  @classmethod
+  def open(cls, numbers):
+    request = cls.create_request(numbers)
+    return urllib2.urlopen(request)
+
+  @classmethod
+  def get_content(cls, numbers):
+    io = cls.open(numbers)
+    try:
+      return io.read()
+    finally:
+      io.close()
