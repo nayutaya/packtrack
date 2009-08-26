@@ -6,8 +6,8 @@ import urllib2
 
 
 class PackageFirstPage:
-  def __init__(self):
-    pass
+  def __init__(self, content):
+    self.content = content
 
   @classmethod
   def create_url(cls):
@@ -32,13 +32,13 @@ class PackageFirstPage:
       io.close()
 
   @classmethod
-  def get_session_id(cls, html):
+  def get(cls):
+    return cls(cls.get_content())
+
+  def get_jsession_id(self):
     pattern = re.compile(r"jsessionid=([0-9A-Z]+\.[0-9A-Z]+_[0-9A-Z]+)")
-    match   = pattern.search(html)
-    if match is not None:
-      return match.group(1)
-    else:
-      return None
+    match   = pattern.search(self.content)
+    return match.group(1) if match is not None else None
 
 
 class PackageListPage:
@@ -46,8 +46,8 @@ class PackageListPage:
     pass
 
   @classmethod
-  def create_url(cls, session_id):
-    return "http://info.jpexpress.jp/confirm/confirmIndex.html;jsessionid=" + session_id
+  def create_url(cls, jsession_id):
+    return "http://info.jpexpress.jp/confirm/confirmIndex.html;jsessionid=" + jsession_id
 
   @classmethod
   def create_base_params(cls):
@@ -80,16 +80,24 @@ class PackageListPage:
     return params
 
   @classmethod
-  def create_request(cls, session_id, numbers):
+  def create_request(cls, jsession_id, numbers):
     params = cls. create_params(numbers)
     return urllib2.Request(
-      url  = cls.create_url(session_id),
+      url  = cls.create_url(jsession_id),
       data = urllib.urlencode(params))
 
   @classmethod
-  def open(cls, session_id, numbers):
-    request = cls.create_request(session_id, numbers)
+  def open(cls, jsession_id, numbers):
+    request = cls.create_request(jsession_id, numbers)
     return urllib2.urlopen(request)
 
-def create_detail_page_url(session_id, params):
-  return "http://info.jpexpress.jp/confirm/confirmDetail.html;jsessionid=" + session_id + "?" + params
+  @classmethod
+  def get_content(cls, jsession_id, numbers):
+    io = cls.open(jsession_id, numbers)
+    try:
+      return io.read()
+    finally:
+      io.close()
+
+def create_detail_page_url(jsession_id, params):
+  return "http://info.jpexpress.jp/confirm/confirmDetail.html;jsessionid=" + jsession_id + "?" + params
