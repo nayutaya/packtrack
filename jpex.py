@@ -23,9 +23,9 @@ numbers = ["348012244355", "348011824893", "348011053121"]
 print numbers
 
 if True:
-  page2 = jpexpress.PackageListPage.get_content(session_id, numbers)
+  page2 = jpexpress.PackageListPage.get(session_id, numbers)
   f = open("page2.html", "wb")
-  f.write(page2)
+  f.write(page2.content)
   f.close()
 else:
   f = open("page2.html", "rb")
@@ -34,7 +34,7 @@ else:
 
 pattern = re.compile(r"href=\"confirmDetail\.html;.+?\?(.+?)\"")
 
-for params in pattern.findall(page2):
+for params in pattern.findall(page2.content):
   params2 = re.compile(r"&amp;").sub("&", params)
   print "---"
   print jpexpress.create_detail_page_url(session_id, params2)

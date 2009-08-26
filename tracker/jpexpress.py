@@ -42,8 +42,8 @@ class PackageFirstPage:
 
 
 class PackageListPage:
-  def __init__(self):
-    pass
+  def __init__(self, content):
+    self.content = content
 
   @classmethod
   def create_url(cls, jsession_id):
@@ -98,6 +98,10 @@ class PackageListPage:
       return io.read()
     finally:
       io.close()
+
+  @classmethod
+  def get(cls, jsession_id, numbers):
+    return cls(cls.get_content(jsession_id, numbers))
 
 def create_detail_page_url(jsession_id, params):
   return "http://info.jpexpress.jp/confirm/confirmDetail.html;jsessionid=" + jsession_id + "?" + params
