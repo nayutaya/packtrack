@@ -5,24 +5,33 @@ import urllib
 import urllib2
 
 
-def create_first_page_url():
-  return "http://info.jpexpress.jp/confirm/confirmIndex.html"
+class PackageFirstPage:
+  def __init__(self):
+    pass
 
-def create_first_page_request():
-  return urllib2.Request(
-    url = create_first_page_url())
+  @classmethod
+  def create_first_page_url(cls):
+    return "http://info.jpexpress.jp/confirm/confirmIndex.html"
 
-def open_first_page():
-  request = create_first_page_request()
-  return urllib2.urlopen(request)
+  @classmethod
+  def create_first_page_request(cls):
+    return urllib2.Request(
+      url = cls.create_first_page_url())
 
-def get_session_id(html):
-  pattern = re.compile(r"jsessionid=([0-9A-Z]+\.[0-9A-Z]+_[0-9A-Z]+)")
-  match   = pattern.search(html)
-  if match is not None:
-    return match.group(1)
-  else:
-    return None
+  @classmethod
+  def open_first_page(cls):
+    request = cls.create_first_page_request()
+    return urllib2.urlopen(request)
+
+  @classmethod
+  def get_session_id(cls, html):
+    pattern = re.compile(r"jsessionid=([0-9A-Z]+\.[0-9A-Z]+_[0-9A-Z]+)")
+    match   = pattern.search(html)
+    if match is not None:
+      return match.group(1)
+    else:
+      return None
+
 
 def create_list_page_url(session_id):
   return "http://info.jpexpress.jp/confirm/confirmIndex.html;jsessionid=" + session_id
