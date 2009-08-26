@@ -4,7 +4,7 @@ from tracker import yamato
 
 numbers = ["225303520584", "249790484403"]
 
-page2 = yamato.PackageDetailPage.get_detail_page(numbers)
+page2 = yamato.PackageDetailPage.get_content(numbers)
 
 f = open("page2.html", "wb")
 f.write(page2)
