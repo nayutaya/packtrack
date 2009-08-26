@@ -28,17 +28,18 @@ base_params = {
 }
 
 for i in range(50):
+  prefix = "4715212"
   number_params = {
-    "reqCodeNo1": create_random_number(),
-    "reqCodeNo2": create_random_number(),
-    "reqCodeNo3": create_random_number(),
-    "reqCodeNo4": create_random_number(),
-    "reqCodeNo5": create_random_number(),
-    "reqCodeNo6": create_random_number(),
-    "reqCodeNo7": create_random_number(),
-    "reqCodeNo8": create_random_number(),
-    "reqCodeNo9": create_random_number(),
-    "reqCodeNo10": create_random_number(),
+    "reqCodeNo1": create_random_number(prefix),
+    "reqCodeNo2": create_random_number(prefix),
+    "reqCodeNo3": create_random_number(prefix),
+    "reqCodeNo4": create_random_number(prefix),
+    "reqCodeNo5": create_random_number(prefix),
+    "reqCodeNo6": create_random_number(prefix),
+    "reqCodeNo7": create_random_number(prefix),
+    "reqCodeNo8": create_random_number(prefix),
+    "reqCodeNo9": create_random_number(prefix),
+    "reqCodeNo10": create_random_number(prefix),
   }
 
   params = base_params
