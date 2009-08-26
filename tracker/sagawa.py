@@ -3,11 +3,14 @@
 import re
 import urllib
 import urllib2
+from BeautifulSoup import BeautifulSoup
 
 
 class PackageFirstPage:
-  def __init__(self):
-    pass
+  def __init__(self, content):
+    self.content  = content
+    self.jsfstate = None
+    self.jsftree  = None
 
   @classmethod
   def create_url(cls):
@@ -30,6 +33,33 @@ class PackageFirstPage:
     io.close()
     return page
 
+  @classmethod
+  def get(cls):
+    return cls(cls.get_content())
+
+  def get_jsfstate(self):
+    if self.jsfstate is None:
+      self.parse_content()
+    return self.jsfstate
+
+  def get_jsftree(self):
+    if self.jsftree is None:
+      self.parse_content()
+    return self.jsftree
+
+  def parse_content(self):
+    hidden_fields = {}
+
+    soup = BeautifulSoup(self.content)
+    for field in soup.findAll("input", {"type": "hidden"}):
+      field_name, field_value = None, None
+      for (attr_name, attr_value) in field.attrs:
+        if   attr_name == "name" : field_name  = attr_value
+        elif attr_name == "value": field_value = attr_value
+      hidden_fields[field_name] = field_value
+
+    self.jsfstate = hidden_fields["jsf_state_64"]
+    self.jsftree  = hidden_fields["jsf_tree_64"]
 
 class PackageDetailPage:
   def __init__(self):
