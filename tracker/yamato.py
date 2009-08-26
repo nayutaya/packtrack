@@ -57,6 +57,7 @@ class PackageDetailPage:
   @classmethod
   def get_content(cls, numbers):
     io = cls.open(numbers)
-    page = io.read()
-    io.close()
-    return page
+    try:
+      return io.read()
+    finally:
+      io.close()
