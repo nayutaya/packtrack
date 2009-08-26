@@ -37,4 +37,4 @@ pattern = re.compile(r"href=\"confirmDetail\.html;.+?\?(.+?)\"")
 for params in pattern.findall(page2.content):
   params2 = re.compile(r"&amp;").sub("&", params)
   print "---"
-  print jpexpress.create_detail_page_url(session_id, params2)
+  print jpexpress.PackageDetailPage.create_url(session_id, params2)

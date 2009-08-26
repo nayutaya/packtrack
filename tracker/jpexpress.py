@@ -103,5 +103,11 @@ class PackageListPage:
   def get(cls, jsession_id, numbers):
     return cls(cls.get_content(jsession_id, numbers))
 
-def create_detail_page_url(jsession_id, params):
-  return "http://info.jpexpress.jp/confirm/confirmDetail.html;jsessionid=" + jsession_id + "?" + params
+
+class PackageDetailPage:
+  def __init__(self):
+    pass
+
+  @classmethod
+  def create_url(cls, jsession_id, params):
+    return "http://info.jpexpress.jp/confirm/confirmDetail.html;jsessionid=" + jsession_id + "?" + params
