@@ -2,16 +2,25 @@
 
 import re
 import urllib
-from google.appengine.api import urlfetch
+import urllib2
 
 
 def create_first_page_url():
   return "http://k2k.sagawa-exp.co.jp/p/sagawa/web/okurijoinput.jsp"
 
-def fetch_first_page():
-  return urlfetch.fetch(
-    method = urlfetch.GET,
-    url    = create_first_page_url())
+def create_first_page_request():
+  return urllib2.Request(
+    url = create_first_page_url())
+
+def open_first_page():
+  request = create_first_page_request()
+  return urllib2.urlopen(request)
+
+def get_first_page():
+  io = open_first_page()
+  page = io.read()
+  io.close()
+  return page
 
 def get_input_fields(html):
   pattern = re.compile(r"<input(.+?)>", re.IGNORECASE | re.DOTALL)
@@ -41,11 +50,8 @@ def parse_first_page_params(html):
   return params
 
 def get_first_page_params():
-  result = fetch_first_page()
-  if result.status_code == 200:
-    return parse_first_page_params(result.content)
-  else:
-    return None
+  html = get_first_page()
+  return parse_first_page_params(html)
 
 def create_detail_page_url():
   return "http://k2k.sagawa-exp.co.jp/p/sagawa/web/okurijoinput.jsp"
@@ -58,8 +64,17 @@ def create_detail_page_number_params(numbers):
     num += 1
   return result
 
-def fetch_detail_page(params):
-  return urlfetch.fetch(
-    method  = urlfetch.POST,
-    url     = create_detail_page_url(),
-    payload = urllib.urlencode(params))
+def create_detail_page_request(params):
+  return urllib2.Request(
+    url  = create_detail_page_url(),
+    data = urllib.urlencode(params))
+
+def open_detail_page(params):
+  request = create_detail_page_request(params)
+  return urllib2.urlopen(request)
+
+def get_detail_page(params):
+  io = open_detail_page(params)
+  page = io.read()
+  io.close()
+  return page
