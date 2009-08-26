@@ -10,17 +10,17 @@ class PackageFirstPage:
     pass
 
   @classmethod
-  def create_first_page_url(cls):
+  def create_url(cls):
     return "http://info.jpexpress.jp/confirm/confirmIndex.html"
 
   @classmethod
-  def create_first_page_request(cls):
+  def create_request(cls):
     return urllib2.Request(
-      url = cls.create_first_page_url())
+      url = cls.create_url())
 
   @classmethod
-  def open_first_page(cls):
-    request = cls.create_first_page_request()
+  def open(cls):
+    request = cls.create_request()
     return urllib2.urlopen(request)
 
   @classmethod
@@ -38,11 +38,11 @@ class PackageListPage:
     pass
 
   @classmethod
-  def create_list_page_url(cls, session_id):
+  def create_url(cls, session_id):
     return "http://info.jpexpress.jp/confirm/confirmIndex.html;jsessionid=" + session_id
 
   @classmethod
-  def create_list_page_base_params(cls):
+  def create_base_params(cls):
     return {
       "includeChildBody:confirmIndexForm:doConfirmCareerList": "",
       "includeChildBody:confirmIndexForm/confirm/confirmIndex.html": "includeChildBody:confirmIndexForm",
@@ -59,28 +59,28 @@ class PackageListPage:
     }
 
   @classmethod
-  def create_list_page_number_params(cls, numbers):
+  def create_number_params(cls, numbers):
     params = {}
     for i, number in enumerate(numbers[:10]):
       params["includeChildBody:confirmIndexForm:denpyoNo%i" % i] = number
     return params
 
   @classmethod
-  def create_list_page_params(cls, numbers):
-    params = cls.create_list_page_base_params()
-    params.update(cls.create_list_page_number_params(numbers))
+  def create_params(cls, numbers):
+    params = cls.create_base_params()
+    params.update(cls.create_number_params(numbers))
     return params
 
   @classmethod
-  def create_list_page_request(cls, session_id, numbers):
-    params = cls. create_list_page_params(numbers)
+  def create_request(cls, session_id, numbers):
+    params = cls. create_params(numbers)
     return urllib2.Request(
-      url  = cls.create_list_page_url(session_id),
+      url  = cls.create_url(session_id),
       data = urllib.urlencode(params))
 
   @classmethod
-  def open_list_page(cls, session_id, numbers):
-    request = cls.create_list_page_request(session_id, numbers)
+  def open(cls, session_id, numbers):
+    request = cls.create_request(session_id, numbers)
     return urllib2.urlopen(request)
 
 def create_detail_page_url(session_id, params):

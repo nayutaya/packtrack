@@ -6,7 +6,7 @@ import urllib2
 from tracker import jpexpress
 
 if True:
-  io = jpexpress.PackageFirstPage.open_first_page()
+  io = jpexpress.PackageFirstPage.open()
   page1 = io.read()
   f = open("page1.html", "wb")
   f.write(page1)
@@ -23,7 +23,7 @@ numbers = ["348012244355", "348011824893", "348011053121"]
 print numbers
 
 if True:
-  io = jpexpress.PackageListPage.open_list_page(session_id, numbers)
+  io = jpexpress.PackageListPage.open(session_id, numbers)
   page2 = io.read()
   f = open("page2.html", "wb")
   f.write(page2)
