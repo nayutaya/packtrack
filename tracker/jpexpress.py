@@ -24,6 +24,14 @@ class PackageFirstPage:
     return urllib2.urlopen(request)
 
   @classmethod
+  def get_content(cls):
+    io = cls.open()
+    try:
+      return io.read()
+    finally:
+      io.close()
+
+  @classmethod
   def get_session_id(cls, html):
     pattern = re.compile(r"jsessionid=([0-9A-Z]+\.[0-9A-Z]+_[0-9A-Z]+)")
     match   = pattern.search(html)

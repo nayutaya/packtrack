@@ -6,8 +6,7 @@ import urllib2
 from tracker import jpexpress
 
 if True:
-  io = jpexpress.PackageFirstPage.open()
-  page1 = io.read()
+  page1 = jpexpress.PackageFirstPage.get_content()
   f = open("page1.html", "wb")
   f.write(page1)
   f.close()
@@ -15,6 +14,8 @@ else:
   f = open("page1.html", "rb")
   page1 = f.read()
   f.close()
+
+exit(0)
 
 session_id = jpexpress.PackageFirstPage.get_session_id(page1)
 print session_id
