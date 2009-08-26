@@ -38,25 +38,25 @@ for params in pattern.findall(page2.content):
   print jpexpress.PackageDetailPage.create_url(session_id, params2)
 """
 
-"""
-import souplib
-page = souplib.create_well_formed_html(page2.content)
-f = open("page.html", "wb")
-f.write(page)
-f.close()
-import xml.etree.ElementTree as etree
-html = etree.fromstring(page)
-"""
 
 from BeautifulSoup import BeautifulSoup
 soup = BeautifulSoup(page2.content)
 
 def get_list_table(soup):
-  for elem1 in soup.findAll("div", {"id": "isGetData"}):
-    for elem2 in elem1.findAll("table"):
-      return elem2
-  return None
+  div = soup.find("div", {"id": "isGetData"})
+  return div.find("table")
 
 list_table = get_list_table(soup)
 
-print list_table.prettify()
+#print list_table.prettify()
+
+def get_list_rows(table):
+  for i, row in enumerate(table.findAll("tr")):
+    if i == 0: continue
+    cells = row.findAll("td")
+    print "----"
+    #print row.prettify()
+    no = cells[0].prettify()
+    print ("no", no)
+
+get_list_rows(list_table)
