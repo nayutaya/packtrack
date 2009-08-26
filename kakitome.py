@@ -2,12 +2,19 @@
 
 import urllib
 import urllib2
+import random
+
+def create_random_number(prefix = ""):
+  number = prefix
+  while len(number) < 11:
+    number += str(random.randint(0, 9))
+  return number
 
 base_params = {
   "SVID": "023",
   "locale": "ja",
   "searchKind": "S002",
-  "reqCodeNo1": "00000000000",
+  "reqCodeNo1": "",
   "reqCodeNo2": "",
   "reqCodeNo3": "",
   "reqCodeNo4": "",
@@ -19,8 +26,35 @@ base_params = {
   "reqCodeNo10": "",
 }
 
-params = base_params
-query = urllib.urlencode(params)
-url = "http://tracking.post.japanpost.jp/service/singleSearch.do" + "?" + query
+for i in range(10):
+  number_params = {
+    "reqCodeNo1": create_random_number(),
+    "reqCodeNo2": create_random_number(),
+    "reqCodeNo3": create_random_number(),
+    "reqCodeNo4": create_random_number(),
+    "reqCodeNo5": create_random_number(),
+    "reqCodeNo6": create_random_number(),
+    "reqCodeNo7": create_random_number(),
+    "reqCodeNo8": create_random_number(),
+    "reqCodeNo9": create_random_number(),
+    "reqCodeNo10": create_random_number(),
+  }
 
-print url
+  params = base_params
+  params.update(number_params)
+  print params
+
+  query = urllib.urlencode(params)
+  url = "http://tracking.post.japanpost.jp/service/singleSearch.do" + "?" + query
+  print url
+
+  io = urllib2.urlopen(url)
+  page = io.read()
+  io.close()
+
+  fname = "test/%03i.html" % i
+  print fname
+
+  f = open(fname, "wb")
+  f.write(page)
+  f.close()
