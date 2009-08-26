@@ -14,8 +14,5 @@ page = sagawa.PackageFirstPage.get()
 state = page.get_jsfstate()
 tree  = page.get_jsftree()
 
-params = sagawa.PackageDetailPage.create_params(state, tree, numbers)
-#print params
-
-result = sagawa.PackageDetailPage.get_content(params)
+result = sagawa.PackageDetailPage.get_content(state, tree, numbers)
 print result

@@ -111,53 +111,20 @@ class PackageDetailPage:
     return params
 
   @classmethod
-  def create_request(cls, params):
+  def create_request(cls, state, tree, numbers):
+    params = cls.create_params(state, tree, numbers)
     return urllib2.Request(
       url  = cls.create_url(),
       data = urllib.urlencode(params))
 
   @classmethod
-  def open(cls, params):
-    request = cls.create_request(params)
+  def open(cls, state, tree, numbers):
+    request = cls.create_request(state, tree, numbers)
     return urllib2.urlopen(request)
 
   @classmethod
-  def get_content(cls, params):
-    io = cls.open(params)
+  def get_content(cls, state, tree, numbers):
+    io = cls.open(state, tree, numbers)
     page = io.read()
     io.close()
     return page
-
-
-
-def get_input_fields(html):
-  pattern = re.compile(r"<input(.+?)>", re.IGNORECASE | re.DOTALL)
-
-  results = []
-  for fragment in pattern.findall(html):
-    attrs = parse_attributes(fragment)
-    results.append(attrs)
-
-  return results
-
-def parse_attributes(html):
-  pattern = re.compile(r" (.+?)=\"(.*?)\"")
-
-  result = {}
-  for key, value in pattern.findall(html):
-    result[key] = value
-
-  return result
-
-def parse_first_page_params(html):
-  params = {}
-  for field in get_input_fields(html):
-    name  = field.get("name")
-    value = field.get("value", "")
-    params[name] = value
-  return params
-
-def get_first_page_params():
-  cls = PackageFirstPage
-  html = cls.get_content()
-  return parse_first_page_params(html)
