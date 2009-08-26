@@ -1,8 +1,5 @@
 # -*- coding: utf-8 -*-
 
-import re
-import urllib
-import urllib2
 from tracker import yamato
 
 numbers = ["225303520584", "249790484403"]
