@@ -3,6 +3,7 @@
 import urllib
 import urllib2
 import random
+import time
 
 def create_random_number(prefix = ""):
   number = prefix
@@ -26,7 +27,7 @@ base_params = {
   "reqCodeNo10": "",
 }
 
-for i in range(10):
+for i in range(50):
   number_params = {
     "reqCodeNo1": create_random_number(),
     "reqCodeNo2": create_random_number(),
@@ -58,3 +59,5 @@ for i in range(10):
   f = open(fname, "wb")
   f.write(page)
   f.close()
+
+  time.sleep(0.5)
