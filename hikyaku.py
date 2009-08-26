@@ -14,16 +14,5 @@ tree  = fields["jsf_tree_64"]
 params = sagawa.PackageDetailPage.create_params(state, tree, numbers)
 #print params
 
-result = sagawa.get_detail_page(params)
-print result
-
-exit(0)
-
-
-
-params = sagawa.get_first_page_params()
-params.update(sagawa.create_detail_page_number_params(numbers))
-#print params
-
-result = sagawa.get_detail_page(params)
+result = sagawa.PackageDetailPage.get_content(params)
 print result
