@@ -22,8 +22,8 @@ print session_id
 numbers = ["348012244355", "348011824893", "348011053121"]
 print numbers
 
-if False:
-  io = jpexpress.open_list_page(session_id, numbers)
+if True:
+  io = jpexpress.PackageListPage.open_list_page(session_id, numbers)
   page2 = io.read()
   f = open("page2.html", "wb")
   f.write(page2)
