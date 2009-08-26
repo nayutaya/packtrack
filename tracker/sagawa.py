@@ -5,22 +5,32 @@ import urllib
 import urllib2
 
 
-def create_first_page_url():
-  return "http://k2k.sagawa-exp.co.jp/p/sagawa/web/okurijoinput.jsp"
+class PackageFirstPage:
+  def __init__(self):
+    pass
 
-def create_first_page_request():
-  return urllib2.Request(
-    url = create_first_page_url())
+  @classmethod
+  def create_url(cls):
+    return "http://k2k.sagawa-exp.co.jp/p/sagawa/web/okurijoinput.jsp"
 
-def open_first_page():
-  request = create_first_page_request()
-  return urllib2.urlopen(request)
+  @classmethod
+  def create_request(cls):
+    return urllib2.Request(
+      url = cls.create_url())
 
-def get_first_page():
-  io = open_first_page()
-  page = io.read()
-  io.close()
-  return page
+  @classmethod
+  def open(cls):
+    request = cls.create_request()
+    return urllib2.urlopen(request)
+
+  @classmethod
+  def get_content(cls):
+    io = cls.open()
+    page = io.read()
+    io.close()
+    return page
+
+
 
 def get_input_fields(html):
   pattern = re.compile(r"<input(.+?)>", re.IGNORECASE | re.DOTALL)
@@ -50,7 +60,8 @@ def parse_first_page_params(html):
   return params
 
 def get_first_page_params():
-  html = get_first_page()
+  cls = PackageFirstPage
+  html = cls.get_content()
   return parse_first_page_params(html)
 
 def create_detail_page_url():
