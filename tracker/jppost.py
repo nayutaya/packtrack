@@ -11,8 +11,7 @@ class PackageTrackingNumber:
 
   @classmethod
   def create_check_digit(cls, number):
-    num = int(number)
-    return str(num % 7)
+    return str(int(number) % 7)
 
   @classmethod
   def create_random_number(cls, prefix = ""):
@@ -80,6 +79,7 @@ class PackageListPage:
   @classmethod
   def get_content(cls, numbers):
     io = cls.open(numbers)
-    page = io.read()
-    io.close()
-    return page
+    try:
+      return io.read()
+    finally:
+      io.close()
