@@ -55,8 +55,28 @@ def get_list_rows(table):
     if i == 0: continue
     cells = row.findAll("td")
     print "----"
-    #print row.prettify()
-    no = cells[0].prettify()
-    print ("no", no)
+    print row.prettify()
+    result_no_cell         = cells[0]
+    tracking_number_cell   = cells[1]
+    current_status_cell    = cells[2]
+    accept_date_cell       = cells[3]
+    arrival_date_cell      = cells[4]
+    handling_division_cell = cells[5]
+    mail_cell              = cells[6] # 用途不明
+    #print ("recv_date", recv_date)
+    #print ("send_date", send_date)
+    #print ("division", division)
+    #print ("mail", mail)
+    hash = {
+      u"No"                 : result_no_cell.center.span.string,
+      u"送り状番号"         : tracking_number_cell.div.a.contents[0].strip(),
+      u"送り状番号:リンク先": tracking_number_cell.div.a["href"],
+      u"最新状況"           : current_status_cell.span.contents[0].strip(),
+      u"最新状況:日時"      : current_status_cell.span.contents[2].strip(),
+    }
+    print hash
+    #for k, v in hash.items():
+    #  print "--"
+    #  print k + u": " + v
 
 get_list_rows(list_table)
