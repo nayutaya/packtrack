@@ -3,7 +3,7 @@
 import re
 from tracker import jpexpress
 
-if False:
+if True:
   page1 = jpexpress.PackageFirstPage.get()
   f = open("page1.html", "wb")
   f.write(page1.content)
@@ -17,10 +17,16 @@ session_id = page1.get_jsession_id()
 print session_id
 
 
-numbers = ["348012244355", "348011824893", "348011053121"]
+#numbers = ["348012244355", "348011824893", "348011053121"]
+from tracker import jppost
+numbers = []
+for i in range(10):
+  number = jppost.PackageTrackingNumber.create_random_number("3480")
+  numbers.append(number)
+
 print numbers
 
-if False:
+if True:
   page2 = jpexpress.PackageListPage.get(session_id, numbers)
   f = open("page2.html", "wb")
   f.write(page2.content)
@@ -46,7 +52,7 @@ def get_list_table(soup):
   div = soup.find("div", {"id": "isGetData"})
   return div.find("table")
 
-list_table = get_list_table(soup)
+#list_table = get_list_table(soup)
 
 #print list_table.prettify()
 
@@ -75,4 +81,4 @@ def get_list_rows(table):
     }
     print hash
 
-get_list_rows(list_table)
+#get_list_rows(list_table)
