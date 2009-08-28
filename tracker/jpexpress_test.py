@@ -64,16 +64,49 @@ class TestPackageListPageParser(unittest.TestCase):
       io.close()
 
   def test_parse__count01(self):
-    target = jpexpress.PackageListPageParser.parse
-    src    = self.read_data("list_count01.html")
     expected = {
       "list": [
         {
-          u"No": "1",
+          u"No"        : u"1",
+          u"送り状番号": u"348-01-037-7713",
+          u"最新状況"  : u"受取が完了いたしました。",
+          u"最新状況:日時": u"6/25 12:54",
+          u"受付日": u"6/20",
+          u"お届け指定日": u"時間指定なし",
+          u"扱区分": u"ペリカン便",
         },
       ],
     }
-    self.assertEqual(expected, target(src))
+    self.assertEqual(
+      expected,
+      jpexpress.PackageListPageParser.parse(self.read_data("list_count01.html")))
+
+  def test_parse__count02(self):
+    expected = {
+      "list": [
+        {
+          u"No"        : u"1",
+          u"送り状番号": u"348-01-077-8570",
+          u"最新状況"  : u"受取が完了いたしました。",
+          u"最新状況:日時": u"7/2 18:53",
+          u"受付日": u"6/30",
+          u"お届け指定日": u"時間指定なし",
+          u"扱区分": u"ペリカン便",
+        },
+        {
+          u"No"        : u"2",
+          u"送り状番号": u"348-01-087-4444",
+          u"最新状況"  : u"受取が完了いたしました。",
+          u"最新状況:日時": u"7/3 19:55",
+          u"受付日": u"7/ 2",
+          u"お届け指定日": u"時間指定なし",
+          u"扱区分": u"ペリカン便",
+        },
+      ],
+    }
+    self.assertEqual(
+      expected,
+      jpexpress.PackageListPageParser.parse(self.read_data("list_count02.html")))
 
 
 # TODO: PackageDetailPageクラスのテストを記述

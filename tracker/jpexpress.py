@@ -193,18 +193,18 @@ class PackageListPageParser:
     accept_date_cell       = cells[3]
     arrival_date_cell      = cells[4]
     handling_division_cell = cells[5]
-    mail_cell              = cells[6] # —p“r•s–¾
+    mail_cell              = cells[6] # ç”¨é€”ä¸æ˜
   
     return {
       u"No"                 : result_no_cell.center.span.string,
-      #u"‘—‚èó”Ô†"         : tracking_number_cell.div.a.contents[0].strip(),
-      #u"‘—‚èó”Ô†:ƒŠƒ“ƒNæ": tracking_number_cell.div.a["href"],
-      #u"ÅVó‹µ"           : current_status_cell.span.contents[0].strip(),
-      #u"ÅVó‹µ:“ú"      : current_status_cell.span.contents[2].strip(),
-      #u"ó•t“ú"             : accept_date_cell.span.contents[0].strip(),
-      #u"‚¨“Í‚¯w’è“ú"       : arrival_date_cell.center.span.contents[1].strip(),
-      #u"ˆµ‹æ•ª"             : handling_division_cell.center.span.contents[0].strip(),
-      #u"ƒ[ƒ‹"             : mail_cell.center.span.string,
+      u"é€ã‚ŠçŠ¶ç•ªå·"         : tracking_number_cell.div.a.contents[0].strip(),
+      #u"é€ã‚ŠçŠ¶ç•ªå·:ãƒªãƒ³ã‚¯å…ˆ": tracking_number_cell.div.a["href"],
+      u"æœ€æ–°çŠ¶æ³"           : current_status_cell.span.contents[0].strip(),
+      u"æœ€æ–°çŠ¶æ³:æ—¥æ™‚"      : current_status_cell.span.contents[2].strip(),
+      u"å—ä»˜æ—¥"             : accept_date_cell.span.contents[0].strip(),
+      u"ãŠå±Šã‘æŒ‡å®šæ—¥"       : arrival_date_cell.center.span.contents[1].strip(),
+      u"æ‰±åŒºåˆ†"             : handling_division_cell.center.span.contents[0].strip(),
+      #u"ãƒ¡ãƒ¼ãƒ«"             : mail_cell.center.span.string,
     }
 
 
