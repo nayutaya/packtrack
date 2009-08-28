@@ -63,6 +63,25 @@ class TestPackageListPageParser(unittest.TestCase):
     finally:
       io.close()
 
+  def test_parse__all_count(self):
+    list = [
+      ("list_count01.html", [u"1"]),
+      ("list_count02.html", [u"1", u"2"]),
+      ("list_count03.html", [u"1", u"2", u"3"]),
+      ("list_count04.html", [u"1", u"2", u"3", u"4"]),
+      ("list_count05.html", [u"1", u"2", u"3", u"4", u"5"]),
+      ("list_count06.html", [u"1", u"2", u"3", u"4", u"5", u"6"]),
+      ("list_count07.html", [u"1", u"2", u"3", u"4", u"5", u"6", u"7"]),
+      ("list_count08.html", [u"1", u"2", u"3", u"4", u"5", u"6", u"7", u"8"]),
+      ("list_count09.html", [u"1", u"2", u"3", u"4", u"5", u"6", u"7", u"8", u"9"]),
+      ("list_count10.html", [u"1", u"2", u"3", u"4", u"5", u"6", u"7", u"8", u"9", u"10"]),
+    ]
+    for filename, expected in list:
+      src  = self.read_data(filename)
+      info = jpexpress.PackageListPageParser.parse(src)
+      actual = [record["No"] for record in info["list"]]
+      self.assertEqual(expected, actual)
+
   def test_parse__count01(self):
     expected = {
       "list": [
