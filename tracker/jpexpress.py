@@ -5,6 +5,15 @@ import urllib
 import urllib2
 
 
+class PackageTrackingNumber:
+  def __init__(self):
+    pass
+
+  @classmethod
+  def create_check_digit(cls, number):
+    return str(int(number) % 7)
+
+
 class PackageFirstPage:
   def __init__(self, content):
     self.content = content
