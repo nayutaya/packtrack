@@ -3,6 +3,7 @@
 import re
 import urllib
 import urllib2
+from BeautifulSoup import BeautifulSoup
 
 
 class PackageTrackingNumber:
@@ -155,6 +156,56 @@ class PackageListPage:
   @classmethod
   def get(cls, jsession_id, numbers):
     return cls(cls.get_content(jsession_id, numbers))
+
+
+class PackageListPageParser:
+  @classmethod
+  def parse(cls, src):
+    doc = BeautifulSoup(src)
+    list_table = cls.get_list_table(doc)
+
+    return {
+      "list": cls.parse_list_table(list_table),
+    }
+
+  @classmethod
+  def get_list_table(cls, doc):
+    return doc.find("div", {"id": "isGetData"}).find("table")
+
+  @classmethod
+  def parse_list_table(cls, list_table):
+    list_rows = list_table.findAll("tr", recursive = False)
+
+    results = []
+    for index, list_row in enumerate(list_rows):
+      if index == 0: continue
+      results.append(cls.parse_list_row(list_row))
+
+    return results
+
+  @classmethod
+  def parse_list_row(cls, list_row):
+    cells = list_row.findAll("td", recursive = False)
+
+    result_no_cell         = cells[0]
+    tracking_number_cell   = cells[1]
+    current_status_cell    = cells[2]
+    accept_date_cell       = cells[3]
+    arrival_date_cell      = cells[4]
+    handling_division_cell = cells[5]
+    mail_cell              = cells[6] # 用途不明
+  
+    return {
+      u"No"                 : result_no_cell.center.span.string,
+      #u"送り状番号"         : tracking_number_cell.div.a.contents[0].strip(),
+      #u"送り状番号:リンク先": tracking_number_cell.div.a["href"],
+      #u"最新状況"           : current_status_cell.span.contents[0].strip(),
+      #u"最新状況:日時"      : current_status_cell.span.contents[2].strip(),
+      #u"受付日"             : accept_date_cell.span.contents[0].strip(),
+      #u"お届け指定日"       : arrival_date_cell.center.span.contents[1].strip(),
+      #u"扱区分"             : handling_division_cell.center.span.contents[0].strip(),
+      #u"メール"             : mail_cell.center.span.string,
+    }
 
 
 class PackageDetailPage:

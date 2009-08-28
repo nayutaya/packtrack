@@ -52,6 +52,30 @@ class TestPackageFirstPageParser(unittest.TestCase):
 
 # TODO: PackageListPageクラスのテストを記述
 
+class TestPackageListPageParser(unittest.TestCase):
+  def setUp(self):
+    pass
+
+  def read_data(self, filename):
+    io = open("test/jpexpress/" + filename, "rb")
+    try:
+      return io.read()
+    finally:
+      io.close()
+
+  def test_parse__count01(self):
+    target = jpexpress.PackageListPageParser.parse
+    src    = self.read_data("list_count01.html")
+    expected = {
+      "list": [
+        {
+          u"No": "1",
+        },
+      ],
+    }
+    self.assertEqual(expected, target(src))
+
+
 # TODO: PackageDetailPageクラスのテストを記述
 
 
