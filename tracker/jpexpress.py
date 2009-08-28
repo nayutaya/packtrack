@@ -36,7 +36,8 @@ class PackageTrackingSession:
   def setup(self):
     if self.jsession_id is None:
       first_page = self.get_first_page()
-      self.jsession_id = first_page.get_jsession_id()
+      first_info = PackageFirstPageParser.parse(first_page.content)
+      self.jsession_id = first_info["jsessionid"]
     return self
 
   def get_first_page(self):
@@ -77,11 +78,6 @@ class PackageFirstPage:
   @classmethod
   def get(cls):
     return cls(cls.get_content())
-
-  def get_jsession_id(self):
-    pattern = re.compile(r"jsessionid=([0-9A-Z]+\.[0-9A-Z]+_[0-9A-Z]+)")
-    match   = pattern.search(self.content)
-    return match.group(1) if match is not None else None
 
 
 class PackageFirstPageParser:

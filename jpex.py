@@ -5,12 +5,6 @@ from tracker import jpexpress
 
 session = jpexpress.PackageTrackingSession()
 print session
-#page = session.get_first_page()
-#print page
-#session.setup()
-#print session.jsession_id
-#session.setup()
-#print session.jsession_id
 
 numbers = ["348012244355", "348011824893", "348011053121"]
 page = session.get_list_page(numbers)
