@@ -1,0 +1,283 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xml:lang="ja" lang="ja" xmlns="http://www.w3.org/1999/xhtml" xmlns:te="http://www.seasar.org/teeda/extension"><head>
+<meta http-equiv="Content-Type" content="text/html; charset=shift_jis" /><link rel="stylesheet" href="/layout/css/common.css" baseViewId="/layout/layout.html" type="text/css" /><title>配達状況確認画面</title><script type="text/javascript" language="JavaScript" src="/js/kumu.js" baseViewId="/confirm/confirmList.html" xml:space="preserve"></script><script type="text/javascript" language="JavaScript" src="/js/event.js" baseViewId="/confirm/confirmList.html" xml:space="preserve"></script><script type="text/javascript" language="JavaScript" src="/js/disabled.js" baseViewId="/confirm/confirmList.html" xml:space="preserve"></script><script type="text/javascript" language="JavaScript" src="/js/jpex_common.js" baseViewId="/confirm/confirmList.html" xml:space="preserve"></script><script type="text/javascript" language="javascript" baseViewId="/confirm/confirmList.html" xml:space="preserve">
+	<!--
+		function goAddMail() {
+
+			count = 0;			// チェックボックスカウント
+
+			// inputタグの要素リストを取得します。
+			elm = document.getElementsByTagName("input");
+
+			// 取得した要素分繰り返します。
+			for(i=0; i<elm.length; i++){
+
+				// 要素がチェックボックスの場合
+				if(elm[i].type == "checkbox"){
+					count++;
+				}
+			}
+
+			j = 0;
+			k = 0;
+			param = "";			// パラメータ
+
+			// チェックボックス分繰り返します。
+			while(count > k){
+
+				// id 「mailCheckBox + j」が存在する場合
+				if(document.getElementById("mailCheckBox" + j) != undefined){
+
+					// 「mailCheckBox + j」が選択されている場合
+					if(document.getElementById("mailCheckBox" + j).checked){
+						if(param != ""){
+							param += ",";
+						}
+						param += j;
+					}
+					k++;
+				}
+				j++;
+			}
+
+			// メールチェックボックスが選択されたインデックスに設定します。
+			document.getElementById("selectedIndex").value = param;
+		}
+	// -->
+	</script></head>
+<body>
+		<div id="wrap-outer">
+			<div id="wrap-inner">
+
+				<!-- ヘッダ -->
+				
+
+<!-- [head-box] start -->
+<div class="printimg"><img src="/layout/img/common/header_print_01.gif;jsessionid=GH12IVIGT6J0QL1HJAANM7TFHDGU03V05N0I3F1LQ5DPNRJ84ISJDIJRBSHG20003O000000.WU001_004" width="768" height="60" alt="【画像】印刷用のヘッダー画像です" /></div>
+	<div id="head-box">
+		<div class="pad">
+			<div id="yubin">
+				<div class="inner"><a href="/index.html" shape="rect" target="_top"><img src="/layout/img/common/jpexpress.gif;jsessionid=GH12IVIGT6J0QL1HJAANM7TFHDGU03V05N0I3F1LQ5DPNRJ84ISJDIJRBSHG20003O000000.WU001_004" alt="JPエクスプレス" /></a></div>
+			</div>
+			<div id="guide">
+				<ul id="head-navi"><li><a href="http://www.jpexpress.jp/about/sitemap.html" shape="rect" target="_top">サイトマップ</a></li><li><a href="http://www.jpexpress.jp/question/contact_us/index.html" shape="rect" target="_top">お問い合わせ</a></li><li class="rear"><a href="http://www.jpexpress.jp/question/index.html" shape="rect" target="_top">よくあるご質問</a></li></ul>
+				<div class="clear"><br clear="none" /></div>
+			</div>
+			<div class="clear"><br clear="none" /></div>
+		</div>
+	</div>
+	<!-- [head-box] end -->
+
+ 
+
+				<!-- [main-box] start -->
+				<div id="main-box">
+					<div class="pad">
+						<!-- メインコンテンツ -->
+						
+	<h1><span class="inner">配達状況確認</span></h1>
+	<h2><span class="inner">お荷物状況一覧</span></h2>
+
+	<label id="G8Label"></label><br clear="none" />
+	
+	<form id="confirmListForm" name="includeChildBody:confirmListForm" method="post" enctype="application/x-www-form-urlencoded" action="/confirm/confirmList.html;jsessionid=GH12IVIGT6J0QL1HJAANM7TFHDGU03V05N0I3F1LQ5DPNRJ84ISJDIJRBSHG20003O000000.WU001_004">
+		
+		<div id="isGetData">
+			<p>
+				配送状況の検索結果です。<label id="T2Label">送り状番号</label>をクリックすると、
+				個々のお荷物の詳しい情報をご覧いただけます。
+			</p>
+			
+			<input type="hidden" id="selectedIndex" name="includeChildBody:confirmListForm:selectedIndex" value="" />
+			<input type="hidden" id="careerItemsSave" name="includeChildBody:confirmListForm:careerItemsSave" value="rO0ABXNyABNqYXZhLnV0aWwuQXJyYXlMaXN0eIHSHZnHYZ0DAAFJAARzaXpleHAAAAABdwQAAAAKc3IAEWphdmEudXRpbC5IYXNoTWFwBQfawcMWYNEDAAJGAApsb2FkRmFjdG9ySQAJdGhyZXNob2xkeHA/QAAAAAAADHcIAAAAEAAAAAh0AAVpbmRleHQAATF0AAx0cmVhdG1lbnREaXZ0AA/jg5rjg6rjgqvjg7Pkvr90ABBtYWlsQ2hlY2tCb3hUYWdzdAAGPGJyIC8+dAALYXBwb2ludERhdGV0AAUmbmJzcHQACnVrZWlyZURhdGV0AAwgNy8gNDxCUj7jgIB0AAZzdGF0dXN0AC3phY3pgZTlrozkuobjgYTjgZ/jgZfjgb7jgZfjgZ/jgII8YnI+Ny82IDg6NTd0AAhkZW5weW9Ob3QADzM4MC03My04MzUtMjg5MHQAC2RldGFpbFF1ZXJ5dACfcHNwYWtzYmEwMDBfMDAwLmpzcD91amkudmVyYj1zdGFydHVwJnVqaS5iZWFuPW5pdHRzdS5remQucHNwYWt6ZGowMDJfNTAxJnN0Ykludm9pY2VObz0zODA3MzgzNTI4OTAmc3RiRHVwdWxpY2F0aW9uQ2hlY2tObz0wJnN0Ykludm9pY2VEU0k9MDQ0JnN0Yk1vbnRoRFNJPTA3JnN0eHg=" />
+			<input type="hidden" id="denpyoNoItemsSave" name="includeChildBody:confirmListForm:denpyoNoItemsSave" value="rO0ABXVyABNbTGphdmEubGFuZy5TdHJpbmc7rdJW5+kde0cCAAB4cAAAAAF0AAwzODA3MzgzNTI4OTA=" />
+
+			<table cellpadding="0" width="100%" class="data s" cellspacing="0" border="1"><tr><td class="h1" colspan="1" rowspan="1"><center>No.</center></td><td class="h1" colspan="1" rowspan="1"><center><label id="T2Label-2">送り状番号</label></center></td><td class="h1" colspan="1" rowspan="1"><center>最新状況</center></td><td class="h1" colspan="1" rowspan="1"><center><label id="T4Label">受付日</label></center></td><td class="h1" colspan="1" rowspan="1"><center>お届け指定日</center></td><td class="h1" colspan="1" rowspan="1"><center><label id="T5Label">扱区分</label></center></td><td class="h1" colspan="1" rowspan="1"><center>メール</center></td></tr>
+					<tr><td colspan="1" rowspan="1"><center><span id="index">1</span></center></td><td colspan="1" rowspan="1">
+							<div id="isDenpyoNoLink">
+								<a id="goConfirmDetail" href="confirmDetail.html;jsessionid=GH12IVIGT6J0QL1HJAANM7TFHDGU03V05N0I3F1LQ5DPNRJ84ISJDIJRBSHG20003O000000.WU001_004?denpyoNo=380-73-835-2890&amp;detailQuery=pspaksba000_000.jsp%3Fuji.verb%3Dstartup%26uji.bean%3Dnittsu.kzd.pspakzdj002_501%26stbInvoiceNo%3D380738352890%26stbDupulicationCheckNo%3D0%26stbInvoiceDSI%3D044%26stbMonthDSI%3D07%26st" shape="rect">
+									380-73-835-2890<br clear="none" />
+								</a>
+							</div>
+							
+						</td><td colspan="1" rowspan="1"><span id="status">配達完了いたしました。<br>7/6 8:57</span></td><td colspan="1" rowspan="1"><span id="ukeireDate"> 7/ 4<BR>　</span></td><td colspan="1" rowspan="1"><center><span id="appointDate">&nbsp</span></center></td><td colspan="1" rowspan="1"><center><span id="treatmentDiv">ペリカン便</span></center></td><td colspan="1" rowspan="1"><center><span id="mailCheckBoxTags"><br /></span></center></td></tr>
+				</table>
+			<br clear="none" />
+		</div>
+		<div align="right">
+			<div id="isGetData-2">
+				
+				<div id="isNotMailButton">
+					<input type="submit" id="doBack" name="includeChildBody:confirmListForm:doBack" value="戻る" />
+				</div>
+			</div>
+		</div>
+	<input type="hidden" name="includeChildBody:confirmListForm/confirm/confirmList.html" value="includeChildBody:confirmListForm" /></form>
+
+					</div>
+				</div>
+				<!-- [main-box] end -->
+
+				<!-- ナビゲーション -->
+				
+<script type="text/javascript" language="JavaScript" baseViewId="/layout/ssi/navigation.html" xml:space="preserve">
+<!--
+/* ===============================================
+	文字色設定
+=============================================== */
+	function setLayerColor(id,c){
+		if(document.all || document.getElementById){
+			if(document.all){
+				document.all(id).style.color = c;
+			} else if(document.getElementById){
+				document.getElementById(id).style.color = c;
+			}
+		}
+	}
+
+
+
+	function writeFalsh(wd){
+		document.write(wd);
+	}
+
+function check_value(url){
+	if(document.tr2.denpyoNo.value == '送り状番号を入力'){
+		document.tr2.denpyoNo.value ="";
+	}
+	var str = document.tr2.denpyoNo.value;
+	var str2 ="";
+	var x ="";
+	var y="";
+	var i =0; var P=0;
+	var len= str.length;
+	var mL='０１２３４５６７８９０';
+	var mS='01234567890';
+	while(i < len){
+		x = str.charAt(i);
+		if(mS.indexOf(x,0) >-1){
+			str2 += x;
+		}else{
+			P = mL.indexOf(x,0);
+			if(P > -1){
+				x =mS.charAt(P);
+				str2 += x;
+			}
+		}
+		i++;
+	}
+	if(str2 != ''){
+		document.tr2.denpyoNo.value =str2;
+		if(url == "confirm"){
+			url = '/confirm/confirmList.html?denpyoNo=' + str2;
+		}
+		if(url == "redeliver"){
+			url = '/redeliver/redeliverTop.html?denpyoNo=' + str2;
+		}
+	}else{
+		if(url == "confirm"){
+			url = '/confirm/confirmIndex.html';
+		}
+		if(url == "redeliver"){
+			url = '/redeliver/redeliverTop.html';
+		}
+	}
+	location.href= url;
+}
+;
+// -->
+</script>
+
+<!-- [navi-box] start -->
+
+	<div id="navi-box">
+		<div class="pad">
+
+          <p class="sp-b5"><a href="http://www.jpexpress.jp/personal/service/fuka_service/benri.html#net_tell" shape="rect"><img width="185" height="81" src="/layout/img/top/nb_syuuka.gif" alt="お電話での集荷申込み" /></a></p>
+
+
+			<div class="trace-head">
+
+					<p class="arrange-c"><img width="185" height="34" src="/layout/img/top/nb_toptrace_head.gif" alt="荷物の追跡・再配達申込" /></p>
+			</div>
+			<div class="trace-body">
+				<div class="inner">
+				  <form action="" onSubmit="return false" enctype="application/x-www-form-urlencoded" name="tr2" method="GET">
+					<div class="lower">
+							<input value="S001" type="hidden" name="searchKind" />
+							<input value="ja" type="hidden" name="locale" />
+							<input value="送り状番号を入力" type="text" class="number" onFocus="setLayerColor('number02','#000000');if(this.value=='送り状番号を入力')this.value='';" size="10" name="denpyoNo" id="number02" onBlur="setLayerColor('number02','#666666');if(this.value=='')this.value='送り状番号を入力';" />
+					<div class="lower-inner">
+					  <div class="col2-l">
+							<input type="image" src="/layout/img/top/nb_trace_btn_l.gif" onClick="check_value('confirm');" alt="追跡" />
+					  </div>
+					  <div class="col2-r">
+
+							<input type="image" src="/layout/img/top/nb_trace_btn.gif" onClick="check_value('redeliver');" alt="再配達申込" />
+					  </div>
+						<div class="clear"><br clear="none" /></div>
+					</div>
+					</div>
+				</form>
+			  </div>
+		        <p class="nb_trace_b_bg_lower"><img width="185" height="43" usemap="#Map2" border="0" src="/layout/img/top/nb_trace_b_bg_lower.gif" alt="" />
+		          <map name="Map2" id="Map2"><area href="/confirm/confirmIndex.html" shape="rect" coords="46,30,182,43" /></map>
+                </p>
+		  </div>
+
+
+
+         <p class="sp-b20 sp-t5"><a href="/collection/collectionLogin.html" shape="rect"><img width="186" height="38" border="0" src="/layout/img/common/nb_syuuka2.gif" alt="集荷のお申し込み" /></a></p>
+
+<br clear="none" />
+
+         <p class="sp-b5 sp-t20"><a href="http://www.jpexpress.jp/" shape="rect"><img width="186" height="42" border="0" src="/layout/img/common/nb_jptop.gif" alt="JPエクスプレストップへもどる" /></a></p>
+
+	  </div>
+	</div>
+
+	<!-- [navi-box] end -->
+
+ 
+
+				<!-- フッタ -->
+				
+
+
+<!-- [foot-box] start -->
+	<div id="foot-box">
+		<div class="upper">
+			<div class="col2-l"><img width="110" height="10" src="/layout/img/common/foot_yubin_j.gif" alt="JPエクスプレス株式会社" /></div>
+			<div class="col2-r">
+				<ul id="foot-navi"><li><a href="http://www.jpexpress.jp/about/profile.html" shape="rect">会社概要</a></li><li><a href="http://www.jpexpress.jp/about/employment/index.html" shape="rect">採用情報</a></li><li><a href="http://www.jpexpress.jp/about/kiyaku.html" shape="rect">サイトのご利用について</a></li><li><a href="http://www.jpexpress.jp/about/yakkan.pdf" shape="rect">各種約款</a></li><li class="rear"><a href="http://www.jpexpress.jp/about/privacy.html" shape="rect">プライバシーポリシー</a></li></ul>
+				<div class="clear"><br clear="none" /></div>
+			</div>
+			<div class="clear"><br clear="none" /></div>
+		</div>
+		<div class="lower">
+			<div class="col2-l"><img width="108" height="11" src="/layout/img/common/foot_yubin_e.gif" alt="日本郵政グループ" /></div>
+			<div class="col2-r"><img width="318" height="9" src="/layout/img/common/copy_2009.gif" alt="Copyright &copy; 2009 JAPAN POST EXPRESS Co.,Ltd. All Rights Reserved." /></div>
+			<br class="clear" clear="none" />
+		</div>
+	</div>
+	<!-- [foot-box] end -->
+
+
+
+			</div>
+		</div>
+	
+<script language="JavaScript" type="text/javascript">
+<!--
+var forms = ['confirmListForm'];
+for (var i = 0, len = forms.length; i < len; ++i) {
+  var span = document.createElement('span');
+  span.style.display = 'none';
+  span.style.position = 'absolute';
+  var form = document.getElementById(forms[i]);
+  form.appendChild(span);
+  span.innerHTML = "<input type='hidden' name='te-conditions' value='rO0ABXNyABdqYXZhLnV0aWwuTGlua2VkSGFzaE1hcDTATlwQbMD7AgABWgALYWNjZXNzT3JkZXJ4cgARamF2YS51dGlsLkhhc2hNYXAFB9rBwxZg0QMAAkYACmxvYWRGYWN0b3JJAAl0aHJlc2hvbGR4cD9AAAAAAABgdwgAAACAAAAACHQALWluY2x1ZGVDaGlsZEJvZHk6Y29uZmlybUxpc3RGb3JtOmlzTm90R2V0RGF0YXNyABFqYXZhLmxhbmcuQm9vbGVhbs0gcoDVnPruAgABWgAFdmFsdWV4cAB0ACppbmNsdWRlQ2hpbGRCb2R5OmNvbmZpcm1MaXN0Rm9ybTppc0dldERhdGFzcQB+AAQBdAAtaW5jbHVkZUNoaWxkQm9keTpjb25maXJtTGlzdEZvcm06aXNNYWlsQnV0dG9ucQB+AAV0AD1pbmNsdWRlQ2hpbGRCb2R5OmNvbmZpcm1MaXN0Rm9ybTpjYXJlZXJJdGVtczowOmlzRGVucHlvTm9MaW5rcQB+AAd0AEBpbmNsdWRlQ2hpbGRCb2R5OmNvbmZpcm1MaXN0Rm9ybTpjYXJlZXJJdGVtczowOmlzTm90RGVucHlvTm9MaW5rcQB+AAV0ACxpbmNsdWRlQ2hpbGRCb2R5OmNvbmZpcm1MaXN0Rm9ybTppc0dldERhdGEtMnEAfgAHdAAvaW5jbHVkZUNoaWxkQm9keTpjb25maXJtTGlzdEZvcm06aXNNYWlsQnV0dG9uLTJxAH4ABXQAMGluY2x1ZGVDaGlsZEJvZHk6Y29uZmlybUxpc3RGb3JtOmlzTm90TWFpbEJ1dHRvbnEAfgAHeAA=' />";
+}
+
+//-->
+</script></body></html>
