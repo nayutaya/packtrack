@@ -6,12 +6,27 @@ import urllib2
 
 
 class PackageTrackingNumber:
+  pattern = re.compile(r"^[0-9]+$")
+
   def __init__(self):
     pass
 
   @classmethod
-  def create_check_digit(cls, number):
-    return str(int(number) % 7)
+  def create_check_digit(cls, body_digits):
+    return str(int(body_digits) % 7)
+
+  @classmethod
+  def split_check_digit(cls, digits):
+    return (digits[0:11], digits[11:12])
+
+  @classmethod
+  def is_valid(cls, digits):
+    if len(digits) < 12: return False
+    if len(digits) > 12: return False
+    if cls.pattern.match(digits) is None: return False
+    body_digits, check_digit = cls.split_check_digit(digits)
+    if check_digit != cls.create_check_digit(body_digits): return False
+    return True
 
 
 class PackageFirstPage:
