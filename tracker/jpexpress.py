@@ -84,6 +84,20 @@ class PackageFirstPage:
     return match.group(1) if match is not None else None
 
 
+class PackageFirstPageParser:
+  @classmethod
+  def parse(cls, src):
+    return {
+      "jsessionid": cls.get_jsession_id(src),
+    }
+
+  @classmethod
+  def get_jsession_id(cls, src):
+    pattern = re.compile(r"jsessionid=([0-9A-Z]+\.[0-9A-Z]+_[0-9A-Z]+)")
+    match   = pattern.search(src)
+    return match.group(1) if match is not None else None
+
+
 class PackageListPage:
   def __init__(self, content):
     self.content = content

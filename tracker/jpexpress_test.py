@@ -32,6 +32,28 @@ class TestPackageTrackingNumber(unittest.TestCase):
     self.assertEqual(False, target("aaaaaaaaaaaa"))
     self.assertEqual(False, target("000000000001"))
 
+# TODO: PackageTrackingSessionクラスのテストを記述
+
+# TODO: PackageFirstPageクラスのテストを記述
+
+class TestPackageFirstPageParser(unittest.TestCase):
+  def setUp(self):
+    pass
+
+  def test_parse(self):
+    target = jpexpress.PackageFirstPageParser.parse
+
+    src = open("test/jpexpress/first.html", "rb").read()
+    expected = {
+      "jsessionid": "39A6C0TBKUFKR11NTUM7N3FKKDGU03V05N0I3F5FMQMFFB9I23PKAAF9B4HG2000JO000000.WU001_001",
+    }
+    self.assertEqual(expected, target(src))
+
+
+# TODO: PackageListPageクラスのテストを記述
+
+# TODO: PackageDetailPageクラスのテストを記述
+
 
 if __name__ == "__main__":
   unittest.main()
