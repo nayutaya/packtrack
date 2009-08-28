@@ -63,6 +63,25 @@ class TestPackageListPageParser(unittest.TestCase):
     finally:
       io.close()
 
+  def test_parse__notexist(self):
+    expected = {
+      "list": [
+        {
+          u"No"                 : u"1",
+          u"送り状番号"         : u"指定された伝票番号(348089408741)は存在しません。",
+          u"送り状番号:リンク先": None,
+          u"最新状況"           : None,
+          u"最新状況:日時"      : None,
+          u"受付日"             : u"該当データ無し",
+          u"お届け指定日"       : None,
+          u"扱区分"             : None,
+        },
+      ],
+    }
+    self.assertEqual(
+      expected,
+      jpexpress.PackageListPageParser.parse(self.read_data("list_notexist.html")))
+
   def test_parse__all_count(self):
     list = [
       ("list_count01.html", [u"1"]),
