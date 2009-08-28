@@ -193,18 +193,16 @@ class PackageListPageParser:
     accept_date_cell       = cells[3]
     arrival_date_cell      = cells[4]
     handling_division_cell = cells[5]
-    mail_cell              = cells[6] # 用途不明
   
     return {
       u"No"                 : result_no_cell.center.span.string,
       u"送り状番号"         : tracking_number_cell.div.a.contents[0].strip(),
-      #u"送り状番号:リンク先": tracking_number_cell.div.a["href"],
+      u"送り状番号:リンク先": tracking_number_cell.div.a["href"],
       u"最新状況"           : current_status_cell.span.contents[0].strip(),
       u"最新状況:日時"      : current_status_cell.span.contents[2].strip(),
       u"受付日"             : accept_date_cell.span.contents[0].strip(),
       u"お届け指定日"       : arrival_date_cell.center.span.contents[1].strip(),
       u"扱区分"             : handling_division_cell.center.span.contents[0].strip(),
-      #u"メール"             : mail_cell.center.span.string,
     }
 
 
