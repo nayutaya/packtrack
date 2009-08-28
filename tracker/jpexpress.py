@@ -29,6 +29,25 @@ class PackageTrackingNumber:
     return True
 
 
+class PackageTrackingSession:
+  def __init__(self):
+    self.jsession_id = None
+
+  def setup(self):
+    if self.jsession_id is None:
+      first_page = self.get_first_page()
+      self.jsession_id = first_page.get_jsession_id()
+    return self
+
+  def get_first_page(self):
+    return PackageFirstPage.get()
+
+  def get_list_page(self, numbers):
+    self.setup()
+    return PackageListPage.get(self.jsession_id, numbers)
+
+
+
 class PackageFirstPage:
   def __init__(self, content):
     self.content = content
