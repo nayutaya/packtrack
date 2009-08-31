@@ -3,7 +3,7 @@
 from BeautifulSoup import BeautifulSoup
 
 # 一覧ページ解析クラス
-class PackageListPageParser:
+class ListPageParser:
   @classmethod
   def parse(cls, src):
     doc = BeautifulSoup(src)

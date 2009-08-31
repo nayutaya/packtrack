@@ -2,9 +2,9 @@
 
 import unittest
 
-from list_page_parser import PackageListPageParser
+from list_page_parser import ListPageParser
 
-class TestPackageListPageParser(unittest.TestCase):
+class TestListPageParser(unittest.TestCase):
   def setUp(self):
     pass
 
@@ -30,7 +30,7 @@ class TestPackageListPageParser(unittest.TestCase):
         },
       ],
     }
-    actual = PackageListPageParser.parse(self.read_data("list_notexist.html"))
+    actual = ListPageParser.parse(self.read_data("list_notexist.html"))
     self.assertEqual(expected, actual)
 
   def test_parse__all_count(self):
@@ -48,7 +48,7 @@ class TestPackageListPageParser(unittest.TestCase):
     ]
     for filename, expected in list:
       src  = self.read_data(filename)
-      info = PackageListPageParser.parse(src)
+      info = ListPageParser.parse(src)
       actual = [record["No"] for record in info["list"]]
       self.assertEqual(expected, actual)
 
@@ -67,7 +67,7 @@ class TestPackageListPageParser(unittest.TestCase):
         },
       ],
     }
-    actual = PackageListPageParser.parse(self.read_data("list_count01.html"))
+    actual = ListPageParser.parse(self.read_data("list_count01.html"))
     self.assertEqual(expected, actual)
 
   def test_parse__count02(self):
@@ -95,7 +95,7 @@ class TestPackageListPageParser(unittest.TestCase):
         },
       ],
     }
-    actual = PackageListPageParser.parse(self.read_data("list_count02.html"))
+    actual = ListPageParser.parse(self.read_data("list_count02.html"))
     self.assertEqual(expected, actual)
 
   def test_parse__accepted(self):
@@ -113,7 +113,7 @@ class TestPackageListPageParser(unittest.TestCase):
         },
       ],
     }
-    actual = PackageListPageParser.parse(self.read_data("list_accepted.html"))
+    actual = ListPageParser.parse(self.read_data("list_accepted.html"))
     self.assertEqual(expected, actual)
 
   def test_parse__arrival(self):
@@ -131,7 +131,7 @@ class TestPackageListPageParser(unittest.TestCase):
         },
       ],
     }
-    actual = PackageListPageParser.parse(self.read_data("list_arrival.html"))
+    actual = ListPageParser.parse(self.read_data("list_arrival.html"))
     self.assertEqual(expected, actual)
 
   def test_parse__delivery(self):
@@ -149,7 +149,7 @@ class TestPackageListPageParser(unittest.TestCase):
         },
       ],
     }
-    actual = PackageListPageParser.parse(self.read_data("list_delivery.html"))
+    actual = ListPageParser.parse(self.read_data("list_delivery.html"))
     self.assertEqual(expected, actual)
 
   def test_parse__inquiry(self):
@@ -167,7 +167,7 @@ class TestPackageListPageParser(unittest.TestCase):
         },
       ],
     }
-    actual = PackageListPageParser.parse(self.read_data("list_inquiry.html"))
+    actual = ListPageParser.parse(self.read_data("list_inquiry.html"))
     self.assertEqual(expected, actual)
 
 if __name__ == "__main__":
