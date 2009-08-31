@@ -6,9 +6,6 @@ import jpexpress
 
 
 
-# TODO: PackageTrackingSessionクラスのテストを記述
-
-# TODO: PackageFirstPageクラスのテストを記述
 
 class TestPackageFirstPageParser(unittest.TestCase):
   def setUp(self):
