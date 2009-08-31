@@ -221,6 +221,41 @@ class TestPackageListPageParser(unittest.TestCase):
 
 # TODO: PackageDetailPageクラスのテストを記述
 
+class TestPackageDetailPageParser(unittest.TestCase):
+  def setUp(self):
+    pass
+
+  def read_data(self, filename):
+    io = open("test/jpexpress/" + filename, "rb")
+    try:
+      return io.read()
+    finally:
+      io.close()
+
+  def test_parse__accepted(self):
+    expected = {
+    }
+    actual = jpexpress.PackageDetailPageParser.parse(self.read_data("detail_accepted.html"))
+    self.assertEqual(expected, actual)
+
+  def test_parse__arrival(self):
+    expected = {
+    }
+    actual = jpexpress.PackageDetailPageParser.parse(self.read_data("detail_arrival.html"))
+    self.assertEqual(expected, actual)
+
+  def test_parse__delivery(self):
+    expected = {
+    }
+    actual = jpexpress.PackageDetailPageParser.parse(self.read_data("detail_delivery.html"))
+    self.assertEqual(expected, actual)
+
+  def test_parse__inquiry(self):
+    expected = {
+    }
+    actual = jpexpress.PackageDetailPageParser.parse(self.read_data("detail_inquiry.html"))
+    self.assertEqual(expected, actual)
+
 
 if __name__ == "__main__":
   unittest.main()

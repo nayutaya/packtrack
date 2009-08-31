@@ -237,3 +237,10 @@ class PackageDetailPage:
   @classmethod
   def create_url(cls, jsession_id, params):
     return "http://info.jpexpress.jp/confirm/confirmDetail.html;jsessionid=" + jsession_id + "?" + params
+
+# 詳細ページ解析クラス
+class PackageDetailPageParser:
+  @classmethod
+  def parse(cls, src):
+    return {
+    }
