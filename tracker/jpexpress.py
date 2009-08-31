@@ -242,5 +242,46 @@ class PackageDetailPage:
 class PackageDetailPageParser:
   @classmethod
   def parse(cls, src):
+    doc = BeautifulSoup(src)
+    detail_table = cls.get_detail_table(doc)
+    return cls.parse_detail_table(detail_table)
+
+  @classmethod
+  def get_detail_table(cls, doc):
+    return doc.find("div", {"id": "isGetData"}).find("table")
+
+  @classmethod
+  def parse_detail_table(cls, detail_table):
+    rows = detail_table.findAll("tr", recursive = False)
+
+    cells1 = rows[2].findAll("td", recursive = False)
+    cells2 = rows[3].findAll("td", recursive = False)
+
+    tracking_number_cell   = cells1[0]
+    print tracking_number_cell.prettify()
+    current_status_cell    = cells1[1]
+    print current_status_cell.prettify()
+    accept_date_cell       = cells1[2]
+    print accept_date_cell.prettify()
+    arrival_date_cell      = cells1[3]
+    print arrival_date_cell.prettify()
+
+    handling_division_cell = cells2[0]
+    print handling_division_cell.prettify()
+    information_cell       = cells2[1]
+    print information_cell.prettify()
+    quantity_cell          = cells2[2]
+    print quantity_cell.prettify()
+    dimension_cell         = cells2[3]
+    print dimension_cell.prettify()
+
     return {
+      u"送り状番号"  : None,
+      #u"最新状況"    : None,
+      #u"受付日"      : None,
+      #u"お届け指定日": None,
+      #u"扱区分"      : None,
+      #u"商品情報"    : None,
+      #u"個数"        : None,
+      #u"重量／サイズ": None,
     }
