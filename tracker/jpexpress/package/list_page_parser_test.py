@@ -2,62 +2,14 @@
 
 import unittest
 
-import jpexpress
+from list_page_parser import ListPageParser
 
-
-class TestPackageTrackingNumber(unittest.TestCase):
-  def setUp(self):
-    pass
-
-  def test_create_check_digit(self):
-    target = jpexpress.PackageTrackingNumber.create_check_digit
-    self.assertEqual("0", target("00000000000"))
-    self.assertEqual("6", target("00000000006"))
-    self.assertEqual("0", target("00000000007"))
-    self.assertEqual("4", target("99999999999"))
-
-  def test_split_check_digit(self):
-    target = jpexpress.PackageTrackingNumber.split_check_digit
-    self.assertEqual(("00000000000", "0"), target("000000000000"))
-    self.assertEqual(("01234567890", "1"), target("012345678901"))
-
-  def test_is_valid(self):
-    target = jpexpress.PackageTrackingNumber.is_valid
-    self.assertEqual(True, target("000000000000"))
-    self.assertEqual(True, target("012345678903"))
-    self.assertEqual(True, target("999999999994"))
-
-    self.assertEqual(False, target("00000000000"))
-    self.assertEqual(False, target("0000000000000"))
-    self.assertEqual(False, target("aaaaaaaaaaaa"))
-    self.assertEqual(False, target("000000000001"))
-
-# TODO: PackageTrackingSessionクラスのテストを記述
-
-# TODO: PackageFirstPageクラスのテストを記述
-
-class TestPackageFirstPageParser(unittest.TestCase):
-  def setUp(self):
-    pass
-
-  def test_parse(self):
-    target = jpexpress.PackageFirstPageParser.parse
-
-    src = open("test/jpexpress/first.html", "rb").read()
-    expected = {
-      "jsessionid": "39A6C0TBKUFKR11NTUM7N3FKKDGU03V05N0I3F5FMQMFFB9I23PKAAF9B4HG2000JO000000.WU001_001",
-    }
-    self.assertEqual(expected, target(src))
-
-
-# TODO: PackageListPageクラスのテストを記述
-
-class TestPackageListPageParser(unittest.TestCase):
+class TestListPageParser(unittest.TestCase):
   def setUp(self):
     pass
 
   def read_data(self, filename):
-    io = open("test/jpexpress/" + filename, "rb")
+    io = open("fixtures/" + filename, "rb")
     try:
       return io.read()
     finally:
@@ -78,7 +30,7 @@ class TestPackageListPageParser(unittest.TestCase):
         },
       ],
     }
-    actual = jpexpress.PackageListPageParser.parse(self.read_data("list_notexist.html"))
+    actual = ListPageParser.parse(self.read_data("list_notexist.html"))
     self.assertEqual(expected, actual)
 
   def test_parse__all_count(self):
@@ -96,7 +48,7 @@ class TestPackageListPageParser(unittest.TestCase):
     ]
     for filename, expected in list:
       src  = self.read_data(filename)
-      info = jpexpress.PackageListPageParser.parse(src)
+      info = ListPageParser.parse(src)
       actual = [record["No"] for record in info["list"]]
       self.assertEqual(expected, actual)
 
@@ -115,7 +67,7 @@ class TestPackageListPageParser(unittest.TestCase):
         },
       ],
     }
-    actual = jpexpress.PackageListPageParser.parse(self.read_data("list_count01.html"))
+    actual = ListPageParser.parse(self.read_data("list_count01.html"))
     self.assertEqual(expected, actual)
 
   def test_parse__count02(self):
@@ -143,7 +95,7 @@ class TestPackageListPageParser(unittest.TestCase):
         },
       ],
     }
-    actual = jpexpress.PackageListPageParser.parse(self.read_data("list_count02.html"))
+    actual = ListPageParser.parse(self.read_data("list_count02.html"))
     self.assertEqual(expected, actual)
 
   def test_parse__accepted(self):
@@ -161,7 +113,7 @@ class TestPackageListPageParser(unittest.TestCase):
         },
       ],
     }
-    actual = jpexpress.PackageListPageParser.parse(self.read_data("list_accepted.html"))
+    actual = ListPageParser.parse(self.read_data("list_accepted.html"))
     self.assertEqual(expected, actual)
 
   def test_parse__arrival(self):
@@ -179,7 +131,7 @@ class TestPackageListPageParser(unittest.TestCase):
         },
       ],
     }
-    actual = jpexpress.PackageListPageParser.parse(self.read_data("list_arrival.html"))
+    actual = ListPageParser.parse(self.read_data("list_arrival.html"))
     self.assertEqual(expected, actual)
 
   def test_parse__delivery(self):
@@ -197,7 +149,7 @@ class TestPackageListPageParser(unittest.TestCase):
         },
       ],
     }
-    actual = jpexpress.PackageListPageParser.parse(self.read_data("list_delivery.html"))
+    actual = ListPageParser.parse(self.read_data("list_delivery.html"))
     self.assertEqual(expected, actual)
 
   def test_parse__inquiry(self):
@@ -215,79 +167,8 @@ class TestPackageListPageParser(unittest.TestCase):
         },
       ],
     }
-    actual = jpexpress.PackageListPageParser.parse(self.read_data("list_inquiry.html"))
+    actual = ListPageParser.parse(self.read_data("list_inquiry.html"))
     self.assertEqual(expected, actual)
-
-
-# TODO: PackageDetailPageクラスのテストを記述
-
-class TestPackageDetailPageParser(unittest.TestCase):
-  def setUp(self):
-    pass
-
-  def read_data(self, filename):
-    io = open("test/jpexpress/" + filename, "rb")
-    try:
-      return io.read()
-    finally:
-      io.close()
-
-  def test_parse__accepted(self):
-    expected = {
-      u"送り状番号"  : u"348-01-225-3676",
-      u"最新状況"    : u"受取が完了いたしました。",
-      u"受付日"      : u"2009/ 8/ 6",
-      u"お届け指定日": u"時間指定なし",
-      u"扱区分"      : u"ペリカン便",
-      u"商品情報"    : u"コンビニ受取",
-      u"個数"        : u"1",
-      u"重量／サイズ": u"６０サイズ",
-    }
-    actual = jpexpress.PackageDetailPageParser.parse(self.read_data("detail_accepted.html"))
-    self.assertEqual(expected, actual)
-
-  def test_parse__arrival(self):
-    expected = {
-      u"送り状番号"  : u"348-01-298-4885",
-      u"最新状況"    : u"コンビニ配送センターに到着いたしました。作業日時の１８時以降にご指定の店舗でお受け取りできます。",
-      u"受付日"      : u"2009/ 8/26",
-      u"お届け指定日": u"時間指定なし",
-      u"扱区分"      : u"ペリカン便",
-      u"商品情報"    : u"コンビニ受取",
-      u"個数"        : u"1",
-      u"重量／サイズ": u"６０サイズ",
-    }
-    actual = jpexpress.PackageDetailPageParser.parse(self.read_data("detail_arrival.html"))
-    self.assertEqual(expected, actual)
-
-  def test_parse__delivery(self):
-    expected = {
-      u"送り状番号"  : u"380-73-835-2890",
-      u"最新状況"    : u"配達完了いたしました。",
-      u"受付日"      : u"2009/ 7/ 4　15:56",
-      u"お届け指定日": u"&nbsp;",
-      u"扱区分"      : u"ペリカン便",
-      u"商品情報"    : u"一般ペリカン",
-      u"個数"        : u"1",
-      u"重量／サイズ": u"８０サイズ",
-    }
-    actual = jpexpress.PackageDetailPageParser.parse(self.read_data("detail_delivery.html"))
-    self.assertEqual(expected, actual)
-
-  def test_parse__inquiry(self):
-    expected = {
-      u"送り状番号"  : u"348-00-178-6042",
-      u"最新状況"    : u"弊社お問い合わせ窓口店にお問合わせ下さい。",
-      u"受付日"      : u"2009/ 7/10",
-      u"お届け指定日": u"時間指定なし",
-      u"扱区分"      : u"ペリカン便",
-      u"商品情報"    : u"コンビニ受取",
-      u"個数"        : u"1",
-      u"重量／サイズ": u"６０サイズ",
-    }
-    actual = jpexpress.PackageDetailPageParser.parse(self.read_data("detail_inquiry.html"))
-    self.assertEqual(expected, actual)
-
 
 if __name__ == "__main__":
   unittest.main()
