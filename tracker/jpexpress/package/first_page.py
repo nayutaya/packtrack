@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 # 先頭ページクラス
-class PackageFirstPage:
+class FirstPage:
   def __init__(self, content):
     self.content = content
 

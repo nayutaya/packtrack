@@ -2,9 +2,9 @@
 
 import unittest
 
-from first_page import PackageFirstPage
+from first_page import FirstPage
 
-class TestPackageFirstPage(unittest.TestCase):
+class TestFirstPage(unittest.TestCase):
   def setUp(self):
     pass
 
