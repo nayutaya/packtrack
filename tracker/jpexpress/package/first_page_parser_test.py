@@ -2,14 +2,14 @@
 
 import unittest
 
-from first_page_parser import PackageFirstPageParser
+from first_page_parser import FirstPageParser
 
-class TestPackageFirstPageParser(unittest.TestCase):
+class TestFirstPageParser(unittest.TestCase):
   def setUp(self):
     pass
 
   def test_parse(self):
-    target = PackageFirstPageParser.parse
+    target = FirstPageParser.parse
 
     src = open("fixtures/first.html", "rb").read()
     expected = {

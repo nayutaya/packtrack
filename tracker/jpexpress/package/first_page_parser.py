@@ -3,7 +3,7 @@
 import re
 
 # 先頭ページ解析クラス
-class PackageFirstPageParser:
+class FirstPageParser:
   @classmethod
   def parse(cls, src):
     return {
