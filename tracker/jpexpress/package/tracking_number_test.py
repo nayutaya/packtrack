@@ -2,26 +2,26 @@
 
 import unittest
 
-from tracking_number import PackageTrackingNumber
+from tracking_number import TrackingNumber
 
-class TestPackageTrackingNumber(unittest.TestCase):
+class TestTrackingNumber(unittest.TestCase):
   def setUp(self):
     pass
 
   def test_create_check_digit(self):
-    target = PackageTrackingNumber.create_check_digit
+    target = TrackingNumber.create_check_digit
     self.assertEqual("0", target("00000000000"))
     self.assertEqual("6", target("00000000006"))
     self.assertEqual("0", target("00000000007"))
     self.assertEqual("4", target("99999999999"))
 
   def test_split_check_digit(self):
-    target = PackageTrackingNumber.split_check_digit
+    target = TrackingNumber.split_check_digit
     self.assertEqual(("00000000000", "0"), target("000000000000"))
     self.assertEqual(("01234567890", "1"), target("012345678901"))
 
   def test_is_valid(self):
-    target = PackageTrackingNumber.is_valid
+    target = TrackingNumber.is_valid
     self.assertEqual(True, target("000000000000"))
     self.assertEqual(True, target("012345678903"))
     self.assertEqual(True, target("999999999994"))

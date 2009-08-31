@@ -3,7 +3,7 @@
 import re
 
 # 追跡番号クラス
-class PackageTrackingNumber:
+class TrackingNumber:
   pattern = re.compile(r"^[0-9]{12}$")
 
   def __init__(self):
