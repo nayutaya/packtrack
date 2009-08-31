@@ -1,5 +1,8 @@
 # -*- coding: utf-8 -*-
 
+import urllib
+import urllib2
+
 # 一覧ページクラス
 class ListPage:
   def __init__(self, content):

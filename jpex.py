@@ -1,9 +1,11 @@
 # -*- coding: utf-8 -*-
 
 import sys
-from tracker import jpexpress
+#from tracker import jpexpress
+import tracker.jpexpress.package.session
+import tracker.jpexpress.package.list_page_parser
 
-session = jpexpress.PackageTrackingSession()
+session = tracker.jpexpress.package.session.Session()
 #print session
 
 #numbers = ["348012244355", "348011824893", "348011053121"]
@@ -23,7 +25,7 @@ for i in range(5):
   f.write(page.content)
   f.close()
 
-  page_info = jpexpress.PackageListPageParser.parse(page.content)
+  page_info = tracker.jpexpress.package.list_page_parser.ListPageParser.parse(page.content)
   #print page_info
 
   for record in page_info["list"]:

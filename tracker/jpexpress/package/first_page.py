@@ -1,5 +1,8 @@
 # -*- coding: utf-8 -*-
 
+import urllib
+import urllib2
+
 # 先頭ページクラス
 class FirstPage:
   def __init__(self, content):
