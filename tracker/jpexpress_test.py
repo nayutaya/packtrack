@@ -78,9 +78,8 @@ class TestPackageListPageParser(unittest.TestCase):
         },
       ],
     }
-    self.assertEqual(
-      expected,
-      jpexpress.PackageListPageParser.parse(self.read_data("list_notexist.html")))
+    actual = jpexpress.PackageListPageParser.parse(self.read_data("list_notexist.html"))
+    self.assertEqual(expected, actual)
 
   def test_parse__all_count(self):
     list = [
@@ -116,9 +115,8 @@ class TestPackageListPageParser(unittest.TestCase):
         },
       ],
     }
-    self.assertEqual(
-      expected,
-      jpexpress.PackageListPageParser.parse(self.read_data("list_count01.html")))
+    actual = jpexpress.PackageListPageParser.parse(self.read_data("list_count01.html"))
+    self.assertEqual(expected, actual)
 
   def test_parse__count02(self):
     expected = {
@@ -145,9 +143,8 @@ class TestPackageListPageParser(unittest.TestCase):
         },
       ],
     }
-    self.assertEqual(
-      expected,
-      jpexpress.PackageListPageParser.parse(self.read_data("list_count02.html")))
+    actual = jpexpress.PackageListPageParser.parse(self.read_data("list_count02.html"))
+    self.assertEqual(expected, actual)
 
 
 # TODO: PackageDetailPageクラスのテストを記述
