@@ -2,9 +2,9 @@
 
 import unittest
 
-from session import PackageTrackingSession
+from session import Session
 
-class TestPackageSession(unittest.TestCase):
+class TestSession(unittest.TestCase):
   def setUp(self):
     pass
 

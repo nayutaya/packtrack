@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
-# 追跡セッションクラス
-class PackageTrackingSession:
+# セッションクラス
+class Session:
   def __init__(self):
     self.jsession_id = None
 
