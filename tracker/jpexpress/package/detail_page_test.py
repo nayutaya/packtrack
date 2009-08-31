@@ -2,7 +2,9 @@
 
 import unittest
 
-class TestPackageDetailPage(unittest.TestCase):
+from detail_page import DetailPage
+
+class TestDetailPage(unittest.TestCase):
   def setUp(self):
     pass
 

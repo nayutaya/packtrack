@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 # 詳細ページクラス
-class PackageDetailPage:
+class DetailPage:
   def __init__(self):
     pass
 
