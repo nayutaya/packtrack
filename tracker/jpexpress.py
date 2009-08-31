@@ -6,6 +6,7 @@ import urllib2
 from BeautifulSoup import BeautifulSoup
 
 
+# 追跡番号クラス
 class PackageTrackingNumber:
   pattern = re.compile(r"^[0-9]{12}$")
 
@@ -27,7 +28,7 @@ class PackageTrackingNumber:
     if check_digit != cls.create_check_digit(body_digits): return False
     return True
 
-
+# 追跡セッションクラス
 class PackageTrackingSession:
   def __init__(self):
     self.jsession_id = None
@@ -46,8 +47,7 @@ class PackageTrackingSession:
     self.setup()
     return PackageListPage.get(self.jsession_id, numbers)
 
-
-
+# 先頭ページクラス
 class PackageFirstPage:
   def __init__(self, content):
     self.content = content
@@ -78,7 +78,7 @@ class PackageFirstPage:
   def get(cls):
     return cls(cls.get_content())
 
-
+# 先頭ページ解析クラス
 class PackageFirstPageParser:
   @classmethod
   def parse(cls, src):
@@ -92,7 +92,7 @@ class PackageFirstPageParser:
     match   = pattern.search(src)
     return match.group(1) if match is not None else None
 
-
+# 一覧ページクラス
 class PackageListPage:
   def __init__(self, content):
     self.content = content
@@ -155,7 +155,7 @@ class PackageListPage:
   def get(cls, jsession_id, numbers):
     return cls(cls.get_content(jsession_id, numbers))
 
-
+# 一覧ページ解析クラス
 class PackageListPageParser:
   @classmethod
   def parse(cls, src):
@@ -229,7 +229,7 @@ class PackageListPageParser:
       u"扱区分"             : handling_division,
     }
 
-
+# 詳細ページクラス
 class PackageDetailPage:
   def __init__(self):
     pass
