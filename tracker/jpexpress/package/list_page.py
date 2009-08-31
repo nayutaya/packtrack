@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 # 一覧ページクラス
-class PackageListPage:
+class ListPage:
   def __init__(self, content):
     self.content = content
 

@@ -2,9 +2,9 @@
 
 import unittest
 
-from list_page import PackageListPage
+from list_page import ListPage
 
-class TestPackageListPage(unittest.TestCase):
+class TestListPage(unittest.TestCase):
   def setUp(self):
     pass
 
