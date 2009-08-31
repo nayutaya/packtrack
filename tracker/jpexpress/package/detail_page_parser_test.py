@@ -2,9 +2,9 @@
 
 import unittest
 
-from detail_page_parser import PackageDetailPageParser
+from detail_page_parser import DetailPageParser
 
-class TestPackageDetailPageParser(unittest.TestCase):
+class TestDetailPageParser(unittest.TestCase):
   def setUp(self):
     pass
 
@@ -26,7 +26,7 @@ class TestPackageDetailPageParser(unittest.TestCase):
       u"個数"        : u"1",
       u"重量／サイズ": u"６０サイズ",
     }
-    actual = PackageDetailPageParser.parse(self.read_data("detail_accepted.html"))
+    actual = DetailPageParser.parse(self.read_data("detail_accepted.html"))
     self.assertEqual(expected, actual)
 
   def test_parse__arrival(self):
@@ -40,7 +40,7 @@ class TestPackageDetailPageParser(unittest.TestCase):
       u"個数"        : u"1",
       u"重量／サイズ": u"６０サイズ",
     }
-    actual = PackageDetailPageParser.parse(self.read_data("detail_arrival.html"))
+    actual = DetailPageParser.parse(self.read_data("detail_arrival.html"))
     self.assertEqual(expected, actual)
 
   def test_parse__delivery(self):
@@ -54,7 +54,7 @@ class TestPackageDetailPageParser(unittest.TestCase):
       u"個数"        : u"1",
       u"重量／サイズ": u"８０サイズ",
     }
-    actual = PackageDetailPageParser.parse(self.read_data("detail_delivery.html"))
+    actual = DetailPageParser.parse(self.read_data("detail_delivery.html"))
     self.assertEqual(expected, actual)
 
   def test_parse__inquiry(self):
@@ -68,7 +68,7 @@ class TestPackageDetailPageParser(unittest.TestCase):
       u"個数"        : u"1",
       u"重量／サイズ": u"６０サイズ",
     }
-    actual = PackageDetailPageParser.parse(self.read_data("detail_inquiry.html"))
+    actual = DetailPageParser.parse(self.read_data("detail_inquiry.html"))
     self.assertEqual(expected, actual)
 
 if __name__ == "__main__":

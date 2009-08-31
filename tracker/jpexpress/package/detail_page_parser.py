@@ -3,7 +3,7 @@
 from BeautifulSoup import BeautifulSoup
 
 # 詳細ページ解析クラス
-class PackageDetailPageParser:
+class DetailPageParser:
   @classmethod
   def parse(cls, src):
     doc = BeautifulSoup(src)
