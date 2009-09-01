@@ -103,5 +103,17 @@ class TestDetailPageFetcher(unittest.TestCase):
       actual[key] = value[0]
     self.assertEqual(expected, actual)
 
+  def test_open(self):
+    target = DetailPageFetcher.open
+    io = target(["000000000000"])
+    io.read()
+    io.close()
+    # MEMO: 良いテスト方法が思いつかないため、現状は呼び出しているだけ
+
+  def test_get_content(self):
+    target = DetailPageFetcher.get_content
+    content = target(["000000000000"])
+    # MEMO: 良いテスト方法が思いつかないため、現状は呼び出しているだけ
+
 if __name__ == "__main__":
   unittest.main()
