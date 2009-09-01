@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 import unittest
+import cgi
 
 from detail_page_fetcher import DetailPageFetcher
 
@@ -73,6 +74,34 @@ class TestDetailPageFetcher(unittest.TestCase):
     target = DetailPageFetcher.create_number_params
     proc = lambda: target(["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11"])
     self.assertRaises(ValueError, proc)
+
+  def test_create_params__empty(self):
+    target = DetailPageFetcher.create_params
+    expected = DetailPageFetcher.create_base_params()
+    self.assertEqual(expected, target([]))
+
+  def test_create_params__empty(self):
+    target = DetailPageFetcher.create_params
+    expected = DetailPageFetcher.create_base_params()
+    expected["number01"] = "1"
+    self.assertEqual(expected, target(["1"]))
+
+  def test_create_request(self):
+    target = DetailPageFetcher.create_request
+    numbers = ["1", "2"]
+    request = target(numbers)
+
+    self.assertEqual(
+      DetailPageFetcher.create_url(),
+      request.get_full_url())
+
+    expected = {}
+    for key, value in DetailPageFetcher.create_params(numbers).items():
+      if value != "": expected[key] = value
+    actual = {}
+    for key, value in cgi.parse_qs(request.get_data()).items():
+      actual[key] = value[0]
+    self.assertEqual(expected, actual)
 
 if __name__ == "__main__":
   unittest.main()

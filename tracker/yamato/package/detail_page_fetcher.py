@@ -1,5 +1,8 @@
 # -*- coding: utf-8 -*-
 
+import urllib
+import urllib2
+
 # 詳細ページ取得クラス
 class DetailPageFetcher:
   def __init__(self):
@@ -33,3 +36,16 @@ class DetailPageFetcher:
     for i, number in enumerate(numbers):
       params["number%02i" % (i + 1)] = number
     return params
+
+  @classmethod
+  def create_params(cls, numbers):
+    params = cls.create_base_params()
+    params.update(cls.create_number_params(numbers))
+    return params
+
+  @classmethod
+  def create_request(cls, numbers):
+    params = cls.create_params(numbers)
+    return urllib2.Request(
+      url  = cls.create_url(),
+      data = urllib.urlencode(params))
