@@ -3,8 +3,8 @@
 import urllib
 import urllib2
 
-
-class PackageDetailPage:
+# 詳細ページ取得クラス
+class DetailPageFetcher:
   def __init__(self):
     pass
 
@@ -31,8 +31,9 @@ class PackageDetailPage:
 
   @classmethod
   def create_number_params(cls, numbers):
+    if len(numbers) > 10: raise ValueError("too big")
     params = {}
-    for i, number in enumerate(numbers[:10]):
+    for i, number in enumerate(numbers):
       params["number%02i" % (i + 1)] = number
     return params
 
