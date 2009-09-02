@@ -32,6 +32,14 @@ def strip_center_tag(html):
   pattern = re.compile(r"</?center>", re.IGNORECASE)
   return re.sub(pattern, "", html)
 
+def strip_paragraph_tag(html):
+  pattern = re.compile(r"(?:<p.*?>|</p>)", re.IGNORECASE)
+  return re.sub(pattern, "", html)
+
+def strip_bold_tag(html):
+  pattern = re.compile(r"</?b>", re.IGNORECASE)
+  return re.sub(pattern, "", html)
+
 
 src1 = detail_page
 f = open("src1.html", "wb")
@@ -48,7 +56,7 @@ f = open("src3.html", "wb")
 f.write(src3)
 f.close()
 
-src4 = strip_center_tag(src3)
+src4 = strip_bold_tag(strip_paragraph_tag(strip_center_tag(src3)))
 f = open("src4.html", "wb")
 f.write(src4)
 f.close()
@@ -66,17 +74,13 @@ for i in range(4):
   doc.body.table.extract()
 
 # フッタを削除
-doc.body.findAll("p", recursive = False)[-1].extract()
+doc.body.findAll("table", recursive = False)[-1].extract()
 
 # リンクを削除
 for elem in doc.body.findAll("a", {"name": re.compile(".+")}):
   elem.extract()
-for elem in doc.body.findAll("p", {"align": "right"}):
+for elem in doc.body.findAll("a", {"href": re.compile("^#")}):
   elem.extract()
-
-f = open("tmp2.html", "wb")
-f.write(doc.prettify())
-f.close()
 
 # ボタンを削除
 for elem in doc.body.findAll("div", {"class": "print_hide"}):
@@ -86,9 +90,14 @@ for elem in doc.body.findAll("div", {"class": "print_hide"}):
 for elem in doc.body.findAll("hr"):
   elem.extract()
 
-#for elem in doc.body.findAll("center"):
-#  #elem.extract()
-#  print elem
+# 強制改行を削除
+for elem in doc.body.findAll("br"):
+  elem.extract()
+
+f = open("tmp2.html", "wb")
+f.write(doc.prettify())
+f.close()
+
 
 f = open("tmp3.html", "wb")
 f.write(doc.prettify())
