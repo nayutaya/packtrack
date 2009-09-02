@@ -28,6 +28,9 @@ def strip_style_tag(html):
   pattern = re.compile(r"<style.+?>.+?</style>", re.IGNORECASE | re.DOTALL)
   return re.sub(pattern, "", html)
 
+def strip_center_tag(html):
+  pattern = re.compile(r"</?center>", re.IGNORECASE)
+  return re.sub(pattern, "", html)
 
 
 src1 = detail_page
@@ -45,14 +48,22 @@ f = open("src3.html", "wb")
 f.write(src3)
 f.close()
 
-doc = BeautifulSoup(src3)
+src4 = strip_center_tag(src3)
+f = open("src4.html", "wb")
+f.write(src4)
+f.close()
+
+doc = BeautifulSoup(src4)
 f = open("tmp.html", "wb")
 f.write(doc.prettify())
 f.close()
 
 # ヘッダを削除
-doc.body.center.extract()
-doc.body.center.extract()
+for i in range(4):
+  doc.body.table.extract()
+doc.body.form.extract()
+for i in range(4):
+  doc.body.table.extract()
 
 # フッタを削除
 doc.body.findAll("p", recursive = False)[-1].extract()
@@ -63,6 +74,10 @@ for elem in doc.body.findAll("a", {"name": re.compile(".+")}):
 for elem in doc.body.findAll("p", {"align": "right"}):
   elem.extract()
 
+f = open("tmp2.html", "wb")
+f.write(doc.prettify())
+f.close()
+
 # ボタンを削除
 for elem in doc.body.findAll("div", {"class": "print_hide"}):
   elem.extract()
@@ -71,10 +86,9 @@ for elem in doc.body.findAll("div", {"class": "print_hide"}):
 for elem in doc.body.findAll("hr"):
   elem.extract()
 
-f = open("tmp2.html", "wb")
-f.write(doc.prettify())
-f.close()
-
+#for elem in doc.body.findAll("center"):
+#  #elem.extract()
+#  print elem
 
 f = open("tmp3.html", "wb")
 f.write(doc.prettify())
