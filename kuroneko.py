@@ -30,7 +30,7 @@ f.write(doc.prettify())
 f.close()
 
 info = DetailPageParser.parse(html)
-for item1 in info["list"]:
+for item1 in info["一覧"]:
   for key1, value1 in item1.items():
     if isinstance(value1, basestring):
       print key1 + ": '" + value1 + "'"
