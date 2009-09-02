@@ -45,8 +45,27 @@ f = open("src3.html", "wb")
 f.write(src3)
 f.close()
 
+doc = BeautifulSoup(src3)
+f = open("tmp.html", "wb")
+f.write(doc.prettify())
+f.close()
 
-doc = BeautifulSoup(src2)
-#f = open("tmp.html", "wb")
-#f.write(doc.prettify())
-#f.close()
+doc.body.center.extract()
+doc.body.center.extract()
+
+for elem in doc.body.findAll("a", recursive = False):
+  elem.extract()
+
+f = open("tmp2.html", "wb")
+f.write(doc.prettify())
+f.close()
+
+for elem in doc.body.findAll("div", {"class": "print_hide"}):
+  elem.extract()
+
+for elem in doc.body.findAll("p", {"align": "right"}):
+  elem.extract()
+
+f = open("tmp3.html", "wb")
+f.write(doc.prettify())
+f.close()
