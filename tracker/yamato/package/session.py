@@ -1,16 +1,16 @@
 # -*- coding: utf-8 -*-
 
-from detail_page_fetcher import DetailPageFetcher
-from detail_page_parser import DetailPageParser
+from list_page_fetcher import ListPageFetcher
+from list_page_parser import ListPageParser
 
 # セッションクラス
 class Session:
   def __init__(self):
     pass
 
-  def get_detail_page(self, numbers):
-    return DetailPageFetcher.get(numbers)
+  def get_list_page(self, numbers):
+    return ListPageFetcher.get(numbers)
 
-  def get_detail(self, numbers):
-    page = self.get_detail_page(numbers)
-    return DetailPageParser.parse(page.content)
+  def get_list(self, numbers):
+    page = self.get_list_page(numbers)
+    return ListPageParser.parse(page.content)

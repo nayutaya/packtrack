@@ -1,12 +1,12 @@
 # -*- coding: utf-8 -*-
 
 from tracker.yamato.package.session import Session
-from tracker.yamato.package.detail_page_fetcher import DetailPageFetcher
-from tracker.yamato.package.detail_page_parser import DetailPageParser
+#from tracker.yamato.package.detail_page_fetcher import DetailPageFetcher
+#from tracker.yamato.package.detail_page_parser import DetailPageParser
 
 
 session = Session()
-print session.get_detail(["225303520584", "249790484403"])
+print session.get_list(["225303520584", "249790484403"])
 
 exit(0)
 
