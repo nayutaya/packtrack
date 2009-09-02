@@ -17,9 +17,8 @@ class TestDetailPageParser(unittest.TestCase):
 
   def test_parser__count01(self):
     target = DetailPageParser.parse
-
     expected = {
-      "一覧": [
+      u"一覧": [
         {
           u"伝票番号"      : u"2253-0009-9640",
           u"メッセージ"    : u"このお品物はお届けが済んでおります。お問い合わせはサービスセンターまでお願いいたします。",
@@ -57,9 +56,8 @@ class TestDetailPageParser(unittest.TestCase):
 
   def test_parser__count02(self):
     target = DetailPageParser.parse
-
     expected = {
-      "一覧": [
+      u"一覧": [
         {
           u"伝票番号"      : u"2253-0299-8793",
           u"メッセージ"    : u"このお品物はお届けが済んでおります。お問い合わせはサービスセンターまでお願いいたします。",
@@ -75,13 +73,12 @@ class TestDetailPageParser(unittest.TestCase):
       ],
     }
     actual = target(self.read_fixture("detail_count02.html"))
-    del actual["一覧"][0][u"詳細"]
-    del actual["一覧"][1][u"詳細"]
+    del actual[u"一覧"][0][u"詳細"]
+    del actual[u"一覧"][1][u"詳細"]
     self.assertEqual(expected, actual)
 
   def test_parser__count_all(self):
     target = DetailPageParser.parse
-
     cases = [
       ("detail_count01.html", [
           (u"2253-0009-9640", 3)]),
@@ -153,7 +150,7 @@ class TestDetailPageParser(unittest.TestCase):
     for filename, expected in cases:
       page = target(self.read_fixture(filename))
       actual = []
-      for record in page["一覧"]:
+      for record in page[u"一覧"]:
         tracking_number   = record[u"伝票番号"]
         number_of_details = len(record[u"詳細"])
         actual.append((tracking_number, number_of_details))
@@ -161,9 +158,8 @@ class TestDetailPageParser(unittest.TestCase):
 
   def test_parser__notexist(self):
     target = DetailPageParser.parse
-
     expected = {
-      "一覧": [
+      u"一覧": [
         {
           u"伝票番号"      : u"9999-9999-9994",
           u"メッセージ"    : u"お問い合わせいただいた伝票番号は、今現在コンピュータに登録されておりません。最寄りのお客様サービスセンターまでお問い合わせ下さい。",

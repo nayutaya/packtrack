@@ -116,7 +116,7 @@ class DetailPageParser:
 
       records.append(record)
 
-    return {"一覧": records}
+    return {u"一覧": records}
 
   @classmethod
   def parse_message_table(cls, table):
