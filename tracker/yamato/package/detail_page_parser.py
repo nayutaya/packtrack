@@ -149,23 +149,17 @@ class DetailPageParser:
   # FIXME: テスト
   @classmethod
   def parse_detail_list_table(cls, table):
-    results = []
+    records = []
 
     for row in table.findAll("tr", recursive = False)[1:]:
       cells = row.findAll("td", recursive = False)
-      station_name_cell = cells[3]
-      if station_name_cell.find("a") is None:
-        station_name = station_name_cell.contents[0]
-      else:
-        station_name = station_name_cell.a.contents[0]
-
-      info = {
+      record = {
         u"荷物状況"    : cells[0].contents[0],
         u"日付"        : cells[1].contents[0],
         u"時刻"        : cells[2].contents[0],
-        u"担当店名"    : station_name,
+        u"担当店名"    : cells[3].find(text = True),
         u"担当店コード": cells[4].contents[0],
       }
-      results.append(info)
+      records.append(record)
 
-    return {u"詳細": results}
+    return {u"詳細": records}
