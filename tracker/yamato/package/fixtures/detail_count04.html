@@ -1,0 +1,1006 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html;charset=Shift_JIS">
+<title>クロネコヤマトの荷物お問い合わせシステム</title>
+<style type="text/css">
+<!--
+a:link.a1 {
+ color: #FFFFFF;
+}
+a:hover.a1 {
+ color: #CC6600;
+ text-decoration: none;
+}
+a:visited.a1 {
+ color: #FFFFFF;
+}
+.white {
+ color: #FFFFFF;
+}
+-->
+</style>
+<style type="text/css" media="all">
+<!--
+.b1 {
+ font-size: 80%;
+ line-height: 120%;
+}
+.ti_w {
+ color: #FFFFFF;
+ font-size: 80%;
+ line-height: 120%;
+}
+.hd {
+ font-size: 76%;
+ color: #FFFFFF;
+}
+.tb_c   {
+ text-align:center;          
+}                            
+-->
+</style>
+<style type="text/css" media="print">
+<!--
+.break{ page-break-after: always; }
+.print_hide{ display:none; }
+-->
+</style>
+<script language="JavaScript">
+<!--
+var w = screen.availWidth;
+var h = screen.availHeight;
+function openWebsrv_top(f){
+  if((w > "640")||(h > "480")){
+    w = 850;
+    h = 650;
+  }
+  window.open("",f.target,"toolbar=no,directories=no,location=yes,status=yes,menubar=no,scrollbars=yes,resizable=yes,copyhistory=no,width=" + w + ",height=" + h);
+}
+function PRINT_HEADER(){
+ subwin = window.open("","","status=0,scrollbars=1,toolbar=0,location=0,menubar=1,resizable=1,top=0,left=0,width=750,height=520");
+ swd = subwin.window.document;
+ swd.open();
+ swd.writeln('<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">');
+ swd.writeln('<html><head>');
+ swd.writeln('<title>クロネコヤマトの荷物お問い合わせシステム</title>');
+ swd.writeln('<style type=text/css media=print>');
+ swd.writeln('\<!--');
+ swd.writeln('body { font-family:"ＭＳ Ｐゴシック",sans-serif; font-size:11px; }');
+ swd.writeln('table{ font-family:"ＭＳ Ｐゴシック",sans-serif; font-size:11px; text-align:center; }');
+ swd.writeln('.break{ page-break-after: always; }');
+ swd.writeln('.print_hide{ display:none; }');
+ swd.writeln('--\>');
+ swd.writeln('</style>');
+ swd.writeln('<style type=text/css media=screen>');
+ swd.writeln('\<!--');
+ swd.writeln('body { font-family:"ＭＳ Ｐゴシック",sans-serif; font-size:13px; }');
+ swd.writeln('table{ font-family:"ＭＳ Ｐゴシック",sans-serif; font-size:13px; text-align:center; }');
+ swd.writeln('--\>');
+ swd.writeln('</style>');
+ swd.writeln('<scr'+'ipt language=JavaScript>');
+ swd.writeln('\<!--');
+ swd.writeln('function PRINTPAGE(){');
+ swd.writeln(' window.print();');
+ swd.writeln('}');
+ swd.writeln('--\>');
+ swd.writeln('</scr'+'ipt>');
+ swd.writeln('</head>');
+ swd.writeln('<body bgcolor=#FFFFFF link=#009999>');
+ swd.writeln('<center>');
+}
+function PRINT_HOOTER(){
+ swd.writeln('<div class=print_hide><br><br>');
+ swd.writeln('<form><INPUT TYPE=button VALUE=印刷 onClick=PRINTPAGE()></form><br>');
+ swd.writeln('<table border=0 width=600>');
+ swd.writeln('<tr><td align=right><form><INPUT TYPE=button VALUE=閉じる onClick=javascript:window.close()></form></td></tr>');
+ swd.writeln('</table>');
+ swd.writeln('</div>');
+ swd.writeln('</center>');
+ swd.writeln('</body></html>');
+ swd.close();
+ swd.send;
+}
+function PRINT_ALL(){
+ PRINT_HEADER();
+ swd.writeln('<table border=1 width=600 bordercolor=#000000>');
+ swd.writeln('<tr><td align=center bgcolor=#CCCCCC><b><font size=3>お問い合わせ結果一覧</font></b></td></tr>');
+ swd.writeln('</table>');
+ swd.writeln('<br>');
+ swd.writeln('<div align=right>お問い合わせ日時: 09/02　13:32</div><br>');
+ swd.writeln('<br>');
+ swd.writeln('<table border=1 width=500 bordercolor=#000000 cellpadding=2 cellspacing=0>');
+ swd.writeln('<tr>');
+ swd.writeln(' <th bgcolor=#CCCCCC colspan=2 align=center><font size=3><B>お問い合わせ伝票番号</B></font></td>');
+ swd.writeln(' <th bgcolor=#CCCCCC><font size=3>日付</font></th>');
+ swd.writeln(' <th bgcolor=#CCCCCC><font size=3>配達状況</font></th>');
+ swd.writeln('</tr>');
+ swd.writeln('<tr align=middle>');
+ swd.writeln(' <td><font size=3>　１件目</font></td>');
+ swd.writeln(' <td><font size=4><b>2253-4716-4906<br></b></font></td>');
+ swd.writeln(' <td><font size=3>07/13<br></font></td>');
+ swd.writeln(' <td><font size=3>配達完了<br></font></td>');
+ swd.writeln('</tr>');
+ swd.writeln('<tr align=middle>');
+ swd.writeln(' <td><font size=3>　２件目</font></td>');
+ swd.writeln(' <td><font size=4><b>2497-0143-1674<br></b></font></td>');
+ swd.writeln(' <td><font size=3>08/17<br></font></td>');
+ swd.writeln(' <td><font size=3>配達完了<br></font></td>');
+ swd.writeln('</tr>');
+ swd.writeln('<tr align=middle>');
+ swd.writeln(' <td><font size=3>　３件目</font></td>');
+ swd.writeln(' <td><font size=4><b>2497-0224-5564<br></b></font></td>');
+ swd.writeln(' <td><font size=3>08/07<br></font></td>');
+ swd.writeln(' <td><font size=3>配達完了<br></font></td>');
+ swd.writeln('</tr>');
+ swd.writeln('<tr align=middle>');
+ swd.writeln(' <td><font size=3>　４件目</font></td>');
+ swd.writeln(' <td><font size=4><b>2497-0259-5984<br></b></font></td>');
+ swd.writeln(' <td><font size=3>08/11<br></font></td>');
+ swd.writeln(' <td><font size=3>配達完了<br></font></td>');
+ swd.writeln('</tr>');
+ swd.writeln('<tr align=middle>');
+ swd.writeln(' <td><font size=3>　５件目</font></td>');
+ swd.writeln(' <td><br></td><td><br></td><td><br></td>');
+ swd.writeln('</tr>');
+ swd.writeln('<tr align=middle>');
+ swd.writeln(' <td><font size=3>　６件目</font></td>');
+ swd.writeln(' <td><br></td><td><br></td><td><br></td>');
+ swd.writeln('</tr>');
+ swd.writeln('<tr align=middle>');
+ swd.writeln(' <td><font size=3>　７件目</font></td>');
+ swd.writeln(' <td><br></td><td><br></td><td><br></td>');
+ swd.writeln('</tr>');
+ swd.writeln('<tr align=middle>');
+ swd.writeln(' <td><font size=3>　８件目</font></td>');
+ swd.writeln(' <td><br></td><td><br></td><td><br></td>');
+ swd.writeln('</tr>');
+ swd.writeln('<tr align=middle>');
+ swd.writeln(' <td><font size=3>　９件目</font></td>');
+ swd.writeln(' <td><br></td><td><br></td><td><br></td>');
+ swd.writeln('</tr>');
+ swd.writeln('<tr align=middle>');
+ swd.writeln(' <td><font size=3>１０件目</font></td>');
+ swd.writeln(' <td><br></td><td><br></td><td><br></td>');
+ swd.writeln('</tr>');
+ swd.writeln('</table>');
+ PRINT_HOOTER();
+}
+function PRINT_0(){
+ PRINT_HEADER();
+ swd.writeln('<table border=1 width=600 bordercolor=#000000>');
+ swd.writeln('<tr><td align=center bgcolor=#CCCCCC><b>詳細情報</b></td></tr>');
+ swd.writeln('</table>');
+ swd.writeln('<div align=right>お問い合わせ日時: 09/02　13:32</div><br>');
+ swd.writeln('<center>');
+ swd.writeln('<font size=4>　１件目</font>');
+ swd.writeln('<font size=4><b>　伝票番号　</b></font>');
+ swd.writeln('<font size=4><b>2253-4716-4906</b></font>');
+ swd.writeln('<p>');
+ swd.writeln('<table border=0><tr>');
+ swd.writeln(' <td><b>このお品物はお届けが済んでおります。</b><br>お問い合わせはサービスセンターまでお願いいたします。</td>');
+ swd.writeln('</tr></table><p>');
+ swd.writeln('<table border=1 width=300 bordercolor=#000000 cellpadding=1 cellspacing=0>');
+ swd.writeln(' <tr>');
+ swd.writeln(' <th bgcolor=#CCCCCC width=50%>商品名</th>');
+ swd.writeln(' <th bgcolor=#CCCCCC width=50%>お届け予定日時</th>');
+ swd.writeln(' </tr>');
+ swd.writeln(' <tr>');
+ swd.writeln('  <td align=center nowrap>宅急便<br></td>');
+ swd.writeln('  <td align=center nowrap>07/13<br></td>');
+ swd.writeln(' </tr>');
+ swd.writeln('</table><p>');
+ swd.writeln('<table border=1 bordercolor=#000000 cellpadding=1 cellspacing=0>');
+ swd.writeln('<tr>');
+ swd.writeln(' <th bgcolor=#CCCCCC>荷物状況</th>');
+ swd.writeln(' <th bgcolor=#CCCCCC>日 付</th>');
+ swd.writeln(' <th bgcolor=#CCCCCC>時 刻</th>');
+ swd.writeln(' <th bgcolor=#CCCCCC>担当店名</th>');
+ swd.writeln(' <th bgcolor=#CCCCCC>担当店コード</th>');
+ swd.writeln('</tr>');
+ swd.writeln('<tr>');
+ swd.writeln(' <td>荷物受付</td>');
+ swd.writeln(' <td>07/06</td>');
+ swd.writeln(' <td>10:29</td>');
+ swd.writeln(' <td>札幌丸井今井営業所</td>');
+ swd.writeln(' <td>000660</td>');
+ swd.writeln('</tr>');
+ swd.writeln('<tr>');
+ swd.writeln(' <td>発送</td>');
+ swd.writeln(' <td>07/06</td>');
+ swd.writeln(' <td>10:29</td>');
+ swd.writeln(' <td>札幌丸井今井営業所</td>');
+ swd.writeln(' <td>000660</td>');
+ swd.writeln('</tr>');
+ swd.writeln('<tr>');
+ swd.writeln(' <td>配達日・時間帯指定（保管中）</td>');
+ swd.writeln(' <td>07/06</td>');
+ swd.writeln(' <td>10:30</td>');
+ swd.writeln(' <td>札幌丸井今井営業所</td>');
+ swd.writeln(' <td>000660</td>');
+ swd.writeln('</tr>');
+ swd.writeln('<tr>');
+ swd.writeln(' <td>作業店通過</td>');
+ swd.writeln(' <td>07/11</td>');
+ swd.writeln(' <td>03:12</td>');
+ swd.writeln(' <td>札幌ベース店</td>');
+ swd.writeln(' <td>000990</td>');
+ swd.writeln('</tr>');
+ swd.writeln('<tr>');
+ swd.writeln(' <td>配達日・時間帯指定（保管中）</td>');
+ swd.writeln(' <td>07/11</td>');
+ swd.writeln(' <td>06:15</td>');
+ swd.writeln(' <td>札幌北大前センター</td>');
+ swd.writeln(' <td>000041</td>');
+ swd.writeln('</tr>');
+ swd.writeln('<tr>');
+ swd.writeln(' <td>配達完了</td>');
+ swd.writeln(' <td>07/13</td>');
+ swd.writeln(' <td>13:03</td>');
+ swd.writeln(' <td>札幌北大前センター</td>');
+ swd.writeln(' <td>000041</td>');
+ swd.writeln('</tr>');
+ swd.writeln('</table>');
+ swd.writeln('</center>');
+ PRINT_HOOTER();
+}
+function PRINT_1(){
+ PRINT_HEADER();
+ swd.writeln('<table border=1 width=600 bordercolor=#000000>');
+ swd.writeln('<tr><td align=center bgcolor=#CCCCCC><b>詳細情報</b></td></tr>');
+ swd.writeln('</table>');
+ swd.writeln('<div align=right>お問い合わせ日時: 09/02　13:32</div><br>');
+ swd.writeln('<center>');
+ swd.writeln('<font size=4>　２件目</font>');
+ swd.writeln('<font size=4><b>　伝票番号　</b></font>');
+ swd.writeln('<font size=4><b>2497-0143-1674</b></font>');
+ swd.writeln('<p>');
+ swd.writeln('<table border=0><tr>');
+ swd.writeln(' <td><b>このお品物はお届けが済んでおります。</b><br>お問い合わせはサービスセンターまでお願いいたします。</td>');
+ swd.writeln('</tr></table><p>');
+ swd.writeln('<table border=1 width=300 bordercolor=#000000 cellpadding=1 cellspacing=0>');
+ swd.writeln(' <tr>');
+ swd.writeln(' <th bgcolor=#CCCCCC width=50%>商品名</th>');
+ swd.writeln(' <th bgcolor=#CCCCCC width=50%>お届け予定日時</th>');
+ swd.writeln(' </tr>');
+ swd.writeln(' <tr>');
+ swd.writeln('  <td align=center nowrap>宅急便<br></td>');
+ swd.writeln('  <td align=center nowrap>08/17<br></td>');
+ swd.writeln(' </tr>');
+ swd.writeln('</table><p>');
+ swd.writeln('<table border=1 bordercolor=#000000 cellpadding=1 cellspacing=0>');
+ swd.writeln('<tr>');
+ swd.writeln(' <th bgcolor=#CCCCCC>荷物状況</th>');
+ swd.writeln(' <th bgcolor=#CCCCCC>日 付</th>');
+ swd.writeln(' <th bgcolor=#CCCCCC>時 刻</th>');
+ swd.writeln(' <th bgcolor=#CCCCCC>担当店名</th>');
+ swd.writeln(' <th bgcolor=#CCCCCC>担当店コード</th>');
+ swd.writeln('</tr>');
+ swd.writeln('<tr>');
+ swd.writeln(' <td>発送</td>');
+ swd.writeln(' <td>08/15</td>');
+ swd.writeln(' <td>15:46</td>');
+ swd.writeln(' <td>新鎌ケ谷センター</td>');
+ swd.writeln(' <td>035060</td>');
+ swd.writeln('</tr>');
+ swd.writeln('<tr>');
+ swd.writeln(' <td>作業店通過</td>');
+ swd.writeln(' <td>08/17</td>');
+ swd.writeln(' <td>02:21</td>');
+ swd.writeln(' <td>千歳ベース店</td>');
+ swd.writeln(' <td>003990</td>');
+ swd.writeln('</tr>');
+ swd.writeln('<tr>');
+ swd.writeln(' <td>作業店通過</td>');
+ swd.writeln(' <td>08/17</td>');
+ swd.writeln(' <td>03:07</td>');
+ swd.writeln(' <td>千歳ベース店</td>');
+ swd.writeln(' <td>003990</td>');
+ swd.writeln('</tr>');
+ swd.writeln('<tr>');
+ swd.writeln(' <td>配達完了</td>');
+ swd.writeln(' <td>08/17</td>');
+ swd.writeln(' <td>12:41</td>');
+ swd.writeln(' <td>釧路昭和センター</td>');
+ swd.writeln(' <td>007230</td>');
+ swd.writeln('</tr>');
+ swd.writeln('</table>');
+ swd.writeln('</center>');
+ PRINT_HOOTER();
+}
+function PRINT_2(){
+ PRINT_HEADER();
+ swd.writeln('<table border=1 width=600 bordercolor=#000000>');
+ swd.writeln('<tr><td align=center bgcolor=#CCCCCC><b>詳細情報</b></td></tr>');
+ swd.writeln('</table>');
+ swd.writeln('<div align=right>お問い合わせ日時: 09/02　13:32</div><br>');
+ swd.writeln('<center>');
+ swd.writeln('<font size=4>　３件目</font>');
+ swd.writeln('<font size=4><b>　伝票番号　</b></font>');
+ swd.writeln('<font size=4><b>2497-0224-5564</b></font>');
+ swd.writeln('<p>');
+ swd.writeln('<table border=0><tr>');
+ swd.writeln(' <td><b>このお品物はお届けが済んでおります。</b><br>お問い合わせはサービスセンターまでお願いいたします。</td>');
+ swd.writeln('</tr></table><p>');
+ swd.writeln('<table border=1 width=300 bordercolor=#000000 cellpadding=1 cellspacing=0>');
+ swd.writeln(' <tr>');
+ swd.writeln(' <th bgcolor=#CCCCCC width=50%>商品名</th>');
+ swd.writeln(' <th bgcolor=#CCCCCC width=50%>お届け予定日時</th>');
+ swd.writeln(' </tr>');
+ swd.writeln(' <tr>');
+ swd.writeln('  <td align=center nowrap>宅急便<br></td>');
+ swd.writeln('  <td align=center nowrap>08/07<br></td>');
+ swd.writeln(' </tr>');
+ swd.writeln('</table><p>');
+ swd.writeln('<table border=1 bordercolor=#000000 cellpadding=1 cellspacing=0>');
+ swd.writeln('<tr>');
+ swd.writeln(' <th bgcolor=#CCCCCC>荷物状況</th>');
+ swd.writeln(' <th bgcolor=#CCCCCC>日 付</th>');
+ swd.writeln(' <th bgcolor=#CCCCCC>時 刻</th>');
+ swd.writeln(' <th bgcolor=#CCCCCC>担当店名</th>');
+ swd.writeln(' <th bgcolor=#CCCCCC>担当店コード</th>');
+ swd.writeln('</tr>');
+ swd.writeln('<tr>');
+ swd.writeln(' <td>発送</td>');
+ swd.writeln(' <td>08/06</td>');
+ swd.writeln(' <td>17:34</td>');
+ swd.writeln(' <td>市川柏井センター</td>');
+ swd.writeln(' <td>035110</td>');
+ swd.writeln('</tr>');
+ swd.writeln('<tr>');
+ swd.writeln(' <td>配達完了</td>');
+ swd.writeln(' <td>08/07</td>');
+ swd.writeln(' <td>10:04</td>');
+ swd.writeln(' <td>三鷹井口センター</td>');
+ swd.writeln(' <td>033204</td>');
+ swd.writeln('</tr>');
+ swd.writeln('</table>');
+ swd.writeln('</center>');
+ PRINT_HOOTER();
+}
+function PRINT_3(){
+ PRINT_HEADER();
+ swd.writeln('<table border=1 width=600 bordercolor=#000000>');
+ swd.writeln('<tr><td align=center bgcolor=#CCCCCC><b>詳細情報</b></td></tr>');
+ swd.writeln('</table>');
+ swd.writeln('<div align=right>お問い合わせ日時: 09/02　13:32</div><br>');
+ swd.writeln('<center>');
+ swd.writeln('<font size=4>　４件目</font>');
+ swd.writeln('<font size=4><b>　伝票番号　</b></font>');
+ swd.writeln('<font size=4><b>2497-0259-5984</b></font>');
+ swd.writeln('<p>');
+ swd.writeln('<table border=0><tr>');
+ swd.writeln(' <td><b>このお品物はお届けが済んでおります。</b><br>お問い合わせはサービスセンターまでお願いいたします。</td>');
+ swd.writeln('</tr></table><p>');
+ swd.writeln('<table border=1 width=300 bordercolor=#000000 cellpadding=1 cellspacing=0>');
+ swd.writeln(' <tr>');
+ swd.writeln(' <th bgcolor=#CCCCCC width=50%>商品名</th>');
+ swd.writeln(' <th bgcolor=#CCCCCC width=50%>お届け予定日時</th>');
+ swd.writeln(' </tr>');
+ swd.writeln(' <tr>');
+ swd.writeln('  <td align=center nowrap>宅急便<br></td>');
+ swd.writeln('  <td align=center nowrap>08/10<br></td>');
+ swd.writeln(' </tr>');
+ swd.writeln('</table><p>');
+ swd.writeln('<table border=1 bordercolor=#000000 cellpadding=1 cellspacing=0>');
+ swd.writeln('<tr>');
+ swd.writeln(' <th bgcolor=#CCCCCC>荷物状況</th>');
+ swd.writeln(' <th bgcolor=#CCCCCC>日 付</th>');
+ swd.writeln(' <th bgcolor=#CCCCCC>時 刻</th>');
+ swd.writeln(' <th bgcolor=#CCCCCC>担当店名</th>');
+ swd.writeln(' <th bgcolor=#CCCCCC>担当店コード</th>');
+ swd.writeln('</tr>');
+ swd.writeln('<tr>');
+ swd.writeln(' <td>発送</td>');
+ swd.writeln(' <td>08/09</td>');
+ swd.writeln(' <td>15:03</td>');
+ swd.writeln(' <td>白井西センター</td>');
+ swd.writeln(' <td>035261</td>');
+ swd.writeln('</tr>');
+ swd.writeln('<tr>');
+ swd.writeln(' <td>作業店通過</td>');
+ swd.writeln(' <td>08/09</td>');
+ swd.writeln(' <td>21:27</td>');
+ swd.writeln(' <td>船橋ベース店</td>');
+ swd.writeln(' <td>035990</td>');
+ swd.writeln('</tr>');
+ swd.writeln('<tr>');
+ swd.writeln(' <td>持戻（ご不在）</td>');
+ swd.writeln(' <td>08/10</td>');
+ swd.writeln(' <td>13:47</td>');
+ swd.writeln(' <td>秋田大曲センター</td>');
+ swd.writeln(' <td>018030</td>');
+ swd.writeln('</tr>');
+ swd.writeln('<tr>');
+ swd.writeln(' <td>持戻（ご不在）</td>');
+ swd.writeln(' <td>08/10</td>');
+ swd.writeln(' <td>17:40</td>');
+ swd.writeln(' <td>秋田大曲センター</td>');
+ swd.writeln(' <td>018030</td>');
+ swd.writeln('</tr>');
+ swd.writeln('<tr>');
+ swd.writeln(' <td>配達完了</td>');
+ swd.writeln(' <td>08/11</td>');
+ swd.writeln(' <td>14:23</td>');
+ swd.writeln(' <td>秋田大曲センター</td>');
+ swd.writeln(' <td>018030</td>');
+ swd.writeln('</tr>');
+ swd.writeln('</table>');
+ swd.writeln('</center>');
+ PRINT_HOOTER();
+}
+-->
+</script>
+</head>
+<body bgcolor="#FFFFFF" link="#009999" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
+<a name="SUMMARY"></a>
+<center>
+
+<!-- Start Header -->
+<table border="0" cellpadding="0" cellspacing="0" width="750">
+  <tr>
+	 <td height="50" align="center" background="../images/hd_bg003.gif"><table width="736" border="0" cellspacing="0" cellpadding="0">
+		<tr>
+		  <td width="145" background="../images/hd_bg002.gif"><a href="http://www.kuronekoyamato.co.jp/"><img src="../images/logo_001.gif" alt="ヤマト運輸" width="142" height="37" border="0"></a></td>
+		  <td width="302" align="left" background="../images/hd_bg002.gif" class="hd"><a href="http://www.kuronekoyamato.co.jp/company/index.html" class="a1"><span class="white">会社情報</span></a><span class="white">｜</span><a href="http://www.kuronekoyamato.co.jp/qa/qa.html" class="a1"><span class="white">よくあるご質問</span></a><span class="white">｜</span><a href="https://www3.kuronekoyamato.co.jp/query/" target="_blank" class="a1"><span class="white">ご意見・ご要望</span></a></td>
+		  <td width="262" align="right" background="../images/hd_bg002.gif" class="hd"><a href="http://www.kuronekoyamato.co.jp/toiawase/guide.html" target="track" class="a1"><span class="white">ご利用方法</span></a><span class="white">｜</span><a href="http://www.kuronekoyamato.co.jp/toiawase/notice.html" target="track" class="a1"><span class="white">注意事項</span></a></td>
+		  <td width="10" align="right" background="../images/hd_bg002.gif" class="hd">&nbsp;</td>
+		</tr>
+	 </table></td>
+  </tr>
+</table>
+<!-- End Header -->
+
+<table width="750" border="0" cellpadding="0" cellspacing="0">
+<tr>
+  <td align="right"><img src="../images/spacer.gif" width="1" height="5"></td>
+</tr>
+<tr>
+  <td align="right"><font size="2"><a href="http://www.google.co.jp/ig/directory?url=link.kuronekoyamato.co.jp%2Figoogle%2Ftoi.xml" target="_blank">Googleガジェットお問い合わせはこちらから</a></font></td>
+  <td width="153" align="right"><font size="2"><a href="http://track.kuronekoyamato.co.jp/english/tracking">Track Shipments (English)</a></font></td>
+</tr>
+<tr>
+  <td align="right"><img src="../images/spacer.gif" width="1" height="10"></td>
+</tr>
+</table>
+<table border="0"><tr>
+ <td><font size=+2><b>クロネコヤマトの荷物お問い合わせシステム</b></font></td>
+</tr></table>
+<table border="0" width=no>
+<tr><td align="left"><font size="2">
+<br>
+<br>
+</font>
+※画面左側の枠の中にお問い合わせ伝票番号を入力して下さい。
+</td>
+</tr>
+</table>
+<form method="post" action="./tneko">
+<input type="hidden" name="timeid" value="Uy6mTtA/TjZsTjK8I7WDeN3HYBUi5wj7">
+<center>
+<table border="0" width=no><tr>
+ <td align="left">詳細情報　
+  <input type="radio" name="number00" value="1" checked>あり
+  <input type="radio" name="number00" value="2">なし
+ </td>
+ <td align="center">
+  <input type="submit" name="sch" value="お問い合わせ開始">
+  <input type="reset"  value="　　クリア　　">
+ </td>
+</tr></table>
+</center>
+<hr width="80%">
+<table border="0" width="600" cellpadding="0">
+<tr>
+<td colspan=2 align="center">
+<font color=#990000 size=3><B>お問い合わせ伝票番号</B></font><br>
+<font size=2>※半角数字でご入力下さい。</font><br><br></td>
+<TH><FONT color=#990000 size=3>日付<BR><BR><BR></FONT></TH>
+<TH><FONT color=#990000 size=3>配達状況<BR><BR><BR></FONT></TH></TR>
+<tr align="middle">
+ <td rowspan="2"><font size="3">　１件目</font>
+  <input name="number01" size="16" maxlength="14">
+ </td>
+ <td><a href="#AA00"><font size="4"><b>2253-4716-4906<br></b></font></a></td>
+ <td><font size="3">07/13<br></font></td>
+ <td><font size="3">配達完了<br></font></td>
+</tr>
+<tr align="middle"><td></td><td></td><td></td>
+</tr>
+<tr align="middle">
+ <td rowspan="2"><font size="3">　２件目</font>
+  <input name="number02" size="16" maxlength="14">
+ </td>
+ <td><a href="#AA10"><font size="4"><b>2497-0143-1674<br></b></font></a></td>
+ <td><font size="3">08/17<br></font></td>
+ <td><font size="3">配達完了<br></font></td>
+</tr>
+<tr align="middle"><td></td><td></td><td></td>
+</tr>
+<tr align="middle">
+ <td rowspan="2"><font size="3">　３件目</font>
+  <input name="number03" size="16" maxlength="14">
+ </td>
+ <td><a href="#AA20"><font size="4"><b>2497-0224-5564<br></b></font></a></td>
+ <td><font size="3">08/07<br></font></td>
+ <td><font size="3">配達完了<br></font></td>
+</tr>
+<tr align="middle"><td></td><td></td><td></td>
+</tr>
+<tr align="middle">
+ <td rowspan="2"><font size="3">　４件目</font>
+  <input name="number04" size="16" maxlength="14">
+ </td>
+ <td><a href="#AA30"><font size="4"><b>2497-0259-5984<br></b></font></a></td>
+ <td><font size="3">08/11<br></font></td>
+ <td><font size="3">配達完了<br></font></td>
+</tr>
+<tr align="middle"><td></td><td></td><td></td>
+</tr>
+<tr align="middle">
+ <td rowspan="2"><font size="3">　５件目</font>
+  <input name="number05" size="16" maxlength="14">
+ </td>
+ <td><br></td><td><br></td><td><br></td>
+</tr>
+<tr align="middle"><td></td><td></td><td></td>
+</tr>
+<tr align="middle">
+ <td rowspan="2"><font size="3">　６件目</font>
+  <input name="number06" size="16" maxlength="14">
+ </td>
+ <td><br></td><td><br></td><td><br></td>
+</tr>
+<tr align="middle"><td></td><td></td><td></td>
+</tr>
+<tr align="middle">
+ <td rowspan="2"><font size="3">　７件目</font>
+  <input name="number07" size="16" maxlength="14">
+ </td>
+ <td><br></td><td><br></td><td><br></td>
+</tr>
+<tr align="middle"><td></td><td></td><td></td>
+</tr>
+<tr align="middle">
+ <td rowspan="2"><font size="3">　８件目</font>
+  <input name="number08" size="16" maxlength="14">
+ </td>
+ <td><br></td><td><br></td><td><br></td>
+</tr>
+<tr align="middle"><td></td><td></td><td></td>
+</tr>
+<tr align="middle">
+ <td rowspan="2"><font size="3">　９件目</font>
+  <input name="number09" size="16" maxlength="14">
+ </td>
+ <td><br></td><td><br></td><td><br></td>
+</tr>
+<tr align="middle"><td></td><td></td><td></td>
+</tr>
+<tr align="middle">
+ <td rowspan="2"><font size="3">１０件目</font>
+  <input name="number10" size="16" maxlength="14">
+ </td>
+ <td><br></td><td><br></td><td><br></td>
+</tr>
+<tr align="middle"><td></td><td></td><td></td>
+</tr>
+</table>
+</form>
+<div class="print_hide">
+<table border="0" width="700" cellpadding="0" cellspacing="0">
+<tr><td align="right">
+<form><INPUT TYPE="button" VALUE="一覧印刷" onClick="PRINT_ALL()"></form>
+</td></tr>
+</table>
+</div>
+<hr width="80%">
+<table border="0" cellpadding="0" cellspacing="0">
+<tr>
+<td>
+<img src="../images/otodoke.gif" hspace="15" alt="お届け完了ｅメール">
+<form></form>
+</td>
+<td valign="bottom">
+<font size="2">
+がご利用いただけます。
+</font>
+<form></form>
+</td>
+<td valign="bottom">
+<form method="post" action="https://jizen.kuronekoyamato.co.jp/haikan/toiawase_coop.jsp" target="cmypage" onSubmit="openWebsrv_top(this);">
+<input type="submit" value="　　ご登録　　">
+<input type="hidden" name="denpyo00" value="225347164906"><input type="hidden" name="latest00" value="12"><input type="hidden" name="kosu00" value="0"><input type="hidden" name="type00" value="TAKKYU">
+<input type="hidden" name="denpyo10" value="249701431674"><input type="hidden" name="latest10" value="12"><input type="hidden" name="kosu10" value="0"><input type="hidden" name="type10" value="TAKKYU">
+<input type="hidden" name="denpyo20" value="249702245564"><input type="hidden" name="latest20" value="12"><input type="hidden" name="kosu20" value="0"><input type="hidden" name="type20" value="TAKKYU">
+<input type="hidden" name="denpyo30" value="249702595984"><input type="hidden" name="latest30" value="12"><input type="hidden" name="kosu30" value="0"><input type="hidden" name="type30" value="TAKKYU">
+
+</form>
+</td>
+<td valign="bottom">
+<font size="2">
+　
+<a href="http://www.kuronekoyamato.co.jp/webservice_guide/otodoke_e-mail_off.html" target="_blank">&gt;&gt;サービス概要</a>
+</font>
+<form></form>
+</td>
+</tr>
+<tr>
+<td><br></td>
+<td colspan="3">
+<font size="2">
+※クロネコメール便は対象外です。
+</font>
+</td>
+</tr>
+</table>
+<br>
+<table width="78%"><tr>
+ <td align="center">
+  <table width="550" border="0" cellspacing="0" cellpadding="1"><tr>
+   <td align="left">
+<font size="2">※ＪＩＴＢＯＸチャーター便の荷物お問い合わせは
+<a href="http://boxtoi.jitbox.co.jp/boxtoi/inquiry" target="_blank">こちらのページ</a>にてご確認下さい。</font></td>  </tr></table>
+ </td>
+</tr><tr>
+ <td align="center">
+  <table width="550" border="0" cellspacing="0" cellpadding="1"><tr>
+   <td align="left">
+<font size="2">※Googleガジェットお問い合わせは
+<a href="http://www.google.co.jp/ig/directory?url=link.kuronekoyamato.co.jp%2Figoogle%2Ftoi.xml" target="_blank">こちら</a>からご利用いただけます。</font></td>  </tr></table>
+ </td>
+</tr><tr>
+ <td align="right"><a href="javascript:window.close()">閉じる</a><br>
+ <div class="print_hide">
+ <font color="#FFFFFF">Ｏ２</font></td>
+ </div>
+</tr></table>
+</center>
+<center><br>
+<table border="1" width="700"><tr>
+ <td align="center" bgcolor="#33CCCC"><b>詳細情報</b></td>
+</tr></table>
+</center>
+<a name="AA00">　</a>
+<center>
+<font size="4">　１件目</font>
+<font size="4"><b>　伝票番号　</b></font>
+<font size="4"><b>2253-4716-4906</b></font>
+<p>
+<table border="0" class="tb_c">
+<tr>
+ <td><b>このお品物はお届けが済んでおります。</b><br>お問い合わせはサービスセンターまでお願いいたします。</td>
+</tr></table><p>
+<table border=3 width=300>
+ <tr>
+  <th bgcolor="#FFCC66" width=50%>商品名</th>
+  <th bgcolor="#FFCC66" width=50%>お届け予定日時</th>
+ </tr>
+ <tr>
+  <td align=center nowrap>宅急便<br></td>
+  <td align=center nowrap>07/13<br></td>
+ </tr>
+</table><p>
+<table border="3" class="tb_c">
+<tr>
+ <th bgcolor="#FFCC66">荷物状況</th>
+ <th bgcolor="#FFCC66">日 付</th>
+ <th bgcolor="#FFCC66">時 刻</th>
+ <th bgcolor="#FFCC66">担当店名</th>
+ <th bgcolor="#FFCC66">担当店コード</th>
+</tr>
+<tr>
+ <td>荷物受付</td>
+ <td>07/06</td>
+ <td>10:29</td>
+ <td>札幌丸井今井営業所</td>
+ <td>000660</td>
+</tr>
+<tr>
+ <td>発送</td>
+ <td>07/06</td>
+ <td>10:29</td>
+<td><a href="http://sneko2.kuronekoyamato.co.jp/sneko2/Sngp?ID=NET_C&JC=000660&DN=&MD=&F=2" target="_blank">札幌丸井今井営業所</a></td>
+ <td>000660</td>
+</tr>
+<tr>
+ <td>配達日・時間帯指定（保管中）</td>
+ <td>07/06</td>
+ <td>10:30</td>
+ <td>札幌丸井今井営業所</td>
+ <td>000660</td>
+</tr>
+<tr>
+ <td>作業店通過</td>
+ <td>07/11</td>
+ <td>03:12</td>
+ <td>札幌ベース店</td>
+ <td>000990</td>
+</tr>
+<tr>
+ <td>配達日・時間帯指定（保管中）</td>
+ <td>07/11</td>
+ <td>06:15</td>
+ <td>札幌北大前センター</td>
+ <td>000041</td>
+</tr>
+<tr>
+ <td>配達完了</td>
+ <td>07/13</td>
+ <td>13:03</td>
+<td><a href="http://sneko2.kuronekoyamato.co.jp/sneko2/Sngp?ID=NET_C&JC=000041&DN=&MD=&F=2" target="_blank">札幌北大前センター</a></td>
+ <td>000041</td>
+</tr>
+</table>
+</center>
+<div class="print_hide">
+<center><br>
+<table border="0" width="700" cellpadding="0">
+<tr><td align="right">
+<form><INPUT TYPE="button" VALUE="詳細印刷" onClick="PRINT_0()"></form>
+</td></tr>
+</table>
+</center>
+</div>
+<p align="right">
+<a href="#SUMMARY">▲先頭に戻る</a></p>
+<p><hr><p>
+<a name="AA10">　</a>
+<center>
+<font size="4">　２件目</font>
+<font size="4"><b>　伝票番号　</b></font>
+<font size="4"><b>2497-0143-1674</b></font>
+<p>
+<table border="0" class="tb_c">
+<tr>
+ <td><b>このお品物はお届けが済んでおります。</b><br>お問い合わせはサービスセンターまでお願いいたします。</td>
+</tr></table><p>
+<table border=3 width=300>
+ <tr>
+  <th bgcolor="#FFCC66" width=50%>商品名</th>
+  <th bgcolor="#FFCC66" width=50%>お届け予定日時</th>
+ </tr>
+ <tr>
+  <td align=center nowrap>宅急便<br></td>
+  <td align=center nowrap>08/17<br></td>
+ </tr>
+</table><p>
+<table border="3" class="tb_c">
+<tr>
+ <th bgcolor="#FFCC66">荷物状況</th>
+ <th bgcolor="#FFCC66">日 付</th>
+ <th bgcolor="#FFCC66">時 刻</th>
+ <th bgcolor="#FFCC66">担当店名</th>
+ <th bgcolor="#FFCC66">担当店コード</th>
+</tr>
+<tr>
+ <td>発送</td>
+ <td>08/15</td>
+ <td>15:46</td>
+<td><a href="http://sneko2.kuronekoyamato.co.jp/sneko2/Sngp?ID=NET_C&JC=035060&DN=&MD=&F=2" target="_blank">新鎌ケ谷センター</a></td>
+ <td>035060</td>
+</tr>
+<tr>
+ <td>作業店通過</td>
+ <td>08/17</td>
+ <td>02:21</td>
+ <td>千歳ベース店</td>
+ <td>003990</td>
+</tr>
+<tr>
+ <td>作業店通過</td>
+ <td>08/17</td>
+ <td>03:07</td>
+ <td>千歳ベース店</td>
+ <td>003990</td>
+</tr>
+<tr>
+ <td>配達完了</td>
+ <td>08/17</td>
+ <td>12:41</td>
+<td><a href="http://sneko2.kuronekoyamato.co.jp/sneko2/Sngp?ID=NET_C&JC=007230&DN=&MD=&F=2" target="_blank">釧路昭和センター</a></td>
+ <td>007230</td>
+</tr>
+</table>
+</center>
+<div class="print_hide">
+<center><br>
+<table border="0" width="700" cellpadding="0">
+<tr><td align="right">
+<form><INPUT TYPE="button" VALUE="詳細印刷" onClick="PRINT_1()"></form>
+</td></tr>
+</table>
+</center>
+</div>
+<p align="right">
+<a href="#SUMMARY">▲先頭に戻る</a></p>
+<p><hr><p>
+<a name="AA20">　</a>
+<center>
+<font size="4">　３件目</font>
+<font size="4"><b>　伝票番号　</b></font>
+<font size="4"><b>2497-0224-5564</b></font>
+<p>
+<table border="0" class="tb_c">
+<tr>
+ <td><b>このお品物はお届けが済んでおります。</b><br>お問い合わせはサービスセンターまでお願いいたします。</td>
+</tr></table><p>
+<table border=3 width=300>
+ <tr>
+  <th bgcolor="#FFCC66" width=50%>商品名</th>
+  <th bgcolor="#FFCC66" width=50%>お届け予定日時</th>
+ </tr>
+ <tr>
+  <td align=center nowrap>宅急便<br></td>
+  <td align=center nowrap>08/07<br></td>
+ </tr>
+</table><p>
+<table border="3" class="tb_c">
+<tr>
+ <th bgcolor="#FFCC66">荷物状況</th>
+ <th bgcolor="#FFCC66">日 付</th>
+ <th bgcolor="#FFCC66">時 刻</th>
+ <th bgcolor="#FFCC66">担当店名</th>
+ <th bgcolor="#FFCC66">担当店コード</th>
+</tr>
+<tr>
+ <td>発送</td>
+ <td>08/06</td>
+ <td>17:34</td>
+<td><a href="http://sneko2.kuronekoyamato.co.jp/sneko2/Sngp?ID=NET_C&JC=035110&DN=&MD=&F=2" target="_blank">市川柏井センター</a></td>
+ <td>035110</td>
+</tr>
+<tr>
+ <td>配達完了</td>
+ <td>08/07</td>
+ <td>10:04</td>
+<td><a href="http://sneko2.kuronekoyamato.co.jp/sneko2/Sngp?ID=NET_C&JC=033204&DN=&MD=&F=2" target="_blank">三鷹井口センター</a></td>
+ <td>033204</td>
+</tr>
+</table>
+</center>
+<div class="print_hide">
+<center><br>
+<table border="0" width="700" cellpadding="0">
+<tr><td align="right">
+<form><INPUT TYPE="button" VALUE="詳細印刷" onClick="PRINT_2()"></form>
+</td></tr>
+</table>
+</center>
+</div>
+<p align="right">
+<a href="#SUMMARY">▲先頭に戻る</a></p>
+<p><hr><p>
+<a name="AA30">　</a>
+<center>
+<font size="4">　４件目</font>
+<font size="4"><b>　伝票番号　</b></font>
+<font size="4"><b>2497-0259-5984</b></font>
+<p>
+<table border="0" class="tb_c">
+<tr>
+ <td><b>このお品物はお届けが済んでおります。</b><br>お問い合わせはサービスセンターまでお願いいたします。</td>
+</tr></table><p>
+<table border=3 width=300>
+ <tr>
+  <th bgcolor="#FFCC66" width=50%>商品名</th>
+  <th bgcolor="#FFCC66" width=50%>お届け予定日時</th>
+ </tr>
+ <tr>
+  <td align=center nowrap>宅急便<br></td>
+  <td align=center nowrap>08/10<br></td>
+ </tr>
+</table><p>
+<table border="3" class="tb_c">
+<tr>
+ <th bgcolor="#FFCC66">荷物状況</th>
+ <th bgcolor="#FFCC66">日 付</th>
+ <th bgcolor="#FFCC66">時 刻</th>
+ <th bgcolor="#FFCC66">担当店名</th>
+ <th bgcolor="#FFCC66">担当店コード</th>
+</tr>
+<tr>
+ <td>発送</td>
+ <td>08/09</td>
+ <td>15:03</td>
+<td><a href="http://sneko2.kuronekoyamato.co.jp/sneko2/Sngp?ID=NET_C&JC=035261&DN=&MD=&F=2" target="_blank">白井西センター</a></td>
+ <td>035261</td>
+</tr>
+<tr>
+ <td>作業店通過</td>
+ <td>08/09</td>
+ <td>21:27</td>
+ <td>船橋ベース店</td>
+ <td>035990</td>
+</tr>
+<tr>
+ <td>持戻（ご不在）</td>
+ <td>08/10</td>
+ <td>13:47</td>
+ <td>秋田大曲センター</td>
+ <td>018030</td>
+</tr>
+<tr>
+ <td>持戻（ご不在）</td>
+ <td>08/10</td>
+ <td>17:40</td>
+ <td>秋田大曲センター</td>
+ <td>018030</td>
+</tr>
+<tr>
+ <td>配達完了</td>
+ <td>08/11</td>
+ <td>14:23</td>
+<td><a href="http://sneko2.kuronekoyamato.co.jp/sneko2/Sngp?ID=NET_C&JC=018030&DN=&MD=&F=2" target="_blank">秋田大曲センター</a></td>
+ <td>018030</td>
+</tr>
+</table>
+</center>
+<div class="print_hide">
+<center><br>
+<table border="0" width="700" cellpadding="0">
+<tr><td align="right">
+<form><INPUT TYPE="button" VALUE="詳細印刷" onClick="PRINT_3()"></form>
+</td></tr>
+</table>
+</center>
+</div>
+<p align="right">
+<a href="#SUMMARY">▲先頭に戻る</a></p>
+<p><hr><p>
+
+<!-- Start Footer -->
+<center>
+<table width="750" border="0" cellspacing="0" cellpadding="0">
+ <tr>
+  <td height="45" align="center" background="../images/fd_bg001.gif">
+   <table width="99%" border="0" cellspacing="0" cellpadding="0">
+	 <tr>
+	  <td height="37" align="left" valign="middle" background="../images/hd_bg002.gif">&nbsp;</td>
+	  <td height="37" align="left" background="../images/hd_bg002.gif" class="hd"><a href="http://www.kuronekoyamato.co.jp/privacy/privacy.html" target="_blank" class="a1"><span class="white">個人情報の取扱について</span></a><span class="white">｜</span><a href="http://www.kuronekoyamato.co.jp/sikumi2/sikumi.html" target="_blank" class="a1"><span class="white">宅急便のしくみ</span></a><span class="white">｜</span><a href="http://www.kuronekoyamato.co.jp/yakkan/y_index.html" class="a1"><span class="white">各種約款</span></a><span class="white">｜</span><a href="https://www3.kuronekoyamato.co.jp/banner/" target="_blank" class="a1"><span class="white">フリーリンクバナー</span></a></td>
+	 </tr>
+   </table>
+  </td>
+ </tr>
+ <tr>
+  <td height="20" align="center" class="b1"><font color="#333333">Copyright (C) 2008 Yamato Transport Co., Ltd. All Rights Reserved.</font></td>
+ </tr>
+</table>
+</center>
+<!-- End Footer -->
+
+<!-- START Nielsen//NetRatings SiteCensus V5.1 -->
+<!-- COPYRIGHT 2005 Nielsen//NetRatings -->
+<script language="JavaScript" type="text/javascript">
+<!--
+var _rsCI="kuronekoyamato";
+var _rsCG="0";
+var _rsDT=0; // to turn on whether to get the document title, 1=on
+var _rsDU=0; // to turn on or off the applet, 1=on
+var _rsDO=0; // to turn on debug output to the console, 1=on, only works if _rsDU=1
+var _rsX6=0; // to force use of applet with XP and IE6, 1=on, only works if _rsDU=1
+var _rsSI=escape(window.location);
+var _rsLP=location.protocol.indexOf('https')>-1?'https:':'http:';
+var _rsRP=escape(document.referrer);
+var _rsND=_rsLP+'//secure-jp.imrworldwide.com/';
+if (parseInt(navigator.appVersion)>=4)
+{
+var _rsRD=(new Date()).getTime();
+var _rsSE=0; // to turn on surveys, 1=on
+var _rsSV=""; // survey name, leave empty
+var _rsSM=0; // maximum survey rate, 1.0=100%
+_rsCL='<scr'+'ipt language="JavaScript" type="text/javascript" src="'+_rsND+'v51.js"><\/scr'+'ipt>';
+}
+else
+{
+_rsCL='<img src="'+_rsND+'cgi-bin/m?ci='+_rsCI+'&cg='+_rsCG+'&si='+_rsSI+'&rp='+_rsRP+'">';
+}
+document.write(_rsCL);
+//-->
+</script>
+<noscript>
+<img src="//secure-jp.imrworldwide.com/cgi-bin/m?ci=kuronekoyamato&amp;cg=0" alt="">
+</noscript>
+<!-- END Nielsen//NetRatings SiteCensus V5.1 -->
+</body>
+</html>
