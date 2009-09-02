@@ -97,10 +97,16 @@ class DetailPageParser:
     list = []
     for tracking_number_element in tracking_number_elements:
       message_table = tracking_number_element.nextSibling.nextSibling
+      detail_table  = message_table.nextSibling.nextSibling
+
+      detail_rows = detail_table.findAll("tr", recursive = False)
+      detail_cells = detail_rows[1].findAll("td", recursive = False)
 
       hash = {
-        u"伝票番号"  : tracking_number_element.string,
-        u"メッセージ": "\n".join(message_table.tr.td.contents),
+        u"伝票番号"      : tracking_number_element.string,
+        u"メッセージ"    : "\n".join(message_table.tr.td.contents),
+        u"商品名"        : detail_cells[0].contents[0],
+        u"お届け予定日時": detail_cells[1].contents[0],
       }
       list.append(hash)
 

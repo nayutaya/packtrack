@@ -34,3 +34,4 @@ elements = DetailPageParser.search_tracking_number_elements(doc)
 for elem in elements:
   print elem
   print elem.nextSibling.nextSibling
+  print elem.nextSibling.nextSibling.nextSibling.nextSibling
