@@ -151,9 +151,14 @@ class ListPageParser:
     rows  = table.findAll("tr", recursive = False)
     cells = rows[1].findAll("td", recursive = False)
 
+    name = cells[0].contents[0]
+    time = None
+    if len(cells) >= 2:
+      time = cells[1].contents[0]
+
     return {
-      u"商品名"        : cells[0].contents[0],
-      u"お届け予定日時": cells[1].contents[0],
+      u"商品名"        : name,
+      u"お届け予定日時": time,
     }
 
   # FIXME: テスト
