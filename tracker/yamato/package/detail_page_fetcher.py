@@ -5,8 +5,8 @@ import urllib2
 
 # 詳細ページ取得クラス
 class DetailPageFetcher:
-  def __init__(self):
-    pass
+  def __init__(self, content):
+    self.content = content
 
   @classmethod
   def create_url(cls):
@@ -62,3 +62,7 @@ class DetailPageFetcher:
       return io.read()
     finally:
       io.close()
+
+  @classmethod
+  def get(cls, numbers):
+    return cls(cls.get_content(numbers))

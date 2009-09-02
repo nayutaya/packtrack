@@ -1,7 +1,14 @@
 # -*- coding: utf-8 -*-
 
+from tracker.yamato.package.session import Session
 from tracker.yamato.package.detail_page_fetcher import DetailPageFetcher
 from tracker.yamato.package.detail_page_parser import DetailPageParser
+
+
+session = Session()
+print session.get_detail(["225303520584", "249790484403"])
+
+exit(0)
 
 """
 if False:
@@ -30,7 +37,7 @@ f.write(doc.prettify())
 f.close()
 
 info = DetailPageParser.parse(html)
-for item1 in info["一覧"]:
+for item1 in info[u"一覧"]:
   for key1, value1 in item1.items():
     if isinstance(value1, basestring):
       print key1 + ": '" + value1 + "'"
