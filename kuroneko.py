@@ -20,43 +20,23 @@ else:
 from BeautifulSoup import BeautifulSoup
 
 import re
-def strip_script_tag(html):
-  pattern = re.compile(r"<script.+?>.+?</script>", re.IGNORECASE | re.DOTALL)
-  return re.sub(pattern, "", html)
-
-def strip_style_tag(html):
-  pattern = re.compile(r"<style.+?>.+?</style>", re.IGNORECASE | re.DOTALL)
-  return re.sub(pattern, "", html)
-
-def strip_center_tag(html):
-  pattern = re.compile(r"</?center>", re.IGNORECASE)
-  return re.sub(pattern, "", html)
-
-def strip_paragraph_tag(html):
-  pattern = re.compile(r"(?:<p.*?>|</p>)", re.IGNORECASE)
-  return re.sub(pattern, "", html)
-
-def strip_bold_tag(html):
-  pattern = re.compile(r"</?b>", re.IGNORECASE)
-  return re.sub(pattern, "", html)
-
 
 src1 = detail_page
 f = open("src1.html", "wb")
 f.write(src1)
 f.close()
 
-src2 = strip_script_tag(src1)
+src2 = DetailPageParser.trim_script_tag(src1)
 f = open("src2.html", "wb")
 f.write(src2)
 f.close()
 
-src3 = strip_style_tag(src2)
+src3 = DetailPageParser.trim_style_tag(src2)
 f = open("src3.html", "wb")
 f.write(src3)
 f.close()
 
-src4 = strip_bold_tag(strip_paragraph_tag(strip_center_tag(src3)))
+src4 = DetailPageParser.trim_bold_tag(DetailPageParser.trim_paragraph_tag(DetailPageParser.trim_center_tag(src3)))
 f = open("src4.html", "wb")
 f.write(src4)
 f.close()
