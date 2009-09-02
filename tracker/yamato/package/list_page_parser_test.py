@@ -204,5 +204,13 @@ class TestListPageParser(unittest.TestCase):
     actual = target(self.read_fixture("list_transfer.html"))
     self.assertEqual(expected, actual)
 
+  def test_parser__misc01(self):
+    target = ListPageParser.parse
+    actual = target(self.read_fixture("list_misc01.html"))
+
+  def test_parser__misc02(self):
+    target = ListPageParser.parse
+    actual = target(self.read_fixture("list_misc02.html"))
+
 if __name__ == "__main__":
   unittest.main()

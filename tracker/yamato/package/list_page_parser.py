@@ -166,7 +166,7 @@ class ListPageParser:
       record = {
         u"荷物状況"    : cells[0].contents[0],
         u"日付"        : cells[1].contents[0],
-        u"時刻"        : cells[2].contents[0],
+        u"時刻"        : cells[2].find(text = True),
         u"担当店名"    : cells[3].find(text = True),
         u"担当店コード": cells[4].contents[0],
       }
