@@ -94,44 +94,43 @@ class DetailPageParser:
 
     tracking_number_elements = cls.search_tracking_number_elements(doc)
 
-    list = []
+    records = []
     for tracking_number_element in tracking_number_elements:
-      message_table = tracking_number_element.nextSibling.nextSibling
-      detail_table  = message_table.nextSibling.nextSibling
-      list_table    = detail_table.nextSibling.nextSibling
+      message_table     = tracking_number_element.nextSibling.nextSibling
+      detail_table      = message_table.nextSibling.nextSibling
+      detail_list_table = detail_table.nextSibling.nextSibling
 
-      hash = {
+      record = {
         u"伝票番号": tracking_number_element.string,
       }
-      hash.update(cls.parse_message_table(message_table))
-      hash.update(cls.parse_detail_table(detail_table))
-      hash.update(cls.parse_detail_list_table(list_table))
-      list.append(hash)
+      record.update(cls.parse_message_table(message_table))
+      record.update(cls.parse_detail_table(detail_table))
+      record.update(cls.parse_detail_list_table(detail_list_table))
+      records.append(record)
 
-    return {"list": list}
+    return {"一覧": records}
 
   @classmethod
-  def parse_message_table(cls, message_table):
+  def parse_message_table(cls, table):
     return {
-      u"メッセージ": "\n".join(message_table.tr.td.contents),
+      u"メッセージ": "\n".join(table.tr.td.contents),
     }
 
   @classmethod
-  def parse_detail_table(cls, detail_table):
-    detail_rows = detail_table.findAll("tr", recursive = False)
-    detail_cells = detail_rows[1].findAll("td", recursive = False)
+  def parse_detail_table(cls, table):
+    rows  = table.findAll("tr", recursive = False)
+    cells = rows[1].findAll("td", recursive = False)
 
     return {
-      u"商品名"        : detail_cells[0].contents[0],
-      u"お届け予定日時": detail_cells[1].contents[0],
+      u"商品名"        : cells[0].contents[0],
+      u"お届け予定日時": cells[1].contents[0],
     }
 
   @classmethod
-  def parse_detail_list_table(cls, detail_list_table):
+  def parse_detail_list_table(cls, table):
     results = []
 
-    detail_list = []
-    for row in detail_list_table.findAll("tr", recursive = False)[1:]:
+    for row in table.findAll("tr", recursive = False)[1:]:
       cells = row.findAll("td", recursive = False)
       station_name_cell = cells[3]
       if station_name_cell.find("a") is None:
