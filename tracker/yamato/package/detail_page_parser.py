@@ -71,3 +71,10 @@ class DetailPageParser:
     # 強制改行を削除
     for elem in doc.body.findAll("br"):
       elem.extract()
+
+  @classmethod
+  def create_doc(cls, html):
+    src = cls.trim_unwanted_tags(html)
+    doc = BeautifulSoup(src)
+    cls.trim_unwanted_nodes(doc)
+    return doc

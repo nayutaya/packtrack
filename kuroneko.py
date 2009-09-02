@@ -26,25 +26,8 @@ f = open("src1.html", "wb")
 f.write(src1)
 f.close()
 
-src2 = DetailPageParser.trim_unwanted_tags(src1)
-f = open("src2.html", "wb")
-f.write(src2)
-f.close()
 
-
-doc = BeautifulSoup(src2)
-f = open("tmp.html", "wb")
-f.write(doc.prettify())
-f.close()
-
+doc = DetailPageParser.create_doc(src1)
 f = open("tmp2.html", "wb")
-f.write(doc.prettify())
-f.close()
-
-doc = BeautifulSoup(src2)
-
-DetailPageParser.trim_unwanted_nodes(doc)
-
-f = open("tmp3.html", "wb")
 f.write(doc.prettify())
 f.close()
