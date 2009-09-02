@@ -79,5 +79,24 @@ class TestDetailPageParser(unittest.TestCase):
     del actual["list"][1][u"詳細"]
     self.assertEqual(expected, actual)
 
+
+  def test_parser__count_all(self):
+    target = DetailPageParser.parse
+
+    cases = [
+      ("detail_count02.html", [
+          (u"2253-0299-8793", 4),
+          (u"2253-0316-9976", 4)]),
+    ]
+
+    for filename, expected in cases:
+      info = target(self.read_fixture(filename))
+      actual = []
+      for item in info["list"]:
+        number  = item[u"伝票番号"]
+        details = len(item[u"詳細"])
+        actual.append((number, details))
+      self.assertEqual(expected, actual)
+
 if __name__ == "__main__":
   unittest.main()
