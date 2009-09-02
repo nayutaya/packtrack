@@ -22,7 +22,7 @@ class TestDetailPageParser(unittest.TestCase):
       "一覧": [
         {
           u"伝票番号"      : u"2253-0009-9640",
-          u"メッセージ"    : u"このお品物はお届けが済んでおります。\nお問い合わせはサービスセンターまでお願いいたします。",
+          u"メッセージ"    : u"このお品物はお届けが済んでおります。お問い合わせはサービスセンターまでお願いいたします。",
           u"商品名"        : u"宅急便",
           u"お届け予定日時": u"07/17　08:00-12:00",
           u"詳細"          : [
@@ -62,13 +62,13 @@ class TestDetailPageParser(unittest.TestCase):
       "一覧": [
         {
           u"伝票番号"      : u"2253-0299-8793",
-          u"メッセージ"    : u"このお品物はお届けが済んでおります。\nお問い合わせはサービスセンターまでお願いいたします。",
+          u"メッセージ"    : u"このお品物はお届けが済んでおります。お問い合わせはサービスセンターまでお願いいたします。",
           u"商品名"        : u"宅急便",
           u"お届け予定日時": u"06/14　08:00-12:00",
         },
         {
           u"伝票番号"      : u"2253-0316-9976",
-          u"メッセージ"    : u"このお品物はお届けが済んでおります。\nお問い合わせはサービスセンターまでお願いいたします。",
+          u"メッセージ"    : u"このお品物はお届けが済んでおります。お問い合わせはサービスセンターまでお願いいたします。",
           u"商品名"        : u"宅急便",
           u"お届け予定日時": u"06/17",
         },
@@ -78,7 +78,6 @@ class TestDetailPageParser(unittest.TestCase):
     del actual["一覧"][0][u"詳細"]
     del actual["一覧"][1][u"詳細"]
     self.assertEqual(expected, actual)
-
 
   def test_parser__count_all(self):
     target = DetailPageParser.parse
@@ -159,6 +158,24 @@ class TestDetailPageParser(unittest.TestCase):
         number_of_details = len(record[u"詳細"])
         actual.append((tracking_number, number_of_details))
       self.assertEqual(expected, actual)
+
+  def test_parser__notexist(self):
+    target = DetailPageParser.parse
+
+    expected = {
+      "一覧": [
+        {
+          u"伝票番号"      : u"9999-9999-9994",
+          u"メッセージ"    : u"お問い合わせいただいた伝票番号は、今現在コンピュータに登録されておりません。最寄りのお客様サービスセンターまでお問い合わせ下さい。",
+          u"商品名"        : None,
+          u"お届け予定日時": None,
+          u"詳細"          : None,
+        },
+      ],
+    }
+    self.assertEqual(
+      expected,
+      target(self.read_fixture("detail_notexist.html")))
 
 if __name__ == "__main__":
   unittest.main()

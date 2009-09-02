@@ -96,24 +96,33 @@ class DetailPageParser:
 
     records = []
     for tracking_number_element in tracking_number_elements:
-      message_table     = tracking_number_element.nextSibling.nextSibling
-      detail_table      = message_table.nextSibling.nextSibling
-      detail_list_table = detail_table.nextSibling.nextSibling
-
       record = {
-        u"伝票番号": tracking_number_element.string,
+        u"伝票番号"      : tracking_number_element.string,
+        u"メッセージ"    : None,
+        u"商品名"        : None,
+        u"お届け予定日時": None,
+        u"詳細"          : None,
       }
+
+      message_table = tracking_number_element.nextSibling.nextSibling
       record.update(cls.parse_message_table(message_table))
-      record.update(cls.parse_detail_table(detail_table))
-      record.update(cls.parse_detail_list_table(detail_list_table))
+
+      detail_table = message_table.nextSibling.nextSibling
+      if detail_table.__class__.__name__ == "Tag":
+        record.update(cls.parse_detail_table(detail_table))
+
+        detail_list_table = detail_table.nextSibling.nextSibling
+        record.update(cls.parse_detail_list_table(detail_list_table))
+
       records.append(record)
 
     return {"一覧": records}
 
   @classmethod
   def parse_message_table(cls, table):
+    messages = table.tr.td.findAll(text = True)
     return {
-      u"メッセージ": "\n".join(table.tr.td.contents),
+      u"メッセージ": "".join(messages),
     }
 
   @classmethod
