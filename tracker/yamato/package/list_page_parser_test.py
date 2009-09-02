@@ -216,5 +216,9 @@ class TestListPageParser(unittest.TestCase):
     target = ListPageParser.parse
     actual = target(self.read_fixture("list_misc03.html"))
 
+  def test_parser__misc04(self):
+    target = ListPageParser.parse
+    actual = target(self.read_fixture("list_misc04.html"))
+
 if __name__ == "__main__":
   unittest.main()
