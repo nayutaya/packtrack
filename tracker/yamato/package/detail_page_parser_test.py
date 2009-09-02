@@ -55,5 +55,29 @@ class TestDetailPageParser(unittest.TestCase):
       expected,
       target(self.read_fixture("detail_count01.html")))
 
+  def test_parser__count02(self):
+    target = DetailPageParser.parse
+
+    expected = {
+      "list": [
+        {
+          u"伝票番号"      : u"2253-0299-8793",
+          u"メッセージ"    : u"このお品物はお届けが済んでおります。\nお問い合わせはサービスセンターまでお願いいたします。",
+          u"商品名"        : u"宅急便",
+          u"お届け予定日時": u"06/14　08:00-12:00",
+        },
+        {
+          u"伝票番号"      : u"2253-0316-9976",
+          u"メッセージ"    : u"このお品物はお届けが済んでおります。\nお問い合わせはサービスセンターまでお願いいたします。",
+          u"商品名"        : u"宅急便",
+          u"お届け予定日時": u"06/17",
+        },
+      ],
+    }
+    actual = target(self.read_fixture("detail_count02.html"))
+    del actual["list"][0][u"詳細"]
+    del actual["list"][1][u"詳細"]
+    self.assertEqual(expected, actual)
+
 if __name__ == "__main__":
   unittest.main()
