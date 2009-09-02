@@ -29,9 +29,15 @@ f = open("tmp.html", "wb")
 f.write(doc.prettify())
 f.close()
 
-
-elements = DetailPageParser.search_tracking_number_elements(doc)
-for elem in elements:
-  print elem
-  print elem.nextSibling.nextSibling
-  print elem.nextSibling.nextSibling.nextSibling.nextSibling
+info = DetailPageParser.parse(html)
+for item1 in info["list"]:
+  for key1, value1 in item1.items():
+    if isinstance(value1, basestring):
+      print key1 + ": '" + value1 + "'"
+    else:
+      print key1 + ":"
+      for item2 in value1:
+        for key2, value2 in item2.items():
+          print "  " + key2 + ": '" + value2 + "'"
+        print "  ---"
+  print "---"
