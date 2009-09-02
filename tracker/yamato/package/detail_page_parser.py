@@ -98,15 +98,35 @@ class DetailPageParser:
     for tracking_number_element in tracking_number_elements:
       message_table = tracking_number_element.nextSibling.nextSibling
       detail_table  = message_table.nextSibling.nextSibling
+      list_table    = detail_table.nextSibling.nextSibling
 
       detail_rows = detail_table.findAll("tr", recursive = False)
       detail_cells = detail_rows[1].findAll("td", recursive = False)
+
+      detail_list = []
+      for row in list_table.findAll("tr", recursive = False)[1:]:
+        cells = row.findAll("td", recursive = False)
+        station_name_cell = cells[3]
+        if station_name_cell.find("a") is None:
+          station_name = station_name_cell.contents[0]
+        else:
+          station_name = station_name_cell.a.contents[0]
+
+        info = {
+          u"荷物状況"    : cells[0].contents[0],
+          u"日付"        : cells[1].contents[0],
+          u"時刻"        : cells[2].contents[0],
+          u"担当店名"    : station_name,
+          u"担当店コード": cells[4].contents[0],
+        }
+        detail_list.append(info)
 
       hash = {
         u"伝票番号"      : tracking_number_element.string,
         u"メッセージ"    : "\n".join(message_table.tr.td.contents),
         u"商品名"        : detail_cells[0].contents[0],
         u"お届け予定日時": detail_cells[1].contents[0],
+        u"詳細"          : detail_list,
       }
       list.append(hash)
 
