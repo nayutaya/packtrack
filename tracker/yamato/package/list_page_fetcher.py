@@ -3,8 +3,8 @@
 import urllib
 import urllib2
 
-# 詳細ページ取得クラス
-class DetailPageFetcher:
+# 一覧ページ取得クラス
+class ListPageFetcher:
   def __init__(self, content):
     self.content = content
 

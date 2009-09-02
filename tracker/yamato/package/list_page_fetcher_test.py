@@ -3,20 +3,20 @@
 import unittest
 import cgi
 
-from detail_page_fetcher import DetailPageFetcher
+from list_page_fetcher import ListPageFetcher
 
-class TestDetailPageFetcher(unittest.TestCase):
+class TestListPageFetcher(unittest.TestCase):
   def setUp(self):
     pass
 
   def test_create_url(self):
-    target = DetailPageFetcher.create_url
+    target = ListPageFetcher.create_url
     self.assertEqual(
       "http://toi.kuronekoyamato.co.jp/cgi-bin/tneko",
       target())
 
   def test_create_base_params(self):
-    target = DetailPageFetcher.create_base_params
+    target = ListPageFetcher.create_base_params
 
     expected = [
       "number00",
@@ -44,18 +44,18 @@ class TestDetailPageFetcher(unittest.TestCase):
         self.assertEqual("", value)
 
   def test_create_number_params__empty(self):
-    target = DetailPageFetcher.create_number_params
+    target = ListPageFetcher.create_number_params
     self.assertEqual({}, target([]))
 
   def test_create_number_params__1(self):
-    target = DetailPageFetcher.create_number_params
+    target = ListPageFetcher.create_number_params
     expected = {
       "number01": "1",
     }
     self.assertEqual(expected, target(["1"]))
 
   def test_create_number_params__10(self):
-    target = DetailPageFetcher.create_number_params
+    target = ListPageFetcher.create_number_params
     expected = {
       "number01": "1",
       "number02": "2",
@@ -71,32 +71,32 @@ class TestDetailPageFetcher(unittest.TestCase):
     self.assertEqual(expected, target(["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"]))
 
   def test_create_number_params__11(self):
-    target = DetailPageFetcher.create_number_params
+    target = ListPageFetcher.create_number_params
     proc = lambda: target(["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11"])
     self.assertRaises(ValueError, proc)
 
   def test_create_params__empty(self):
-    target = DetailPageFetcher.create_params
-    expected = DetailPageFetcher.create_base_params()
+    target = ListPageFetcher.create_params
+    expected = ListPageFetcher.create_base_params()
     self.assertEqual(expected, target([]))
 
   def test_create_params__empty(self):
-    target = DetailPageFetcher.create_params
-    expected = DetailPageFetcher.create_base_params()
+    target = ListPageFetcher.create_params
+    expected = ListPageFetcher.create_base_params()
     expected["number01"] = "1"
     self.assertEqual(expected, target(["1"]))
 
   def test_create_request(self):
-    target = DetailPageFetcher.create_request
+    target = ListPageFetcher.create_request
     numbers = ["1", "2"]
     request = target(numbers)
 
     self.assertEqual(
-      DetailPageFetcher.create_url(),
+      ListPageFetcher.create_url(),
       request.get_full_url())
 
     expected = {}
-    for key, value in DetailPageFetcher.create_params(numbers).items():
+    for key, value in ListPageFetcher.create_params(numbers).items():
       if value != "": expected[key] = value
     actual = {}
     for key, value in cgi.parse_qs(request.get_data()).items():
@@ -104,14 +104,14 @@ class TestDetailPageFetcher(unittest.TestCase):
     self.assertEqual(expected, actual)
 
   def test_open(self):
-    target = DetailPageFetcher.open
+    target = ListPageFetcher.open
     io = target(["000000000000"])
     io.read()
     io.close()
     # MEMO: 良いテスト方法が思いつかないため、現状は呼び出しているだけ
 
   def test_get_content(self):
-    target = DetailPageFetcher.get_content
+    target = ListPageFetcher.get_content
     content = target(["000000000000"])
     # MEMO: 良いテスト方法が思いつかないため、現状は呼び出しているだけ
 
