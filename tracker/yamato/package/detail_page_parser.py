@@ -100,34 +100,52 @@ class DetailPageParser:
       detail_table  = message_table.nextSibling.nextSibling
       list_table    = detail_table.nextSibling.nextSibling
 
-      detail_rows = detail_table.findAll("tr", recursive = False)
-      detail_cells = detail_rows[1].findAll("td", recursive = False)
-
-      detail_list = []
-      for row in list_table.findAll("tr", recursive = False)[1:]:
-        cells = row.findAll("td", recursive = False)
-        station_name_cell = cells[3]
-        if station_name_cell.find("a") is None:
-          station_name = station_name_cell.contents[0]
-        else:
-          station_name = station_name_cell.a.contents[0]
-
-        info = {
-          u"荷物状況"    : cells[0].contents[0],
-          u"日付"        : cells[1].contents[0],
-          u"時刻"        : cells[2].contents[0],
-          u"担当店名"    : station_name,
-          u"担当店コード": cells[4].contents[0],
-        }
-        detail_list.append(info)
-
       hash = {
-        u"伝票番号"      : tracking_number_element.string,
-        u"メッセージ"    : "\n".join(message_table.tr.td.contents),
-        u"商品名"        : detail_cells[0].contents[0],
-        u"お届け予定日時": detail_cells[1].contents[0],
-        u"詳細"          : detail_list,
+        u"伝票番号": tracking_number_element.string,
       }
+      hash.update(cls.parse_message_table(message_table))
+      hash.update(cls.parse_detail_table(detail_table))
+      hash.update(cls.parse_detail_list_table(list_table))
       list.append(hash)
 
     return {"list": list}
+
+  @classmethod
+  def parse_message_table(cls, message_table):
+    return {
+      u"メッセージ": "\n".join(message_table.tr.td.contents),
+    }
+
+  @classmethod
+  def parse_detail_table(cls, detail_table):
+    detail_rows = detail_table.findAll("tr", recursive = False)
+    detail_cells = detail_rows[1].findAll("td", recursive = False)
+
+    return {
+      u"商品名"        : detail_cells[0].contents[0],
+      u"お届け予定日時": detail_cells[1].contents[0],
+    }
+
+  @classmethod
+  def parse_detail_list_table(cls, detail_list_table):
+    results = []
+
+    detail_list = []
+    for row in detail_list_table.findAll("tr", recursive = False)[1:]:
+      cells = row.findAll("td", recursive = False)
+      station_name_cell = cells[3]
+      if station_name_cell.find("a") is None:
+        station_name = station_name_cell.contents[0]
+      else:
+        station_name = station_name_cell.a.contents[0]
+
+      info = {
+        u"荷物状況"    : cells[0].contents[0],
+        u"日付"        : cells[1].contents[0],
+        u"時刻"        : cells[2].contents[0],
+        u"担当店名"    : station_name,
+        u"担当店コード": cells[4].contents[0],
+      }
+      results.append(info)
+
+    return {u"詳細": results}
