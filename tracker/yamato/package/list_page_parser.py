@@ -3,8 +3,8 @@
 import re
 from BeautifulSoup import BeautifulSoup
 
-# 詳細ページ解析クラス
-class DetailPageParser:
+# 一覧ページ解析クラス
+class ListPageParser:
   def __init__(self):
     pass
 
