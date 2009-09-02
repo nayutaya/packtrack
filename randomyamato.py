@@ -1,18 +1,18 @@
 # -*- coding: utf-8 -*-
 
 from tracker import jppost
+from tracker.yamato.package.session import Session
 
 numbers = []
 for i in range(10):
-  number = jppost.PackageTrackingNumber.create_random_number("225")
+  number = jppost.PackageTrackingNumber.create_random_number("2497")
   numbers.append(number)
-
-for number in numbers:
   print number
 
-from tracker.yamato.package.detail_page_fetcher import DetailPageFetcher
+session = Session()
+list = session.get_list(numbers)
 
-detail_page = DetailPageFetcher.get_content(numbers)
-f = open("yamato.html", "wb")
-f.write(detail_page)
-f.close()
+for record in list[u"一覧"]:
+  tracking_number = record[u"伝票番号"]
+  message         = record[u"メッセージ"]
+  print ("\t".join([tracking_number, message])).encode("utf-8")
