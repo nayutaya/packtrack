@@ -50,21 +50,31 @@ f = open("tmp.html", "wb")
 f.write(doc.prettify())
 f.close()
 
+# ヘッダを削除
 doc.body.center.extract()
 doc.body.center.extract()
 
-for elem in doc.body.findAll("a", recursive = False):
+# フッタを削除
+doc.body.findAll("p", recursive = False)[-1].extract()
+
+# リンクを削除
+for elem in doc.body.findAll("a", {"name": re.compile(".+")}):
+  elem.extract()
+for elem in doc.body.findAll("p", {"align": "right"}):
+  elem.extract()
+
+# ボタンを削除
+for elem in doc.body.findAll("div", {"class": "print_hide"}):
+  elem.extract()
+
+# 水平線を削除
+for elem in doc.body.findAll("hr"):
   elem.extract()
 
 f = open("tmp2.html", "wb")
 f.write(doc.prettify())
 f.close()
 
-for elem in doc.body.findAll("div", {"class": "print_hide"}):
-  elem.extract()
-
-for elem in doc.body.findAll("p", {"align": "right"}):
-  elem.extract()
 
 f = open("tmp3.html", "wb")
 f.write(doc.prettify())
