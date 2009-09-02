@@ -84,15 +84,39 @@ class TestDetailPageParser(unittest.TestCase):
     target = DetailPageParser.parse
 
     cases = [
+      ("detail_count01.html", [
+          (u"2253-0009-9640", 3)]),
       ("detail_count02.html", [
           (u"2253-0299-8793", 4),
           (u"2253-0316-9976", 4)]),
+      ("detail_count03.html", [
+          (u"2253-0341-5632", 7),
+          (u"2253-0354-9181", 5),
+          (u"2253-0529-2332", 6)]),
+      ("detail_count04.html", [
+          (u"2253-4716-4906", 6),
+          (u"2497-0143-1674", 4),
+          (u"2497-0224-5564", 2),
+          (u"2497-0259-5984", 5)]),
+      ("detail_count05.html", [
+          (u"2497-0318-8405", 3),
+          (u"2497-0826-0970", 4),
+          (u"2497-0832-2905", 3),
+          (u"2497-1190-3571", 4),
+          (u"2497-2674-2926", 4)]),
+      ("detail_count06.html", [
+          (u"2497-3352-0540", 4),
+          (u"2497-3610-7003", 6),
+          (u"2497-3614-0916", 6),
+          (u"2497-3951-0790", 5),
+          (u"2497-3959-4031", 3),
+          (u"2497-3977-4815", 3)]),
     ]
 
     for filename, expected in cases:
-      info = target(self.read_fixture(filename))
+      page = target(self.read_fixture(filename))
       actual = []
-      for record in info["一覧"]:
+      for record in page["一覧"]:
         tracking_number   = record[u"伝票番号"]
         number_of_details = len(record[u"詳細"])
         actual.append((tracking_number, number_of_details))
