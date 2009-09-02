@@ -173,5 +173,36 @@ class TestListPageParser(unittest.TestCase):
       expected,
       target(self.read_fixture("list_notexist.html")))
 
+  def test_parser__transfer(self):
+    target = ListPageParser.parse
+    expected = {
+      u"一覧": [
+        {
+          u"伝票番号"      : u"2497-2497-3934",
+          u"メッセージ"    : None,
+          u"商品名"        : u"宅急便",
+          u"お届け予定日時": u"09/03",
+          u"詳細"          : [
+            {
+              u"荷物状況"    : u"発送",
+              u"日付"        : u"09/01",
+              u"時刻"        : u"18:21",
+              u"担当店名"    : u"緑八朔センター",
+              u"担当店コード": u"028682",
+            },
+            {
+              u"荷物状況"    : u"作業店通過",
+              u"日付"        : u"09/01",
+              u"時刻"        : u"20:56",
+              u"担当店名"    : u"神奈川ベース店",
+              u"担当店コード": u"028990",
+            },
+          ],
+        },
+      ],
+    }
+    actual = target(self.read_fixture("list_transfer.html"))
+    self.assertEqual(expected, actual)
+
 if __name__ == "__main__":
   unittest.main()

@@ -114,9 +114,19 @@ class ListPageParser:
       }
 
       message_table = tracking_number_element.nextSibling.nextSibling
-      record.update(cls.parse_message_table(message_table))
+      try:
+        mt_class = message_table["class"]
+      except KeyError:
+        mt_class = None
 
-      detail_table = message_table.nextSibling.nextSibling
+      if mt_class == "tb_c":
+        record.update(cls.parse_message_table(message_table))
+
+      if mt_class == "tb_c":
+        detail_table = message_table.nextSibling.nextSibling
+      else:
+        detail_table = tracking_number_element.nextSibling.nextSibling
+
       if detail_table.__class__.__name__ == "Tag":
         record.update(cls.parse_detail_table(detail_table))
 
