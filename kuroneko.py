@@ -20,19 +20,33 @@ else:
 from BeautifulSoup import BeautifulSoup
 
 import re
-def strip_javascript(html):
-  pattern = re.compile(r"<script.+?>.+?</script>", re.DOTALL)
+def strip_script_tag(html):
+  pattern = re.compile(r"<script.+?>.+?</script>", re.IGNORECASE | re.DOTALL)
   return re.sub(pattern, "", html)
 
-src1 = detail_page
-src2 = strip_javascript(src1)
+def strip_style_tag(html):
+  pattern = re.compile(r"<style.+?>.+?</style>", re.IGNORECASE | re.DOTALL)
+  return re.sub(pattern, "", html)
 
-#f = open("tmp.html", "wb")
-#f.write(src2)
-#f.close()
+
+
+src1 = detail_page
+f = open("src1.html", "wb")
+f.write(src1)
+f.close()
+
+src2 = strip_script_tag(src1)
+f = open("src2.html", "wb")
+f.write(src2)
+f.close()
+
+src3 = strip_style_tag(src2)
+f = open("src3.html", "wb")
+f.write(src3)
+f.close()
+
 
 doc = BeautifulSoup(src2)
-
-f = open("tmp.html", "wb")
-f.write(doc.prettify())
-f.close()
+#f = open("tmp.html", "wb")
+#f.write(doc.prettify())
+#f.close()
