@@ -3,6 +3,7 @@
 from tracker.yamato.package.detail_page_fetcher import DetailPageFetcher
 from tracker.yamato.package.detail_page_parser import DetailPageParser
 
+"""
 if False:
   numbers = ["225303520584", "249790484403"]
   detail_page = DetailPageFetcher.get_content(numbers)
@@ -13,92 +14,30 @@ else:
   f = open("yamato.html", "rb")
   detail_page = f.read()
   f.close()
-
-
-#print detail_page
-
-from BeautifulSoup import BeautifulSoup
+"""
 
 import re
-def strip_script_tag(html):
-  pattern = re.compile(r"<script.+?>.+?</script>", re.IGNORECASE | re.DOTALL)
-  return re.sub(pattern, "", html)
+from BeautifulSoup import BeautifulSoup
 
-def strip_style_tag(html):
-  pattern = re.compile(r"<style.+?>.+?</style>", re.IGNORECASE | re.DOTALL)
-  return re.sub(pattern, "", html)
-
-def strip_center_tag(html):
-  pattern = re.compile(r"</?center>", re.IGNORECASE)
-  return re.sub(pattern, "", html)
-
-def strip_paragraph_tag(html):
-  pattern = re.compile(r"(?:<p.*?>|</p>)", re.IGNORECASE)
-  return re.sub(pattern, "", html)
-
-def strip_bold_tag(html):
-  pattern = re.compile(r"</?b>", re.IGNORECASE)
-  return re.sub(pattern, "", html)
-
-
-src1 = detail_page
-f = open("src1.html", "wb")
-f.write(src1)
+f = open("tracker/yamato/package/fixtures/detail_count02.html", "rb")
+html = f.read()
 f.close()
+#print html
 
-src2 = strip_script_tag(src1)
-f = open("src2.html", "wb")
-f.write(src2)
-f.close()
-
-src3 = strip_style_tag(src2)
-f = open("src3.html", "wb")
-f.write(src3)
-f.close()
-
-src4 = strip_bold_tag(strip_paragraph_tag(strip_center_tag(src3)))
-f = open("src4.html", "wb")
-f.write(src4)
-f.close()
-
-doc = BeautifulSoup(src4)
+doc = DetailPageParser.create_doc(html)
 f = open("tmp.html", "wb")
 f.write(doc.prettify())
 f.close()
 
-# ヘッダを削除
-for i in range(4):
-  doc.body.table.extract()
-doc.body.form.extract()
-for i in range(4):
-  doc.body.table.extract()
-
-# フッタを削除
-doc.body.findAll("table", recursive = False)[-1].extract()
-
-# リンクを削除
-for elem in doc.body.findAll("a", {"name": re.compile(".+")}):
-  elem.extract()
-for elem in doc.body.findAll("a", {"href": re.compile("^#")}):
-  elem.extract()
-
-# ボタンを削除
-for elem in doc.body.findAll("div", {"class": "print_hide"}):
-  elem.extract()
-
-# 水平線を削除
-for elem in doc.body.findAll("hr"):
-  elem.extract()
-
-# 強制改行を削除
-for elem in doc.body.findAll("br"):
-  elem.extract()
-
-f = open("tmp2.html", "wb")
-f.write(doc.prettify())
-f.close()
-
-
-f = open("tmp3.html", "wb")
-f.write(doc.prettify())
-f.close()
+info = DetailPageParser.parse(html)
+for item1 in info["一覧"]:
+  for key1, value1 in item1.items():
+    if isinstance(value1, basestring):
+      print key1 + ": '" + value1 + "'"
+    else:
+      print key1 + ":"
+      for item2 in value1:
+        for key2, value2 in item2.items():
+          print "  " + key2 + ": '" + value2 + "'"
+        print "  ---"
+  print "---"
