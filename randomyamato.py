@@ -1,18 +1,31 @@
 # -*- coding: utf-8 -*-
 
+import sys
+import time
 from tracker import jppost
+from tracker.yamato.package.session import Session
 
-numbers = []
-for i in range(10):
-  number = jppost.PackageTrackingNumber.create_random_number("225")
-  numbers.append(number)
+for i in range(100):
+  numbers = []
+  for i in range(10):
+    number = jppost.PackageTrackingNumber.create_random_number("5")
+    numbers.append(number)
+    sys.stderr.write(number + "\n")
 
-for number in numbers:
-  print number
+  sys.stderr.write("---\n")
 
-from tracker.yamato.package.detail_page_fetcher import DetailPageFetcher
+  session = Session()
+  list = session.get_list(numbers)
 
-detail_page = DetailPageFetcher.get_content(numbers)
-f = open("yamato.html", "wb")
-f.write(detail_page)
-f.close()
+  for record in list[u"一覧"]:
+    tracking_number = record[u"伝票番号"]
+    message         = unicode(record[u"メッセージ"])
+    details         = record[u"詳細"]
+    if details is not None:
+      state = details[-1][u"荷物状況"]
+    else:
+      state = u"未登録"
+
+    print ("\t".join([tracking_number, state, message])).encode("utf-8")
+
+  time.sleep(1.5)
