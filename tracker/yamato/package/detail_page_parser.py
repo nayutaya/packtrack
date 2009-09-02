@@ -78,3 +78,30 @@ class DetailPageParser:
     doc = BeautifulSoup(src)
     cls.trim_unwanted_nodes(doc)
     return doc
+
+  @classmethod
+  def search_tracking_number_elements(cls, doc):
+    pattern = re.compile(r"^\d+-\d+-\d+$")
+    elements = []
+    for element in doc.body.findAll("font", size = "4"):
+      if pattern.match(element.string):
+        elements.append(element)
+    return elements
+
+  @classmethod
+  def parse(cls, html):
+    doc = cls.create_doc(html)
+
+    tracking_number_elements = cls.search_tracking_number_elements(doc)
+
+    list = []
+    for tracking_number_element in tracking_number_elements:
+      message_table = tracking_number_element.nextSibling.nextSibling
+
+      hash = {
+        u"伝票番号"  : tracking_number_element.string,
+        u"メッセージ": "\n".join(message_table.tr.td.contents),
+      }
+      list.append(hash)
+
+    return {"list": list}
