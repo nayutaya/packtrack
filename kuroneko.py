@@ -1,12 +1,18 @@
 # -*- coding: utf-8 -*-
 
 from tracker.yamato.package.detail_page_fetcher import DetailPageFetcher
+from tracker.yamato.package.detail_page_parser import DetailPageParser
 
-numbers = ["225303520584", "249790484403"]
+if False:
+  numbers = ["225303520584", "249790484403"]
+  detail_page = DetailPageFetcher.get_content(numbers)
+  f = open("yamato.html", "wb")
+  f.write(detail_page)
+  f.close()
+else:
+  f = open("yamato.html", "rb")
+  detail_page = f.read()
+  f.close()
 
-page2 = DetailPageFetcher.get_content(numbers)
 
-f = open("page2.html", "wb")
-f.write(page2)
-f.close()
-print page2
+print detail_page
