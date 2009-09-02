@@ -8,31 +8,37 @@ class DetailPageParser:
   def __init__(self):
     pass
 
+  # FIXME: テスト
   @classmethod
   def trim_script_tag(cls, html):
     pattern = re.compile(r"<script.+?>.+?</script>", re.IGNORECASE | re.DOTALL)
     return re.sub(pattern, "", html)
 
+  # FIXME: テスト
   @classmethod
   def trim_style_tag(cls, html):
     pattern = re.compile(r"<style.+?>.+?</style>", re.IGNORECASE | re.DOTALL)
     return re.sub(pattern, "", html)
 
+  # FIXME: テスト
   @classmethod
   def trim_center_tag(cls, html):
     pattern = re.compile(r"</?center>", re.IGNORECASE)
     return re.sub(pattern, "", html)
 
+  # FIXME: テスト
   @classmethod
   def trim_paragraph_tag(cls, html):
     pattern = re.compile(r"(?:<p.*?>|</p>)", re.IGNORECASE)
     return re.sub(pattern, "", html)
 
+  # FIXME: テスト
   @classmethod
   def trim_bold_tag(cls, html):
     pattern = re.compile(r"</?b>", re.IGNORECASE)
     return re.sub(pattern, "", html)
 
+  # FIXME: テスト
   @classmethod
   def trim_unwanted_tags(cls, html):
     result1 = cls.trim_script_tag(html)
@@ -42,6 +48,7 @@ class DetailPageParser:
     result5 = cls.trim_bold_tag(result4)
     return result5
 
+  # FIXME: テスト
   @classmethod
   def trim_unwanted_nodes(cls, doc):
     # ヘッダを削除
@@ -72,6 +79,7 @@ class DetailPageParser:
     for elem in doc.body.findAll("br"):
       elem.extract()
 
+  # FIXME: テスト
   @classmethod
   def create_doc(cls, html):
     src = cls.trim_unwanted_tags(html)
@@ -79,6 +87,7 @@ class DetailPageParser:
     cls.trim_unwanted_nodes(doc)
     return doc
 
+  # FIXME: テスト
   @classmethod
   def search_tracking_number_elements(cls, doc):
     pattern = re.compile(r"^\d+-\d+-\d+$")
@@ -118,6 +127,7 @@ class DetailPageParser:
 
     return {u"一覧": records}
 
+  # FIXME: テスト
   @classmethod
   def parse_message_table(cls, table):
     messages = table.tr.td.findAll(text = True)
@@ -125,6 +135,7 @@ class DetailPageParser:
       u"メッセージ": "".join(messages),
     }
 
+  # FIXME: テスト
   @classmethod
   def parse_detail_table(cls, table):
     rows  = table.findAll("tr", recursive = False)
@@ -135,6 +146,7 @@ class DetailPageParser:
       u"お届け予定日時": cells[1].contents[0],
     }
 
+  # FIXME: テスト
   @classmethod
   def parse_detail_list_table(cls, table):
     results = []
