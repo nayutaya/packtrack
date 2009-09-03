@@ -4,6 +4,8 @@ from first_page_fetcher import FirstPageFetcher
 from first_page_parser import FirstPageParser
 from list_page_fetcher import ListPageFetcher
 from list_page_parser import ListPageParser
+from detail_page_fetcher import DetailPageFetcher
+from detail_page_parser import DetailPageParser
 
 # セッションクラス
 class Session:
@@ -27,3 +29,11 @@ class Session:
   def get_list(self, numbers):
     page = self.get_list_page(numbers)
     return ListPageParser.parse(page.content)
+
+  def get_detail_page(self, params):
+    self.setup()
+    return DetailPageFetcher.get(self.jsession_id, params)
+
+  def get_detail(self, params):
+    page = self.get_detail_page(params)
+    return DetailPageParser.parse(page.content)
