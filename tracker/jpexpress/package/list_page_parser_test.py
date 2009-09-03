@@ -8,7 +8,7 @@ class TestListPageParser(unittest.TestCase):
   def setUp(self):
     pass
 
-  def read_data(self, filename):
+  def read_fixture(self, filename):
     io = open("fixtures/" + filename, "rb")
     try:
       return io.read()
@@ -30,7 +30,7 @@ class TestListPageParser(unittest.TestCase):
         },
       ],
     }
-    actual = ListPageParser.parse(self.read_data("list_notexist.html"))
+    actual = ListPageParser.parse(self.read_fixture("list_notexist.html"))
     self.assertEqual(expected, actual)
 
   def test_parse__all_count(self):
@@ -47,7 +47,7 @@ class TestListPageParser(unittest.TestCase):
       ("list_count10.html", [u"1", u"2", u"3", u"4", u"5", u"6", u"7", u"8", u"9", u"10"]),
     ]
     for filename, expected in list:
-      src  = self.read_data(filename)
+      src  = self.read_fixture(filename)
       info = ListPageParser.parse(src)
       actual = [record["No"] for record in info["list"]]
       self.assertEqual(expected, actual)
@@ -67,7 +67,7 @@ class TestListPageParser(unittest.TestCase):
         },
       ],
     }
-    actual = ListPageParser.parse(self.read_data("list_count01.html"))
+    actual = ListPageParser.parse(self.read_fixture("list_count01.html"))
     self.assertEqual(expected, actual)
 
   def test_parse__count02(self):
@@ -95,7 +95,7 @@ class TestListPageParser(unittest.TestCase):
         },
       ],
     }
-    actual = ListPageParser.parse(self.read_data("list_count02.html"))
+    actual = ListPageParser.parse(self.read_fixture("list_count02.html"))
     self.assertEqual(expected, actual)
 
   def test_parse__accepted(self):
@@ -113,7 +113,7 @@ class TestListPageParser(unittest.TestCase):
         },
       ],
     }
-    actual = ListPageParser.parse(self.read_data("list_accepted.html"))
+    actual = ListPageParser.parse(self.read_fixture("list_accepted.html"))
     self.assertEqual(expected, actual)
 
   def test_parse__arrival(self):
@@ -131,7 +131,7 @@ class TestListPageParser(unittest.TestCase):
         },
       ],
     }
-    actual = ListPageParser.parse(self.read_data("list_arrival.html"))
+    actual = ListPageParser.parse(self.read_fixture("list_arrival.html"))
     self.assertEqual(expected, actual)
 
   def test_parse__delivery(self):
@@ -149,7 +149,7 @@ class TestListPageParser(unittest.TestCase):
         },
       ],
     }
-    actual = ListPageParser.parse(self.read_data("list_delivery.html"))
+    actual = ListPageParser.parse(self.read_fixture("list_delivery.html"))
     self.assertEqual(expected, actual)
 
   def test_parse__inquiry(self):
@@ -167,7 +167,7 @@ class TestListPageParser(unittest.TestCase):
         },
       ],
     }
-    actual = ListPageParser.parse(self.read_data("list_inquiry.html"))
+    actual = ListPageParser.parse(self.read_fixture("list_inquiry.html"))
     self.assertEqual(expected, actual)
 
 if __name__ == "__main__":
