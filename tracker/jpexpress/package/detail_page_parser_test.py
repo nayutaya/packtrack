@@ -8,7 +8,7 @@ class TestDetailPageParser(unittest.TestCase):
   def setUp(self):
     pass
 
-  def read_data(self, filename):
+  def read_fixture(self, filename):
     io = open("fixtures/" + filename, "rb")
     try:
       return io.read()
@@ -26,7 +26,7 @@ class TestDetailPageParser(unittest.TestCase):
       u"個数"        : u"1",
       u"重量／サイズ": u"６０サイズ",
     }
-    actual = DetailPageParser.parse(self.read_data("detail_accepted.html"))
+    actual = DetailPageParser.parse(self.read_fixture("detail_accepted.html"))
     self.assertEqual(expected, actual)
 
   def test_parse__arrival(self):
@@ -40,7 +40,7 @@ class TestDetailPageParser(unittest.TestCase):
       u"個数"        : u"1",
       u"重量／サイズ": u"６０サイズ",
     }
-    actual = DetailPageParser.parse(self.read_data("detail_arrival.html"))
+    actual = DetailPageParser.parse(self.read_fixture("detail_arrival.html"))
     self.assertEqual(expected, actual)
 
   def test_parse__delivery(self):
@@ -54,7 +54,7 @@ class TestDetailPageParser(unittest.TestCase):
       u"個数"        : u"1",
       u"重量／サイズ": u"８０サイズ",
     }
-    actual = DetailPageParser.parse(self.read_data("detail_delivery.html"))
+    actual = DetailPageParser.parse(self.read_fixture("detail_delivery.html"))
     self.assertEqual(expected, actual)
 
   def test_parse__inquiry(self):
@@ -68,7 +68,7 @@ class TestDetailPageParser(unittest.TestCase):
       u"個数"        : u"1",
       u"重量／サイズ": u"６０サイズ",
     }
-    actual = DetailPageParser.parse(self.read_data("detail_inquiry.html"))
+    actual = DetailPageParser.parse(self.read_fixture("detail_inquiry.html"))
     self.assertEqual(expected, actual)
 
 if __name__ == "__main__":

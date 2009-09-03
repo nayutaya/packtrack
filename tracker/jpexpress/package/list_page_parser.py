@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 
+import re
 from BeautifulSoup import BeautifulSoup
 
 # 一覧ページ解析クラス
@@ -10,7 +11,7 @@ class ListPageParser:
     list_table = cls.get_list_table(doc)
 
     return {
-      "list": cls.parse_list_table(list_table),
+      u"一覧": cls.parse_list_table(list_table),
     }
 
   @classmethod
@@ -59,19 +60,27 @@ class ListPageParser:
 
     arrival_date = None
     if len(arrival_date_cell.center.span.contents) >= 2:
-      arrival_date = arrival_date_cell.center.span.contents[1].strip()
+      arrival_date = "".join(arrival_date_cell.center.span.findAll(text = True))
 
     handling_division = None
     if handling_division_cell.center.span.contents[0].strip is not None:
       handling_division = handling_division_cell.center.span.contents[0].strip()
 
+    tracking_number_params = None
+    if tracking_number_href is not None:
+      pattern = re.compile(r"\?(.*)$")
+      match   = pattern.search(tracking_number_href)
+      if match is not None:
+        tracking_number_params = match.group(1)
+
     return {
-      u"No"                 : result_no_cell.center.span.string,
-      u"送り状番号"         : tracking_number,
-      u"送り状番号:リンク先": tracking_number_href,
-      u"最新状況"           : current_status,
-      u"最新状況:日時"      : current_status_time,
-      u"受付日"             : accept_date_cell.span.contents[0].strip(),
-      u"お届け指定日"       : arrival_date,
-      u"扱区分"             : handling_division,
+      u"No"                   : result_no_cell.center.span.string,
+      u"送り状番号"           : tracking_number,
+      u"送り状番号:リンク先"  : tracking_number_href,
+      u"送り状番号:パラメータ": tracking_number_params,
+      u"最新状況"             : current_status,
+      u"最新状況:日時"        : current_status_time,
+      u"受付日"               : accept_date_cell.span.contents[0].strip(),
+      u"お届け指定日"         : arrival_date,
+      u"扱区分"               : handling_division,
     }
