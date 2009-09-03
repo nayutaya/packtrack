@@ -60,7 +60,7 @@ class ListPageParser:
 
     arrival_date = None
     if len(arrival_date_cell.center.span.contents) >= 2:
-      arrival_date = arrival_date_cell.center.span.contents[1].strip()
+      arrival_date = "".join(arrival_date_cell.center.span.findAll(text = True))
 
     handling_division = None
     if handling_division_cell.center.span.contents[0].strip is not None:
