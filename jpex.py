@@ -1,16 +1,15 @@
 # -*- coding: utf-8 -*-
 
 import sys
-#from tracker import jpexpress
-import tracker.jpexpress.package.session
-import tracker.jpexpress.package.list_page_parser
+from tracker.jpexpress.package.tracking_number import TrackingNumber
+from tracker.jpexpress.package.session import Session
 
-session = tracker.jpexpress.package.session.Session()
+session = Session()
 #print session
 
 #numbers = ["348012244355", "348011824893", "348011053121"]
 
-for i in range(5):
+for i in range(1):
   sys.stderr.write(".")
 
   from tracker import jppost
@@ -19,14 +18,7 @@ for i in range(5):
     number = jppost.PackageTrackingNumber.create_random_number("3480")
     numbers.append(number)
 
-  page = session.get_list_page(numbers)
-  #print page
-  f = open("page2.html", "wb")
-  f.write(page.content)
-  f.close()
-
-  page_info = tracker.jpexpress.package.list_page_parser.ListPageParser.parse(page.content)
-  #print page_info
+  page_info = session.get_list(numbers)
 
   for record in page_info["list"]:
     line  = ""

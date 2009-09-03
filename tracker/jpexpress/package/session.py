@@ -3,6 +3,7 @@
 from first_page_fetcher import FirstPageFetcher
 from first_page_parser import FirstPageParser
 from list_page_fetcher import ListPageFetcher
+from list_page_parser import ListPageParser
 
 # セッションクラス
 class Session:
@@ -22,3 +23,7 @@ class Session:
   def get_list_page(self, numbers):
     self.setup()
     return ListPageFetcher.get(self.jsession_id, numbers)
+
+  def get_list(self, numbers):
+    page = self.get_list_page(numbers)
+    return ListPageParser.parse(page.content)
