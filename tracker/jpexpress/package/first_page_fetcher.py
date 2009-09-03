@@ -3,8 +3,8 @@
 import urllib
 import urllib2
 
-# 先頭ページクラス
-class FirstPage:
+# 先頭ページ取得クラス
+class FirstPageFetcher:
   def __init__(self, content):
     self.content = content
 

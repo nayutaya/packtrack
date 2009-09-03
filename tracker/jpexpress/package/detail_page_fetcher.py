@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
-# 詳細ページクラス
-class DetailPage:
+# 詳細ページ取得クラス
+class DetailPageFetcher:
   def __init__(self):
     pass
 

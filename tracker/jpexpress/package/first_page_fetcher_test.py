@@ -2,9 +2,9 @@
 
 import unittest
 
-from first_page import FirstPage
+from first_page_fetcher import FirstPageFetcher
 
-class TestFirstPage(unittest.TestCase):
+class TestFirstPageFetcher(unittest.TestCase):
   def setUp(self):
     pass
 

@@ -2,9 +2,9 @@
 
 import unittest
 
-from detail_page import DetailPage
+from detail_page_fetcher import DetailPageFetcher
 
-class TestDetailPage(unittest.TestCase):
+class TestDetailPageFetcher(unittest.TestCase):
   def setUp(self):
     pass
 
