@@ -17,7 +17,7 @@ class TestListPageParser(unittest.TestCase):
 
   def test_parse__notexist(self):
     expected = {
-      "list": [
+      u"一覧": [
         {
           u"No"                   : u"1",
           u"送り状番号"           : u"指定された伝票番号(348089408741)は存在しません。",
@@ -50,12 +50,12 @@ class TestListPageParser(unittest.TestCase):
     for filename, expected in list:
       src  = self.read_fixture(filename)
       info = ListPageParser.parse(src)
-      actual = [record["No"] for record in info["list"]]
+      actual = [record["No"] for record in info[u"一覧"]]
       self.assertEqual(expected, actual)
 
   def test_parse__count01(self):
     expected = {
-      "list": [
+      u"一覧": [
         {
           u"No"                   : u"1",
           u"送り状番号"           : u"348-01-037-7713",
@@ -74,7 +74,7 @@ class TestListPageParser(unittest.TestCase):
 
   def test_parse__count02(self):
     expected = {
-      "list": [
+      u"一覧": [
         {
           u"No"                   : u"1",
           u"送り状番号"           : u"348-01-077-8570",
@@ -104,7 +104,7 @@ class TestListPageParser(unittest.TestCase):
 
   def test_parse__accepted(self):
     expected = {
-      "list": [
+      u"一覧": [
         {
           u"No"                   : u"1",
           u"送り状番号"           : u"348-01-225-3676",
@@ -123,7 +123,7 @@ class TestListPageParser(unittest.TestCase):
 
   def test_parse__arrival(self):
     expected = {
-      "list": [
+      u"一覧": [
         {
           u"No"                   : u"1",
           u"送り状番号"           : u"348-00-190-9286",
@@ -142,7 +142,7 @@ class TestListPageParser(unittest.TestCase):
 
   def test_parse__delivery(self):
     expected = {
-      "list": [
+      u"一覧": [
         {
           u"No"                   : u"1",
           u"送り状番号"           : u"380-73-835-2890",
@@ -161,7 +161,7 @@ class TestListPageParser(unittest.TestCase):
 
   def test_parse__inquiry(self):
     expected = {
-      "list": [
+      u"一覧": [
         {
           u"No"                   : u"1",
           u"送り状番号"           : u"348-00-178-6042",

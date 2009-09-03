@@ -11,7 +11,7 @@ class ListPageParser:
     list_table = cls.get_list_table(doc)
 
     return {
-      "list": cls.parse_list_table(list_table),
+      u"一覧": cls.parse_list_table(list_table),
     }
 
   @classmethod
