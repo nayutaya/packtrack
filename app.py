@@ -5,6 +5,8 @@ from google.appengine.ext import webapp
 from google.appengine.ext.webapp.util import run_wsgi_app
 from google.appengine.ext.webapp import template
 
+import page.yamato.package
+
 class HomePage(webapp.RequestHandler):
   def get(self):
     values = {}
@@ -12,10 +14,12 @@ class HomePage(webapp.RequestHandler):
     html = template.render(path, values)
     self.response.out.write(html)
 
+
 if __name__ == "__main__":
   application = webapp.WSGIApplication(
     [
       (r"/", HomePage),
+      (r"/yamato/package/query", page.yamato.package.QueryPage),
     ],
     debug = True)
   run_wsgi_app(application)
