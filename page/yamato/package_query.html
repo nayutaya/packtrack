@@ -5,8 +5,19 @@
   <title>packtrack</title>
  </head>
  <body>
-  <div>
-   ヤマト運輸 宅急便</div>
+  <div>ヤマト運輸 宅急便</div>
+  <hr />
+
+  {% for result in results %}
+    <div>{{result.number}}: {{result.message}}</div>
+  {% endfor %}
+
+  <hr />
+  <form action="/yamato/package/query" method="get">
+   {% for param in number_params %}
+    <input type="text" name="{{param.name}}" value="{{param.value}}" /><br />
+   {% endfor %}
+   <input type="submit" name="commit" value="問い合わせ" />
   </form>
  </body>
 </html>
