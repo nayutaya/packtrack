@@ -1,37 +1,21 @@
 # -*- coding: utf-8 -*-
 
-import re
-import logging
-import urllib
-from google.appengine.api import urlfetch
+import os
+from google.appengine.ext import webapp
+from google.appengine.ext.webapp.util import run_wsgi_app
+from google.appengine.ext.webapp import template
 
-from tracker import sagawa
-from tracker import jppost
+class HomePage(webapp.RequestHandler):
+  def get(self):
+    values = {}
+    path = os.path.join(os.path.dirname(__file__), "page/home.html")
+    html = template.render(path, values)
+    self.response.out.write(html)
 
-
-"""
-def sagawa():
-  numbers = [
-    "600097281033",
-    "600092368315"
-  ]
-
-  params = sagawa.get_first_page_params()
-  params.update(sagawa.create_detail_page_number_params(numbers))
-  #print params
-
-  result = sagawa.fetch_detail_page(params)
-  #print result.status_code
-  print result.content
-"""
-
-print "content-type: text/plain"
-print ""
-
-numbers = ["317443794205", "317443794334"]
-page = jppost.PackageListPage.get_content(numbers)
-#print page
-
-from BeautifulSoup import BeautifulSoup
-soup = BeautifulSoup(page)
-print soup.prettify()
+if __name__ == "__main__":
+  application = webapp.WSGIApplication(
+    [
+      (r"/", HomePage),
+    ],
+    debug = True)
+  run_wsgi_app(application)
