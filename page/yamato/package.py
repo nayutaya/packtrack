@@ -77,6 +77,7 @@ class ListJson(webapp.RequestHandler):
       "result": {
         numbers[0]: {
           "message": table[numbers[0]][u"メッセージ"],
+          "type"   : table[numbers[0]][u"商品名"],
         },
       },
     }

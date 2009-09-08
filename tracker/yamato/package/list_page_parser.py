@@ -151,7 +151,7 @@ class ListPageParser:
     rows  = table.findAll("tr", recursive = False)
     cells = rows[1].findAll("td", recursive = False)
 
-    name = cells[0].contents[0]
+    name = cells[0].contents[0].strip()
     time = None
     if len(cells) >= 2:
       time = cells[1].contents[0]
