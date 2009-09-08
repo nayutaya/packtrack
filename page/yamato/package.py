@@ -53,3 +53,7 @@ class QueryPage(webapp.RequestHandler):
     path = os.path.join(os.path.dirname(__file__), "package_query.html")
     html = template.render(path, values)
     self.response.out.write(html)
+
+class ListJson(webapp.RequestHandler):
+  def get(self):
+    self.response.headers["Content-Type"] = "text/javascript"

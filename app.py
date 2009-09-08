@@ -19,7 +19,8 @@ if __name__ == "__main__":
   application = webapp.WSGIApplication(
     [
       (r"/", HomePage),
-      (r"/yamato/package/query", page.yamato.package.QueryPage),
+      (r"/yamato/package/query",      page.yamato.package.QueryPage),
+      (r"/yamato/package/list\.json", page.yamato.package.ListJson),
     ],
     debug = True)
   run_wsgi_app(application)
