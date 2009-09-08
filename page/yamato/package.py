@@ -61,12 +61,25 @@ class ListJson(webapp.RequestHandler):
 
     numbers = param_numbers.split(",")
 
-    hash = {
-      "request": {
-        "numbers": numbers,
+    session = Session()
+    list    = session.get_list(numbers)
+    table = {}
+    for record in list[u"一覧"]:
+      tracking_number = re.sub("-", "", record[u"伝票番号"])
+      table[tracking_number] = record
+
+    result = {
+      "success": True,
+      "parameter": {
+        "callback": None,
+        "numbers" : numbers,
+      },
+      "result": {
+        numbers[0]: {
+          "message": table[numbers[0]][u"メッセージ"],
+        },
       },
     }
-    ret = json.write(hash)
 
     self.response.headers["Content-Type"] = "text/javascript"
-    self.response.out.write(ret)
+    self.response.out.write(json.write(result))

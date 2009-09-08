@@ -11,8 +11,9 @@ class JsonTest < Test::Unit::TestCase
   end
 
   def test_get
-    url  = "http://localhost:8080/yamato/package/list.json"
-    url += "?numbers=1,2,3"
+    url  = "http://localhost:8080"
+    url += "/yamato/package/list.json"
+    url += "?numbers=249711710883"
 
     json = nil
     assert_nothing_raised {
@@ -23,10 +24,18 @@ class JsonTest < Test::Unit::TestCase
     }
 
     expected = {
-      "request" => {
-        "numbers" => ["1", "2", "3"],
+      "success" => true,
+      "parameter" => {
+        "callback" => nil,
+        "numbers"  => ["249711710883"],
+      },
+      "result" => {
+        "249711710883" => {
+          "message" => "このお品物はお届けが済んでおります。お問い合わせはサービスセンターまでお願いいたします。",
+        },
       },
     }
+    p json
     assert_equal(expected, JSON.parse(json))
   end
 end
