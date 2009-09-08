@@ -2,6 +2,7 @@
 
 import os
 import re
+import json
 from google.appengine.ext import webapp
 from google.appengine.ext.webapp.util import run_wsgi_app
 from google.appengine.ext.webapp import template
@@ -59,9 +60,13 @@ class ListJson(webapp.RequestHandler):
     param_numbers = self.request.get("numbers")
 
     numbers = param_numbers.split(",")
-    json_numbers = ",".join(['"' + number + '"' for number in numbers])
 
-    json = '{"request":{"numbers":[' + json_numbers + ']}}'
+    hash = {
+      "request": {
+        "numbers": numbers,
+      },
+    }
+    ret = json.write(hash)
 
     self.response.headers["Content-Type"] = "text/javascript"
-    self.response.out.write(json)
+    self.response.out.write(ret)
