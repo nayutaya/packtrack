@@ -56,4 +56,12 @@ class QueryPage(webapp.RequestHandler):
 
 class ListJson(webapp.RequestHandler):
   def get(self):
+    param_numbers = self.request.get("numbers")
+
+    numbers = param_numbers.split(",")
+    json_numbers = ",".join(['"' + number + '"' for number in numbers])
+
+    json = '{"request":{"numbers":[' + json_numbers + ']}}'
+
     self.response.headers["Content-Type"] = "text/javascript"
+    self.response.out.write(json)
