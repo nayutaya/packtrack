@@ -55,11 +55,12 @@ class QueryPage(webapp.RequestHandler):
     html = template.render(path, values)
     self.response.out.write(html)
 
+import api
 class ListJson(webapp.RequestHandler):
   def get(self):
-    param_numbers = self.request.get("numbers")
+    params = api.ListParameter(self.request)
 
-    numbers = param_numbers.split(",")
+    numbers = params.numbers
 
     session = Session()
     list    = session.get_list(numbers)
