@@ -27,22 +27,33 @@ class TestListParameter(unittest.TestCase):
 
     self.assertEqual(True, target("true"))
 
+  def test_parse_include_history(self):
+    target = ListParameter.parse_include_history
+
+    self.assertEqual(False, target(None))
+    self.assertEqual(False, target("false"))
+
+    self.assertEqual(True, target("true"))
+
   def test_init__empty(self):
     target = ListParameter
 
     obj = target({})
     self.assertEqual([],    obj.numbers)
     self.assertEqual(False, obj.include_detail)
+    self.assertEqual(False, obj.include_history)
 
   def test_init__full(self):
     target = ListParameter
 
     obj = target({
-      "numbers"       : "1,2,3",
-      "include_detail": "true",
+      "numbers"        : "1,2,3",
+      "include_detail" : "true",
+      "include_history": "true",
     })
     self.assertEqual(["1", "2", "3"], obj.numbers)
     self.assertEqual(True, obj.include_detail)
+    self.assertEqual(True, obj.include_history)
 
 if __name__ == "__main__":
   unittest.main()
