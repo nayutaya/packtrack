@@ -68,17 +68,28 @@ class ListJson(webapp.RequestHandler):
       tracking_number = re.sub("-", "", record[u"伝票番号"])
       table[tracking_number] = record
 
+    detail = []
+    for record in table[numbers[0]][u"詳細"]:
+      time  = "2009-" + re.sub("/", "-", record[u"日付"]) # FIXME:
+      time += " " + record[u"時刻"]
+      hash = {
+        "state": record[u"荷物状況"],
+        "time" : time,
+      }
+      detail.append(hash)
+
     result = {
       "success": True,
       "parameter": {
-        "callback": None,
-        "numbers" : numbers,
+        #"callback": None,
+        #"numbers" : numbers,
       },
       "result": {
         numbers[0]: {
-          "message"      : table[numbers[0]][u"メッセージ"],
-          "type"         : table[numbers[0]][u"商品名"],
-          "delivery_time": "2009-" + re.sub("/", "-", table[numbers[0]][u"お届け予定日時"]), # FIXME:
+          #"message"      : table[numbers[0]][u"メッセージ"],
+          #"type"         : table[numbers[0]][u"商品名"],
+          #"delivery_time": "2009-" + re.sub("/", "-", table[numbers[0]][u"お届け予定日時"]), # FIXME:
+          "detail"       : detail,
         },
       },
     }
