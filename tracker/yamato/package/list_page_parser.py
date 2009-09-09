@@ -154,7 +154,7 @@ class ListPageParser:
     name = cells[0].contents[0].strip()
     time = None
     if len(cells) >= 2:
-      time = cells[1].contents[0]
+      time = cells[1].contents[0].strip()
 
     return {
       u"商品名"        : name,

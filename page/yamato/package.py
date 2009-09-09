@@ -76,8 +76,9 @@ class ListJson(webapp.RequestHandler):
       },
       "result": {
         numbers[0]: {
-          "message": table[numbers[0]][u"メッセージ"],
-          "type"   : table[numbers[0]][u"商品名"],
+          "message"      : table[numbers[0]][u"メッセージ"],
+          "type"         : table[numbers[0]][u"商品名"],
+          "delivery_time": "2009-" + re.sub("/", "-", table[numbers[0]][u"お届け予定日時"]), # FIXME:
         },
       },
     }

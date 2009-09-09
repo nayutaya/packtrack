@@ -31,12 +31,14 @@ class JsonTest < Test::Unit::TestCase
       },
       "result" => {
         "249711710883" => {
-          "message" => "このお品物はお届けが済んでおります。お問い合わせはサービスセンターまでお願いいたします。",
-          "type"    => "宅急便",
+          "message"       => "このお品物はお届けが済んでおります。お問い合わせはサービスセンターまでお願いいたします。",
+          "type"          => "宅急便",
+          "delivery_time" => "2009-08-24",
         },
       },
     }
-    p json
+
+    File.open("out.txt", "wb") { |file| file.write(json) }
     assert_equal(expected, JSON.parse(json))
   end
 end
