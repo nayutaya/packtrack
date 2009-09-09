@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 import unittest
+import os
 
 from detail_page_parser import DetailPageParser
 
@@ -9,7 +10,8 @@ class TestDetailPageParser(unittest.TestCase):
     pass
 
   def read_fixture(self, filename):
-    io = open("fixtures/" + filename, "rb")
+    path = os.path.join(os.path.dirname(__file__), "fixtures", filename)
+    io = open(path, "rb")
     try:
       return io.read()
     finally:
