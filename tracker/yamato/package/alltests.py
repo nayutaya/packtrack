@@ -7,10 +7,15 @@ import list_page_parser_test
 import session_test
 import tracking_number_test
 
-suite = unittest.TestSuite()
-suite.addTest(list_page_fetcher_test.suite())
-suite.addTest(list_page_parser_test.suite())
-suite.addTest(session_test.suite())
-suite.addTest(tracking_number_test.suite())
+def suite():
+  loader = unittest.defaultTestLoader.loadTestsFromModule
+  suites = [
+    loader(list_page_fetcher_test),
+    loader(list_page_parser_test),
+    loader(session_test),
+    loader(tracking_number_test),
+  ]
+  return unittest.TestSuite(suites)
 
-unittest.TextTestRunner(verbosity = 1).run(suite)
+if __name__ == "__main__":
+  unittest.TextTestRunner(verbosity = 1).run(suite())

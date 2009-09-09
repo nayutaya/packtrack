@@ -115,8 +115,5 @@ class TestListPageFetcher(unittest.TestCase):
     content = target(["000000000000"])
     # MEMO: 良いテスト方法が思いつかないため、現状は呼び出しているだけ
 
-def suite():
-  return unittest.makeSuite(TestListPageFetcher, "test")
-
 if __name__ == "__main__":
   unittest.main()

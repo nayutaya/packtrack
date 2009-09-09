@@ -38,8 +38,5 @@ class TestTrackingNumber(unittest.TestCase):
     self.assertEqual("0",  target("0")[:1])
     self.assertEqual("12", target("12")[:2])
 
-def suite():
-  return unittest.makeSuite(TestTrackingNumber, "test")
-
 if __name__ == "__main__":
   unittest.main()
