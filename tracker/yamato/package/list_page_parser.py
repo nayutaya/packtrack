@@ -169,11 +169,11 @@ class ListPageParser:
     for row in table.findAll("tr", recursive = False)[1:]:
       cells = row.findAll("td", recursive = False)
       record = {
-        u"荷物状況"    : cells[0].contents[0].strip(),
+        u"荷物状況"    : cells[0].find(text = True).strip(),
         u"日付"        : cells[1].find(text = True).strip(),
-        u"時刻"        : cells[2].find(text = True),
-        u"担当店名"    : cells[3].find(text = True),
-        u"担当店コード": cells[4].contents[0],
+        u"時刻"        : cells[2].find(text = True).strip(),
+        u"担当店名"    : cells[3].find(text = True).strip(),
+        u"担当店コード": cells[4].find(text = True).strip(),
       }
       records.append(record)
 

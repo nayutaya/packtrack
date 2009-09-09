@@ -73,22 +73,24 @@ class ListJson(webapp.RequestHandler):
       time  = "2009-" + re.sub("/", "-", record[u"日付"]) # FIXME:
       time += " " + record[u"時刻"]
       hash = {
-        "state": record[u"荷物状況"],
-        "time" : time,
+        "state"       : record[u"荷物状況"],
+        "time"        : time,
+        "station_name": record[u"担当店名"],
+        "station_code": record[u"担当店コード"],
       }
       detail.append(hash)
 
     result = {
       "success": True,
       "parameter": {
-        #"callback": None,
-        #"numbers" : numbers,
+        "callback": None,
+        "numbers" : numbers,
       },
       "result": {
         numbers[0]: {
-          #"message"      : table[numbers[0]][u"メッセージ"],
-          #"type"         : table[numbers[0]][u"商品名"],
-          #"delivery_time": "2009-" + re.sub("/", "-", table[numbers[0]][u"お届け予定日時"]), # FIXME:
+          "message"      : table[numbers[0]][u"メッセージ"],
+          "type"         : table[numbers[0]][u"商品名"],
+          "delivery_time": "2009-" + re.sub("/", "-", table[numbers[0]][u"お届け予定日時"]), # FIXME:
           "detail"       : detail,
         },
       },

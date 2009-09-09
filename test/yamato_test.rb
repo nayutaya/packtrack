@@ -26,26 +26,32 @@ class JsonTest < Test::Unit::TestCase
     expected = {
       "success" => true,
       "parameter" => {
-        #"callback" => nil,
-        #"numbers"  => ["249711710883"],
+        "callback" => nil,
+        "numbers"  => ["249711710883"],
       },
       "result" => {
         "249711710883" => {
-          #"message"       => "このお品物はお届けが済んでおります。お問い合わせはサービスセンターまでお願いいたします。",
-          #"type"          => "宅急便",
-          #"delivery_time" => "2009-08-24",
+          "message"       => "このお品物はお届けが済んでおります。お問い合わせはサービスセンターまでお願いいたします。",
+          "type"          => "宅急便",
+          "delivery_time" => "2009-08-24",
           "detail"        => [
             {
-              "state" => "発送",
-              "time"  => "2009-08-23 17:44",
+              "state"        => "発送",
+              "time"         => "2009-08-23 17:44",
+              "station_name" => "船橋藤原センター",
+              "station_code" => "035012",
             },
             {
-              "state" => "作業店通過",
-              "time"  => "2009-08-23 19:37",
+              "state"        => "作業店通過",
+              "time"         => "2009-08-23 19:37",
+              "station_name" => "船橋ベース店",
+              "station_code" => "035990",
             },
             {
-              "state" => "配達完了",
-              "time"  => "2009-08-24 11:19",
+              "state"        => "配達完了",
+              "time"         => "2009-08-24 11:19",
+              "station_name" => "日野豊田センター",
+              "station_code" => "033092",
             },
           ],
         },
