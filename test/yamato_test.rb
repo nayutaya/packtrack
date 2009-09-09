@@ -31,10 +31,14 @@ class JsonTest < Test::Unit::TestCase
       },
       "result"    => {
         "249711710883" => {
-          "message"       => "このお品物はお届けが済んでおります。お問い合わせはサービスセンターまでお願いいたします。",
-          "type"          => "宅急便",
-          "delivery_time" => "08/24",
-          "detail"        => [
+          "message"            => "このお品物はお届けが済んでおります。お問い合わせはサービスセンターまでお願いいたします。",
+          "type"               => "宅急便",
+          "current_state"      => "配達完了",
+          "current_state_time" => "2009-08-24 11:19",
+          "detail"             => {
+            "delivery_time" => "08/24",
+          },
+          "history"            => [
             {
               "state"        => "発送",
               "time"         => "2009-08-23 17:44",
@@ -83,10 +87,14 @@ class JsonTest < Test::Unit::TestCase
       },
       "result"    => {
         "099723653466" => {
-          "message"       => "このお品物はお届けが済んでおります。",
-          "type"          => "クロネコメール便",
-          "delivery_time" => nil,
-          "detail"        => [
+          "message"            => "このお品物はお届けが済んでおります。",
+          "type"               => "クロネコメール便",
+          "current_state"      => "投函完了",
+          "current_state_time" => "2009-07-09 11:22",
+          "detail"             => {
+            "delivery_time" => nil,
+          },
+          "history"            => [
             {
               "state"        => "発送",
               "time"         => "2009-07-07 20:12",
@@ -102,10 +110,14 @@ class JsonTest < Test::Unit::TestCase
           ],
         },
         "203115515466" => {
-          "message"       => "このお品物はお届けが済んでおります。お問い合わせはサービスセンターまでお願いいたします。",
-          "type"          => "宅急便コレクト（クール）",
-          "delivery_time" => "20:00-21:00",
-          "detail"        => [
+          "message"            => "このお品物はお届けが済んでおります。お問い合わせはサービスセンターまでお願いいたします。",
+          "type"               => "宅急便コレクト（クール）",
+          "current_state"      => "配達完了",
+          "current_state_time" => "2009-07-02 20:43",
+          "detail"             => {
+            "delivery_time" => "20:00-21:00",
+          },
+          "history"            => [
             {
               "state"        => "荷物受付",
               "time"         => "2009-07-01 14:24",

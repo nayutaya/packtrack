@@ -70,7 +70,7 @@ class ListJson(webapp.RequestHandler):
 
     result = {}
     for number in numbers:
-      detail = []
+      history = []
       for record in table[number][u"詳細"]:
         time  = "2009-" + re.sub("/", "-", record[u"日付"]) # FIXME:
         time += " " + record[u"時刻"]
@@ -80,13 +80,19 @@ class ListJson(webapp.RequestHandler):
           "station_name": record[u"担当店名"],
           "station_code": record[u"担当店コード"],
         }
-        detail.append(hash)
+        history.append(hash)
+
+      detail = {
+        "delivery_time": table[number][u"お届け予定日時"],
+      }
 
       result[number] = {
-        "message"      : table[number][u"メッセージ"],
-        "type"         : table[number][u"商品名"],
-        "delivery_time": table[number][u"お届け予定日時"],
-        "detail"       : detail,
+        "message"           : table[number][u"メッセージ"],
+        "type"              : table[number][u"商品名"],
+        "current_state"     : history[-1]["state"],
+        "current_state_time": history[-1]["time"],
+        "detail"            : detail,
+        "history"           : history,
       }
 
     result = {
