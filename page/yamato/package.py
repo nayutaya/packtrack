@@ -55,32 +55,23 @@ class QueryPage(webapp.RequestHandler):
     html = template.render(path, values)
     self.response.out.write(html)
 
+import api
 class ListJson(webapp.RequestHandler):
   def get(self):
-    param_numbers = self.request.get("numbers")
-
-    numbers = param_numbers.split(",")
-
+    params  = api.ListParameter(self.request)
     session = Session()
-    list    = session.get_list(numbers)
-    table = {}
-    for record in list[u"一覧"]:
-      tracking_number = re.sub("-", "", record[u"伝票番号"])
-      table[tracking_number] = record
+    data    = session.get_list(params.numbers)
 
-    result = {
+    result = api.ListConverter.convert(data)
+
+    output = {
       "success": True,
       "parameter": {
         "callback": None,
-        "numbers" : numbers,
+        "numbers" : params.numbers,
       },
-      "result": {
-        numbers[0]: {
-          "message": table[numbers[0]][u"メッセージ"],
-          "type"   : table[numbers[0]][u"商品名"],
-        },
-      },
+      "result": result,
     }
 
     self.response.headers["Content-Type"] = "text/javascript"
-    self.response.out.write(json.write(result))
+    self.response.out.write(json.write(output))
