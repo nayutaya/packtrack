@@ -38,12 +38,17 @@ class ListConverter:
     for record in records:
       tracking_number = re.sub("-", "", record[u"伝票番号"])
 
+      detail  = cls.convert_detail(record)
+      history = cls.convert_history(record)
+
       ret = {
-        u"message": record[u"メッセージ"],
-        u"type"   : record[u"商品名"],
+        u"message"           : record[u"メッセージ"],
+        u"type"              : record[u"商品名"],
+        u"current_state"     : history["history"][-1]["state"],
+        u"current_state_time": history["history"][-1]["time"],
       }
-      ret.update(cls.convert_detail(record))
-      ret.update(cls.convert_history(record))
+      ret.update(detail)
+      ret.update(history)
       result[tracking_number] = ret
 
     return result

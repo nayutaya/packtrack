@@ -58,52 +58,20 @@ class QueryPage(webapp.RequestHandler):
 import api
 class ListJson(webapp.RequestHandler):
   def get(self):
-    params = api.ListParameter(self.request)
-
-    numbers = params.numbers
-
+    params  = api.ListParameter(self.request)
     session = Session()
-    list    = session.get_list(numbers)
-    table = {}
-    for record in list[u"一覧"]:
-      tracking_number = re.sub("-", "", record[u"伝票番号"])
-      table[tracking_number] = record
+    data    = session.get_list(params.numbers)
 
-    result = {}
-    for number in numbers:
-      history = []
-      for record in table[number][u"詳細"]:
-        time  = "2009-" + re.sub("/", "-", record[u"日付"]) # FIXME:
-        time += " " + record[u"時刻"]
-        hash = {
-          "state"       : record[u"荷物状況"],
-          "time"        : time,
-          "station_name": record[u"担当店名"],
-          "station_code": record[u"担当店コード"],
-        }
-        history.append(hash)
+    result = api.ListConverter.convert(data)
 
-      detail = {
-        "delivery_time": table[number][u"お届け予定日時"],
-      }
-
-      result[number] = {
-        "message"           : table[number][u"メッセージ"],
-        "type"              : table[number][u"商品名"],
-        "current_state"     : history[-1]["state"],
-        "current_state_time": history[-1]["time"],
-        "detail"            : detail,
-        "history"           : history,
-      }
-
-    result = {
+    output = {
       "success": True,
       "parameter": {
         "callback": None,
-        "numbers" : numbers,
+        "numbers" : params.numbers,
       },
       "result": result,
     }
 
     self.response.headers["Content-Type"] = "text/javascript"
-    self.response.out.write(json.write(result))
+    self.response.out.write(json.write(output))
