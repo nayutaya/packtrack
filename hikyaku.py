@@ -1,16 +1,22 @@
 # -*- coding: utf-8 -*-
 
-from tracker import sagawa
+from tracker.sagawa.package.first_page_fetcher import FirstPageFetcher
+from tracker import sagawa_old
 
 numbers = [
   "600097281033",
   "600092368315"
 ]
 
-page = sagawa.PackageFirstPage.get()
+page = FirstPageFetcher.get()
+print page
+print page.content
+exit()
+
+page = sagawa_old.PackageFirstPage.get()
 
 state = page.get_jsfstate()
 tree  = page.get_jsftree()
 
-result = sagawa.PackageDetailPage.get_content(state, tree, numbers)
+result = sagawa_old.PackageDetailPage.get_content(state, tree, numbers)
 print result
