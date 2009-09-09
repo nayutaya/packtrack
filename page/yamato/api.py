@@ -38,9 +38,29 @@ class ListConverter:
     for record in records:
       tracking_number = re.sub("-", "", record[u"伝票番号"])
 
-      result[tracking_number] = {
-        u"message": None,
+      detail = {
+        u"delivery_time": record[u"お届け予定日時"],
       }
 
+      history = []
+      detail_records = record[u"詳細"]
+      for detail_record in detail_records:
+        time  = "2009-"
+        time += re.sub("/", "-", detail_record[u"日付"]) # FIXME:
+        time += " " + detail_record[u"時刻"]
+        his = {
+          "state"       : detail_record[u"荷物状況"],
+          "time"        : time,
+          "station_name": detail_record[u"担当店名"],
+          "station_code": detail_record[u"担当店コード"],
+        }
+        history.append(his)
+
+      result[tracking_number] = {
+        u"message": record[u"メッセージ"],
+        u"type"   : record[u"商品名"],
+        u"detail" : detail,
+        u"history": history,
+      }
 
     return result
