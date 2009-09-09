@@ -2,15 +2,11 @@
 
 import unittest
 
-import jpexpress.alltests
-import sagawa.alltests
-import yamato.alltests
+import package.alltests
 
 def suite():
   suites = [
-    jpexpress.alltests.suite(),
-    sagawa.alltests.suite(),
-    yamato.alltests.suite(),
+    package.alltests.suite(),
   ]
   return unittest.TestSuite(suites)
 
