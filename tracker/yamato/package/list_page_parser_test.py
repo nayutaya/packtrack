@@ -220,5 +220,8 @@ class TestListPageParser(unittest.TestCase):
     target = ListPageParser.parse
     actual = target(self.read_fixture("list_misc04.html"))
 
+def suite():
+  return unittest.makeSuite(TestListPageParser, "test")
+
 if __name__ == "__main__":
   unittest.main()
