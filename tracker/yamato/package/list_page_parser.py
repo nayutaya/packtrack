@@ -164,16 +164,20 @@ class ListPageParser:
   # FIXME: テスト
   @classmethod
   def parse_detail_list_table(cls, table):
+    def to_str(elem):
+      text = elem.find(text = True)
+      return text.strip() if text is not None else None
+
     records = []
 
     for row in table.findAll("tr", recursive = False)[1:]:
       cells = row.findAll("td", recursive = False)
       record = {
-        u"荷物状況"    : cells[0].find(text = True).strip(),
-        u"日付"        : cells[1].find(text = True).strip(),
-        u"時刻"        : cells[2].find(text = True).strip(),
-        u"担当店名"    : cells[3].find(text = True).strip(),
-        u"担当店コード": cells[4].find(text = True).strip(),
+        u"荷物状況"    : to_str(cells[0]),
+        u"日付"        : to_str(cells[1]),
+        u"時刻"        : to_str(cells[2]),
+        u"担当店名"    : to_str(cells[3]),
+        u"担当店コード": to_str(cells[4]),
       }
       records.append(record)
 

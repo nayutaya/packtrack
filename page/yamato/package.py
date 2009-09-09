@@ -68,17 +68,26 @@ class ListJson(webapp.RequestHandler):
       tracking_number = re.sub("-", "", record[u"伝票番号"])
       table[tracking_number] = record
 
-    detail = []
-    for record in table[numbers[0]][u"詳細"]:
-      time  = "2009-" + re.sub("/", "-", record[u"日付"]) # FIXME:
-      time += " " + record[u"時刻"]
-      hash = {
-        "state"       : record[u"荷物状況"],
-        "time"        : time,
-        "station_name": record[u"担当店名"],
-        "station_code": record[u"担当店コード"],
+    result = {}
+    for number in numbers:
+      detail = []
+      for record in table[number][u"詳細"]:
+        time  = "2009-" + re.sub("/", "-", record[u"日付"]) # FIXME:
+        time += " " + record[u"時刻"]
+        hash = {
+          "state"       : record[u"荷物状況"],
+          "time"        : time,
+          "station_name": record[u"担当店名"],
+          "station_code": record[u"担当店コード"],
+        }
+        detail.append(hash)
+
+      result[number] = {
+        "message"      : table[number][u"メッセージ"],
+        "type"         : table[number][u"商品名"],
+        "delivery_time": table[number][u"お届け予定日時"],
+        "detail"       : detail,
       }
-      detail.append(hash)
 
     result = {
       "success": True,
@@ -86,14 +95,7 @@ class ListJson(webapp.RequestHandler):
         "callback": None,
         "numbers" : numbers,
       },
-      "result": {
-        numbers[0]: {
-          "message"      : table[numbers[0]][u"メッセージ"],
-          "type"         : table[numbers[0]][u"商品名"],
-          "delivery_time": "2009-" + re.sub("/", "-", table[numbers[0]][u"お届け予定日時"]), # FIXME:
-          "detail"       : detail,
-        },
-      },
+      "result": result,
     }
 
     self.response.headers["Content-Type"] = "text/javascript"
