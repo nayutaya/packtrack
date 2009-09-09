@@ -2,11 +2,11 @@
 
 import unittest
 
-import first_page_parser
+from first_page_parser import FirstPageParser
 
-#class TestXXX(unittest.TestCase):
-#  def setUp(self):
-#    pass
+class TestFirstPageParser(unittest.TestCase):
+  def setUp(self):
+    pass
 
 if __name__ == "__main__":
   unittest.main()

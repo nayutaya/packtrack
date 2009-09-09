@@ -3,7 +3,7 @@
 import urllib
 import urllib2
 
-# 初期ページ取得クラス
+# 蛻晄悄繝壹�ｼ繧ｸ蜿門ｾ励け繝ｩ繧ｹ
 class FirstPageFetcher:
   def __init__(self, content):
     self.content = content

@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from tracker.sagawa.package.first_page_fetcher import FirstPageFetcher
+from tracker.sagawa.package.first_page_parser import FirstPageParser
 from tracker import sagawa_old
 
 numbers = [
@@ -9,14 +10,10 @@ numbers = [
 ]
 
 page = FirstPageFetcher.get()
-print page
-print page.content
+data = FirstPageParser.parse(page.content)
+state = data["jsf_state_64"]
+tree  = data["jsf_tree_64"]
 exit()
-
-page = sagawa_old.PackageFirstPage.get()
-
-state = page.get_jsfstate()
-tree  = page.get_jsftree()
 
 result = sagawa_old.PackageDetailPage.get_content(state, tree, numbers)
 print result
