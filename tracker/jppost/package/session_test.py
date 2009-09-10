@@ -2,6 +2,8 @@
 
 import unittest
 
+import session
+
 #class TestXXX(unittest.TestCase):
 #  def setUp(self):
 #    pass
