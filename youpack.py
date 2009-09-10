@@ -1,13 +1,12 @@
 # -*- coding: utf-8 -*-
 
 import souplib
+from tracker.jppost.package.tracking_number import TrackingNumber
 from tracker import jppost_old
-
-#print jppost_old.PackageTrackingNumber.create_check_digit("31744379420")
 
 numbers = []
 for i in range(10):
-  number = jppost_old.PackageTrackingNumber.create_random_number("31744379")
+  number = TrackingNumber.create_random_number("31744379")
   numbers.append(number)
 print numbers
 
