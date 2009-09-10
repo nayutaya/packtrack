@@ -2,7 +2,7 @@
 
 import souplib
 from tracker.jppost.package.tracking_number import TrackingNumber
-from tracker import jppost_old
+from tracker.jppost.package.list_page_fetcher import ListPageFetcher
 
 numbers = []
 for i in range(10):
@@ -10,7 +10,7 @@ for i in range(10):
   numbers.append(number)
 print numbers
 
-page = jppost_old.PackageListPage.get_content(numbers)
+page = ListPageFetcher.get_content(numbers)
 f = open("page.html", "wb")
 f.write(page)
 f.close()

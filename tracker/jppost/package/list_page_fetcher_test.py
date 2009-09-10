@@ -2,11 +2,11 @@
 
 import unittest
 
-import list_page_fetcher
+from list_page_fetcher import ListPageFetcher
 
-#class TestXXX(unittest.TestCase):
-#  def setUp(self):
-#    pass
+class TestListPageFetcher(unittest.TestCase):
+  def setUp(self):
+    pass
 
 if __name__ == "__main__":
   unittest.main()
