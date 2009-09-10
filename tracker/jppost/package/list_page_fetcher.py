@@ -66,3 +66,7 @@ class ListPageFetcher:
       return io.read()
     finally:
       io.close()
+
+  @classmethod
+  def get(cls, numbers):
+    return cls(cls.get_content(numbers))
