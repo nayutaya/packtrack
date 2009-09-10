@@ -3,12 +3,14 @@
 import unittest
 
 import jpexpress.alltests
+import jppost.alltests
 import sagawa.alltests
 import yamato.alltests
 
 def suite():
   suites = [
     jpexpress.alltests.suite(),
+    jppost.alltests.suite(),
     sagawa.alltests.suite(),
     yamato.alltests.suite(),
   ]

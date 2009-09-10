@@ -1,32 +1,32 @@
 # -*- coding: utf-8 -*-
 
 import souplib
-from tracker import jppost
+from tracker.jppost.package.tracking_number import TrackingNumber
+from tracker.jppost.package.session import Session
 
-#print jppost.PackageTrackingNumber.create_check_digit("31744379420")
 
-"""
 numbers = []
 for i in range(10):
-  number = jppost.PackageTrackingNumber.create_random_number("31744379")
+  number = TrackingNumber.create_random_number("31744379")
   numbers.append(number)
 print numbers
 
-page = jppost.PackageListPage.get_content(numbers)
+session = Session()
+
+page = session.get_list_page(numbers)
 f = open("page.html", "wb")
-f.write(page)
+f.write(page.content)
+f.close()
+print page.content
+
+"""
+f = open("page.html", "rb")
+page = f.read()
 f.close()
 print page
 """
 
-f = open("page.html", "rb")
-page = f.read()
-f.close()
-#print page
-
-#list_page = jppost.PackageListPage(page)
-#print list_page
-
+exit(0)
 
 wellformed = souplib.create_well_formed_html(page)
 import xml.etree.ElementTree as etree
