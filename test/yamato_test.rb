@@ -4,6 +4,7 @@ require "test/unit"
 require "open-uri"
 require "rubygems"
 require "json"
+require "yaml"
 
 class JsonTest < Test::Unit::TestCase
   def setup
@@ -23,44 +24,7 @@ class JsonTest < Test::Unit::TestCase
       }
     }
 
-    expected = {
-      "success"   => true,
-      "parameter" => {
-        "callback" => nil,
-        "numbers"  => ["249711710883"],
-      },
-      "result"    => {
-        "249711710883" => {
-          "message"            => "このお品物はお届けが済んでおります。お問い合わせはサービスセンターまでお願いいたします。",
-          "type"               => "宅急便",
-          "current_state"      => "配達完了",
-          "current_state_time" => "2009-08-24 11:19",
-          "detail"             => {
-            "delivery_time" => "08/24",
-          },
-          "history"            => [
-            {
-              "state"        => "発送",
-              "time"         => "2009-08-23 17:44",
-              "station_name" => "船橋藤原センター",
-              "station_code" => "035012",
-            },
-            {
-              "state"        => "作業店通過",
-              "time"         => "2009-08-23 19:37",
-              "station_name" => "船橋ベース店",
-              "station_code" => "035990",
-            },
-            {
-              "state"        => "配達完了",
-              "time"         => "2009-08-24 11:19",
-              "station_name" => "日野豊田センター",
-              "station_code" => "033092",
-            },
-          ],
-        },
-      },
-    }
+    expected = YAML.load_file("yamato/list__1.yml")
 
     #File.open("out.txt", "wb") { |file| file.write(json) }
     assert_equal(expected, JSON.parse(json))
