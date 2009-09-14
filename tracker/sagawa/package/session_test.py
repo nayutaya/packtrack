@@ -2,11 +2,11 @@
 
 import unittest
 
-import session
+from session import Session
 
-#class TestXXX(unittest.TestCase):
-#  def setUp(self):
-#    pass
+class TestSession(unittest.TestCase):
+  def setUp(self):
+    pass
 
 if __name__ == "__main__":
   unittest.main()
