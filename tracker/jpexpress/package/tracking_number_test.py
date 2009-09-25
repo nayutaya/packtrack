@@ -31,5 +31,12 @@ class TestTrackingNumber(unittest.TestCase):
     self.assertEqual(False, target("aaaaaaaaaaaa"))
     self.assertEqual(False, target("000000000001"))
 
+  def test_create_random_number(self):
+    target = TrackingNumber.create_random_number
+    self.assertEqual(False, (target() == target()))
+    self.assertEqual(True, TrackingNumber.is_valid(target()))
+    self.assertEqual("0",  target("0")[:1])
+    self.assertEqual("12", target("12")[:2])
+
 if __name__ == "__main__":
   unittest.main()

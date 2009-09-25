@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 import re
+import random
 
 # 追跡番号クラス
 class TrackingNumber:
@@ -23,3 +24,10 @@ class TrackingNumber:
     body_digits, check_digit = cls.split_check_digit(digits)
     if check_digit != cls.create_check_digit(body_digits): return False
     return True
+
+  @classmethod
+  def create_random_number(cls, prefix = ""):
+    number = prefix
+    while len(number) < 11:
+      number += str(random.randint(0, 9))
+    return number + cls.create_check_digit(number)
