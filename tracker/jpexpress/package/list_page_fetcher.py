@@ -47,7 +47,7 @@ class ListPageFetcher:
     params = cls. create_params(numbers)
     return urllib2.Request(
       url  = cls.create_url(jsession_id),
-      data = urllib.urlencode(params))
+      data = urllib.urlencode(params), headers = {"Cookie": "JSESSIONID=" + jsession_id})
 
   @classmethod
   def open(cls, jsession_id, numbers):
