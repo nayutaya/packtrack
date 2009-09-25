@@ -3,12 +3,27 @@
 import json
 from google.appengine.ext import webapp
 
+from tracker.jpexpress.package.session import Session
+
 class PackageListJson(webapp.RequestHandler):
   def get(self):
     param_numbers = self.request.get("numbers")
     array_numbers = param_numbers.split(",")
 
+    session = Session()
+    results = session.get_list_page(["144856020890"])
+
     result = {}
+
+    """
+    for record in results[u"一覧"]:
+      number = record[u"送り状番号"]
+      ret = {
+      }
+      result[number] = ret
+    """
+
+    """
     for number in array_numbers:
       ret = {
         "message": u"配達完了いたしました。",
@@ -21,6 +36,7 @@ class PackageListJson(webapp.RequestHandler):
         },
       }
       result[number] = ret
+    """
 
     output = {
       "success": True,
@@ -28,12 +44,9 @@ class PackageListJson(webapp.RequestHandler):
         "callback": None,
         "numbers": array_numbers,
       },
-      "result": result,
+      "result": results.content,
     }
 
-    #u"一覧"
-    #  u"No"                   
-    #  u"送り状番号"           
     #  u"送り状番号:リンク先"  
     #  u"送り状番号:パラメータ"
     #  u"最新状況"             
@@ -42,5 +55,10 @@ class PackageListJson(webapp.RequestHandler):
     #  u"お届け指定日"         
     #  u"扱区分"               
 
+    #self.render_json(output)
+    self.response.headers["Content-Type"] = "text/html"
+    self.response.out.write(results.content)
+
+  def render_json(self, body):
     self.response.headers["Content-Type"] = "text/javascript"
-    self.response.out.write(json.write(output))
+    self.response.out.write(json.write(body))
