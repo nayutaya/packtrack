@@ -15,13 +15,7 @@ class JpExpressJsonTest < Test::Unit::TestCase
     url  = @base_url + "/jpexpress/package/list.json"
     url += "?numbers=144856020890"
 
-    json = nil
-    assert_nothing_raised {
-      open(url) { |io|
-        assert_equal("text/javascript", io.content_type)
-        json = io.read
-      }
-    }
+    json = get_json(url)
 
     assert_equal(
       YAML.load_file("jpexpress/list__1.yml"),
@@ -32,16 +26,21 @@ class JpExpressJsonTest < Test::Unit::TestCase
     url  = @base_url + "/jpexpress/package/list.json"
     url += "?numbers=348001739212,348001786042"
 
-    json = nil
-    assert_nothing_raised {
-      open(url) { |io|
-        assert_equal("text/javascript", io.content_type)
-        json = io.read
-      }
-    }
+    json = get_json(url)
 
     assert_equal(
       YAML.load_file("jpexpress/list__2.yml"),
       JSON.parse(json))
+  end
+
+  private
+
+  def get_json(url)
+    assert_nothing_raised {
+      open(url) { |io|
+        assert_equal("text/javascript", io.content_type)
+        return io.read
+      }
+    }
   end
 end
