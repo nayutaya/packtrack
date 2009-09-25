@@ -12,13 +12,11 @@ numbers = [TrackingNumber.create_random_number(number_prefix) for i in range(10)
 for number in numbers:
   sys.stderr.write(number + "\n")
 
-list = session.get_list_page(numbers)
+data    = session.get_list(numbers)
+records = data[u"一覧"]
 
-f = open("tmp.html", "wb")
-f.write(list.content)
-f.close()
+for record in records:
+  tracking_number = record[u"送り状番号"]
+  state           = unicode(record[u"最新状況"])
 
-from list_page_parser import ListPageParser
-
-info = ListPageParser.parse(list.content)
-print info
+  print ("\t".join([tracking_number, state])).encode("shift-jis")
