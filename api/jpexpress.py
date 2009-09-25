@@ -11,17 +11,15 @@ class PackageListJson(webapp.RequestHandler):
     array_numbers = param_numbers.split(",")
 
     session = Session()
-    results = session.get_list_page(["144856020890"])
+    results = session.get_list(["144856020890"])
 
     result = {}
 
-    """
     for record in results[u"一覧"]:
       number = record[u"送り状番号"]
       ret = {
       }
       result[number] = ret
-    """
 
     """
     for number in array_numbers:
@@ -44,7 +42,7 @@ class PackageListJson(webapp.RequestHandler):
         "callback": None,
         "numbers": array_numbers,
       },
-      "result": results.content,
+      "result": result,
     }
 
     #  u"送り状番号:リンク先"  
@@ -55,9 +53,9 @@ class PackageListJson(webapp.RequestHandler):
     #  u"お届け指定日"         
     #  u"扱区分"               
 
-    #self.render_json(output)
-    self.response.headers["Content-Type"] = "text/html"
-    self.response.out.write(results.content)
+    self.render_json(output)
+    #self.response.headers["Content-Type"] = "text/html"
+    #self.response.out.write(results.content)
 
   def render_json(self, body):
     self.response.headers["Content-Type"] = "text/javascript"
