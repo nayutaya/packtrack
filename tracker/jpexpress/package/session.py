@@ -14,13 +14,16 @@ class Session:
 
   def setup(self):
     if self.jsession_id is None:
-      first_page = self.get_first_page()
-      first_info = FirstPageParser.parse(first_page.content)
-      self.jsession_id = first_info["jsessionid"]
+      first = self.get_first()
+      self.jsession_id = first["jsessionid"]
     return self
 
   def get_first_page(self):
     return FirstPageFetcher.get()
+
+  def get_first(self):
+    page = self.get_first_page()
+    return FirstPageParser.parse(page.content)
 
   def get_list_page(self, numbers):
     self.setup()
